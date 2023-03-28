@@ -81,6 +81,7 @@ bash_prompt
 # ==================alias=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
 alias browsh='docker run -it --rm browsh/browsh'
+export VIM_HOME=/home/federicobruzzoneplasma
 
 # ==================rust==================
 . "$HOME/.cargo/env"

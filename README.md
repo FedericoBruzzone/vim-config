@@ -1,5 +1,33 @@
 # Vim Config
 
+## How to start
+
+1. **Clone the repo to any folder**
+
+```bash
+$ git clone https://github.com/FedericoBruzzone/vim-config.git
+```
+
+2. **Add in your .bashrc**
+
+```bash
+export VIM_HOME=<The path where you cloned the repo>/vim-config
+```
+
+3. **Replace your .vimrc**    
+
+```bash
+$ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
+```
+
+4. **Open vim**
+
+`:PlugInstall`
+
+---
+
+## Videos
+
 <details open>
 <summary>1</summary>
 <img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/1.gif"/>
@@ -20,7 +48,9 @@
 <img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/4.gif"/>
 </details>
 
+<!--
 Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimtex - Instant markdown - Tabular - Multiple cursors - GitGutter - Fugitive  
+-->
 
 ---
 
@@ -201,3 +231,11 @@ _Commands_:
 |`"+y"`                               |copy to clipboard                         |
 |`:>`                                 |tab                                       |
 |`:<`                                 |back tab                                  |
+
+### Terminal
+
+_Commands_:
+
+|Command                              |Action                                    |
+|-------------------------------------|------------------------------------------|
+|`<CTRL-w>` + <SHFT-n>                |Scroll up/down in terminal                |
