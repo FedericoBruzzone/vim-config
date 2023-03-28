@@ -5,18 +5,18 @@
 " |___|___|  /__||__| /\ \_/ |__|__|_|  /
 "          \/         \/              \/
 " General settings
-source ~/.vim/vim-plug/plugin.vim
-source ~/.vim/general/settings.vim
+source $VIM_HOME/.vim/vim-plug/plugin.vim
+source $VIM_HOME/.vim/general/settings.vim
 
 " Plugin configuration
-source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
-source ~/.vim/vim-plug/tagbar.vim
-source ~/.vim/vim-plug/coc.vim
-source ~/.vim/vim-plug/nerdtree.vim
-source ~/.vim/vim-plug/commentary.vim
-source ~/.vim/vim-plug/fzf.vim
-source ~/.vim/vim-plug/vim-instant-markdown.vim
-source ~/.vim/vim-plug/floaterm.vim
-source ~/.vim/vim-plug/airline.vim
-source ~/.vim/vim-plug/airline-themes.vim
-source ~/.vim/vim-plug/vimtex.vim
+source $VIM_HOME/.vim/vim-plug/awesome-vim-colorschemes.vim
+source $VIM_HOME/.vim/vim-plug/tagbar.vim
+source $VIM_HOME/.vim/vim-plug/coc.vim
+source $VIM_HOME/.vim/vim-plug/nerdtree.vim
+source $VIM_HOME/.vim/vim-plug/commentary.vim
+source $VIM_HOME/.vim/vim-plug/fzf.vim
+source $VIM_HOME/.vim/vim-plug/vim-instant-markdown.vim
+source $VIM_HOME/.vim/vim-plug/floaterm.vim
+source $VIM_HOME/.vim/vim-plug/airline.vim
+source $VIM_HOME/.vim/vim-plug/airline-themes.vim
+source $VIM_HOME/.vim/vim-plug/vimtex.vim
