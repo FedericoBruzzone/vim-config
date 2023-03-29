@@ -238,4 +238,5 @@ _Commands_:
 
 |Command                              |Action                                    |
 |-------------------------------------|------------------------------------------|
-|`<CTRL-w>` + <SHFT-n>                |Scroll up/down in terminal                |
+|`:terminal ++curwin`                 |Open a new terminal in current window     |
+|`<CTRL-w>` + `<SHFT-n>`              |Scroll up/down in terminal                |
