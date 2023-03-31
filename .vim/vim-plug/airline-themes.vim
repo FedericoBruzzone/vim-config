@@ -1,4 +1,4 @@
-let g:airline_theme=''
+"let g:airline_theme=''
 " let g:airline_theme='gruvbox' 
 " let g:airline_theme='simple' 
 " let g:airline_theme='base16'

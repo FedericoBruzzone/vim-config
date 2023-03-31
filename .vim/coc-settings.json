@@ -1,11 +1,3 @@
 {
-  "snippets.ultisnips.pythonPrompt": false,
-  "languageserver": {
-      "neverlang" : {
-        "filetypes": ["neverlang"],
-        "trace.server":"verbose",
-        "host": "127.0.0.1",      
-        "port": 5123
-      }
-  }
+  "snippets.ultisnips.pythonPrompt": false
 }

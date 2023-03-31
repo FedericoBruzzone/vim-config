@@ -23,6 +23,16 @@
 
 set termguicolors
 colorscheme deep-space
+"colorscheme jellybeans
+
+
+
+
+
+
+
+
+
 
 " Returns true if the color hex value is light
 " function! IsHexColorLight(color) abort

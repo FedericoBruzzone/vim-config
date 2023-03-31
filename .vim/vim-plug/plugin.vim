@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
     Plug 'https://github.com/vim-airline/vim-airline' " Status bar
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
+    Plug 'https://github.com/sheerun/vim-polyglot'
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
 
     Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
@@ -26,7 +27,7 @@ call plug#begin('~/.vim/plugged')
     
     " Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal  
     " Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
-    Plug 'github/copilot.vim'
+    " Plug 'github/copilot.vim'
 call plug#end()
 
 " --- Just Some Notes ---
