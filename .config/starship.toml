@@ -1,3 +1,32 @@
+# format = """
+# [](#2c6552)\
+# $os\
+# $username\
+# [](bg:#2a8082 fg:#2c6552)\
+# $directory\
+# [](fg:#2a8082 bg:#339f8d)\
+# $git_branch\
+# $git_status\
+# [](fg:#339f8d bg:#61c9c9)\
+# $c\
+# $elixir\
+# $elm\
+# $golang\
+# $gradle\
+# $haskell\
+# $java\
+# $julia\
+# $nodejs\
+# $nim\
+# $rust\
+# $scala\
+# [](fg:#61c9c9 bg:#9ee9c4)\
+# $docker_context\
+# [](fg:#9ee9c4 bg:#abf8e4)\
+# $time\
+# [ ](fg:#abf8e4)\
+# """
+
 format = """
 [](#2c6552)\
 $os\
@@ -7,22 +36,7 @@ $directory\
 [](fg:#2a8082 bg:#339f8d)\
 $git_branch\
 $git_status\
-[](fg:#339f8d bg:#61c9c9)\
-$c\
-$elixir\
-$elm\
-$golang\
-$gradle\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$rust\
-$scala\
-[](fg:#61c9c9 bg:#9ee9c4)\
-$docker_context\
-[](fg:#9ee9c4 bg:#abf8e4)\
+[](fg:#339f8d bg:#abf8e4)\
 $time\
 [ ](fg:#abf8e4)\
 """
