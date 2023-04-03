@@ -199,9 +199,11 @@ _Mapping_:
 |NewCommand                           |Vim Command                             |
 |-------------------------------------|----------------------------------------|
 |`<SPACE>`                            | `:`                                    |
-|`++`                                 | `:Commentary`                          |  
-|`dw`                                 |Delete a work after cursor              |
-|`0p`                                 |Paste without copy                      |
+|`++`                                 | `:Commentary`                          | 
+|`dw`                                 |delete a work after cursor              |
+|`0p`                                 |paste without copy                      |
+|`/<word>`                            |search word "word"                      |
+|`n`/`N`                              |go to the next searched word            |
 
 _Commands_:
 
