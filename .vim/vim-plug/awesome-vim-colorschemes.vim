@@ -21,10 +21,16 @@
 " set termguicolors
 " :colorscheme iceberg
 
-set termguicolors
-colorscheme deep-space
+" === Best ColorScheme ===
+
+" set termguicolors
+" colorscheme deep-space
+
 "colorscheme jellybeans
 
+set termguicolors
+set background=light
+colorscheme gruvbox
 
 
 

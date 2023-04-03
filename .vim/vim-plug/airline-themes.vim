@@ -6,7 +6,10 @@
 " let g:airline_theme='base16_solarized_light'
 " let g:airline_theme='base16_solarized'
 " let g:airline_theme='minimalist'
-
-"let g:airline_theme='jellybeans'
 "let g:airline_theme='alduin'
-let g:airline_theme='deep_space'
+
+" === Best AirLine themes ===
+
+"let g:airline_theme='deep_space'
+"let g:airline_theme='jellybeans'
+let g:airline_theme='base16_gruvbox_dark_hard'
