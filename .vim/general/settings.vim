@@ -38,10 +38,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Resize split windows using arrow keys by pressing:
 " CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
 "nnoremap <C-UP> <c-w>+
 "nnoremap <C-DOWN> <c-w>-
+" Resize split windows using arrow keys by pressing:
 nnoremap <S-LEFT> <c-w><
 nnoremap <S-RIGHT> <c-w>>
 

@@ -200,7 +200,8 @@ _Mapping_:
 |-------------------------------------|----------------------------------------|
 |`<SPACE>`                            | `:`                                    |
 |`++`                                 | `:Commentary`                          |  
-
+|`dw`                                 |Delete a work after cursor              |
+|`0p`                                 |Paste without copy                      |
 
 _Commands_:
 
