@@ -243,3 +243,4 @@ _Commands_:
 |-------------------------------------|------------------------------------------|
 |`:terminal ++curwin`                 |Open a new terminal in current window     |
 |`<CTRL-w>` + `<SHFT-n>`              |Scroll up/down in terminal                |
+
