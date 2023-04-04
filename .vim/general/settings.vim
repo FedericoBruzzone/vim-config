@@ -21,7 +21,7 @@ set guicursor=
 :set mouse=a
 :set go+=a
 
-:set encoding=UTF-8
+:set encoding=utf-8
 
 " :set showtabline=2
 
