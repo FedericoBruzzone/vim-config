@@ -1,3 +1,9 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " set clipboard^=unnamedplus
 " set clipboard^=unnamed
 set guicursor=
@@ -115,6 +121,9 @@ set hlsearch
 " Set the commands to save in history default number is 20.
 set history=1000
 
+set timeoutlen=500
+
+set ttimeoutlen=0
 
 
 inoremap jj <esc>

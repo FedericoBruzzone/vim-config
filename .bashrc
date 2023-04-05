@@ -67,14 +67,16 @@ md() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory pass
 [ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
 
 ######################################## GIT ########################################
-alias gs='git status'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit -s'
-alias gl='git log --oneline'
+alias gstatus='git status'
+alias gadd='git add'
+alias gadda='git add --all'
+alias gcommit='git commit -s'
+alias glog='git log --oneline'
 alias gb='git checkout -b'
-alias gd='git diff'
-
+alias gdiff='git diff'
+alias gpush='git push'
+alias gpushf='git push --force'
+alias gpull='git pull'
 ########################################  FAST  ########################################
 alias vi='vim'
 alias c='/usr/bin/clear'
@@ -158,7 +160,7 @@ calc() {
 # ==================alias=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
 alias browsh='docker run -it --rm browsh/browsh'
-export VIM_HOME=/home/federicobruzzoneplasma
+export VIM_HOME="/home/federicobruzzoneplasma"
 
 alias ble='source ~/ble.sh/out/ble.sh'
 

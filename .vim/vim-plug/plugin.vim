@@ -1,4 +1,5 @@
 " To run this you have to install plugin manager from https://github.com/junegunn/vim-plug.git
+
 call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Color font Retro Scheme
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons

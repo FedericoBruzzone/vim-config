@@ -5,8 +5,8 @@
 " |___|___|  /__||__| /\ \_/ |__|__|_|  /
 "          \/         \/              \/
 " General settings
-source $VIM_HOME/.vim/vim-plug/plugin.vim
 source $VIM_HOME/.vim/general/settings.vim
+source $VIM_HOME/.vim/vim-plug/plugin.vim
 
 " Plugin configuration
 source $VIM_HOME/.vim/vim-plug/awesome-vim-colorschemes.vim
