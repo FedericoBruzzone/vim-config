@@ -125,6 +125,8 @@ set timeoutlen=500
 
 set ttimeoutlen=0
 
+" Open terminal in a new windows
+map t :tabnew<esc>:terminal ++curwin<cr>
 
 inoremap jj <esc>
 nnoremap <space> :
@@ -134,8 +136,6 @@ nmap <C-j> mz:m+<cr>`z
 nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-vmap <C-c> y
 
 " Map Ctrl-Backspace to delete the previous word in insert mode.
 noremap! <C-BS> <C-w>

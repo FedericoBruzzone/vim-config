@@ -70,6 +70,10 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |------------------|-----------------------------|----------------------------------------|
 |`<F3>`            |_Normal_ / _Insert_          |toggle NERD Tree                        |
 |`<SHIFT>` + `i`   |_NERDTree_                   |show hidden files                       |
+|`i`               |_NERDTree_                   |open file in orizontal mode             |
+|`s`               |_NERDTree_                   |open file in vertical mode              |
+|`t`               |_NERDTree_                   |open file in a new tab                  |
+
 
 ### Tag bar
 

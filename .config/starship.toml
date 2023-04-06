@@ -28,6 +28,7 @@
 # """
 
 format = """
+$time\
 [](#2c6552)\
 $os\
 $username\
@@ -36,10 +37,11 @@ $directory\
 [](fg:#2a8082 bg:#339f8d)\
 $git_branch\
 $git_status\
-[](fg:#339f8d bg:#abf8e4)\
-$time\
-[ ](fg:#abf8e4)\
+[](fg:#339f8d)\
 """
+# [](fg:#339f8d bg:#abf8e4)\
+# $time\
+# [ ](fg:#abf8e4)\
 
 # Disable the blank line at the start of the prompt
 # add_newline = false
@@ -154,5 +156,6 @@ format = '[ $symbol ($version) ]($style)'
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
-style = "bg:#abf8e4"
+style = "" #"bg:#abf8e4"
 format = '[  $time ]($style)'
+
