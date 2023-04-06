@@ -204,10 +204,7 @@ _Mapping_:
 |-------------------------------------|----------------------------------------|
 |`<SPACE>`                            | `:`                                    |
 |`++`                                 | `:Commentary`                          | 
-|`dw`                                 |delete a work after cursor              |
-|`0p`                                 |paste without copy                      |
-|`/<word>`                            |search word "word"                      |
-|`n`/`N`                              |go to the next searched word            |
+|`t`                                  |`:tabnew<esc>:terminal ++curwin`        |
 
 _Commands_:
 
@@ -219,12 +216,17 @@ _Commands_:
 |`<SPACE>` + `wq`                     |save and quit                           |
 |`:>`                                 |tab                                     |
 |`:<`                                 |back tab                                |
+|`:Ex` and `<SHIFT>` + `d`            |delete file                             |
 
 |Command                              |Action                                    |
 |-------------------------------------|------------------------------------------|
 |`ci` + `<c>`                         |delete the word inside the character `<c>`|
 |`za`                                 |fold and un-fold                          |
 |`<CTRL>` + `j`/`k`                   |move line/lines                           |
+|`dw`                                 |delete a work after cursor              |
+|`0p`                                 |paste without copy                      |
+|`/<word>`                            |search word "word"                      |
+|`n`/`N`                              |go to the next searched word            |
 
 ---
 
@@ -235,7 +237,7 @@ _Commands_:
 |Command                              |Action                                    |
 |-------------------------------------|------------------------------------------|
 |`<CTRL>` + `j`/`k`                   |move line/lines                           |
-|`"+y"`                               |copy to clipboard                         |
+|`"+y`                                |copy to clipboard                         |
 |`:>`                                 |tab                                       |
 |`:<`                                 |back tab                                  |
 
