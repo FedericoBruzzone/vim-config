@@ -147,7 +147,7 @@ ftext() {
   grep -iIHrn --color=always "$1" . | less -r
 }
 
-ff() {
+ffile() {
   find . | grep --color=always "$1"  
 }
 
