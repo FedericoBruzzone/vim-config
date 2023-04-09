@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022/07'
+let g:netrw_dirhist_3='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022'
+let g:netrw_dirhist_2='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code'
+let g:netrw_dirhist_1='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022/07'

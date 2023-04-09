@@ -164,6 +164,12 @@ export VIM_HOME="/home/federicobruzzoneplasma"
 
 alias ble='source ~/ble.sh/out/ble.sh'
 
+# ==================s-search=================
+alias s='s-search'
+alias sg='s-search -p google'
+alias sw='s-search -p wikipedia'
+alias sy='s-search -p youtube'
+
 # ==================rust==================
 . "$HOME/.cargo/env"
 
