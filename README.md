@@ -138,6 +138,13 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |------------------------------------|----------------------|----------------------------------------------|
 |`:VimtexCompile`                    |_Normal_              |Compile and start preview                     |
 
+### Vim-Repl 
+
+|Command                             |Mode                  |Action                                        |
+|------------------------------------|----------------------|----------------------------------------------|
+|`:<leader>r`                        |_Normal_              |:REPLToggle                                   |
+|`:<leader>w`                        |_Normal_              |Send to vim repl                              |
+
 ### Vim Instant Markdown
 
 |Command                             |Mode                  |Action                                        |

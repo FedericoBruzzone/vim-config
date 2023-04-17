@@ -20,3 +20,4 @@ source $VIM_HOME/.vim/vim-plug/floaterm.vim
 source $VIM_HOME/.vim/vim-plug/airline.vim
 source $VIM_HOME/.vim/vim-plug/airline-themes.vim
 source $VIM_HOME/.vim/vim-plug/vimtex.vim
+source $VIM_HOME/.vim/vim-plug/vim-repl.vim
