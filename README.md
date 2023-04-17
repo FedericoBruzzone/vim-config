@@ -113,6 +113,23 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |--------------------------------------------------------------------------------|--------------------|----------------------|
 |`<CTRL>` + `n`, `<DOWN>` to select multiple lines, `<CTRL>` + `n`, `i` (insert) |_Normal_ / _Visual_ |multiple cursors      |
 
+### CSV Vim
+
+|Command              |Mode              |Action                                      |
+|---------------------|------------------|--------------------------------------------|
+|`:%CSVArrangeColum!` |_Normal_          |Tab correctly all columns                   |
+
+
+### How Much
+
+Block-wise selection (Ctrl-V)
+
+|Command              |Mode              |Action                                                 |
+|---------------------|------------------|-------------------------------------------------------|
+|`<Leader>?=`         |_Normal_          |Append result after each expression, separated with '='|
+|`<leader><Leader>?`  |_Normal_          |Replace selected expressions with result               |
+|`<Leader>?s`         |_Normal_          |Append result after each expressions (with Err)        |
+
 ### Commentary
 
 |Command            |Mode                |Action                |
@@ -142,8 +159,8 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 
 |Command                             |Mode                  |Action                                        |
 |------------------------------------|----------------------|----------------------------------------------|
-|`:<leader>r`                        |_Normal_              |:REPLToggle                                   |
-|`:<leader>w`                        |_Normal_              |Send to vim repl                              |
+|`<leader>r`                        |_Normal_              |:REPLToggle                                   |
+|`<leader>w`                        |_Normal_              |Send to vim repl                              |
 
 ### Vim Instant Markdown
 

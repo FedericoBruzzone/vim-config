@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/federicobruzzoneplasma/test_vim'
 let g:netrw_dirhist_0='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022/08'
 let g:netrw_dirhist_9='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022'
 let g:netrw_dirhist_8='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_5='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/a
 let g:netrw_dirhist_4='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022/07'
 let g:netrw_dirhist_3='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022'
 let g:netrw_dirhist_2='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code'
-let g:netrw_dirhist_1='/home/federicobruzzoneplasma/Documents/FedericoBruzzone/advent-of-code/2022/07'

@@ -4,12 +4,23 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" set clipboard^=unnamedplus
-" set clipboard^=unnamed
-set guicursor=
+set clipboard^=unnamedplus
+set clipboard^=unnamed
+" set guicursor=
 ":set paste
-
 :set colorcolumn=80
+
+
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+\ if v:insertmode == 'i' | 
+\   silent execute '!echo -ne "\e[6 q"' | redraw! |
+\ elseif v:insertmode == 'r' |
+\   silent execute '!echo -ne "\e[4 q"' | redraw! |
+\ endif
+au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
 
 "set statusline=%t 
 " set statusline=0 
@@ -50,7 +61,6 @@ nnoremap <C-H> <C-W><C-H>
 :set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
-
 
 """"""""""""""""""""
 
