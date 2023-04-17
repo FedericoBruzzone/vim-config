@@ -100,6 +100,35 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |`<CTRL>` + `v`    |_File mode_                  |open file in vertical split             |
 |`<CTRL>` + `x`    |_File mode_                  |open file in horizontal split           |
 
+### Vim-Repl 
+
+|Command                             |Mode                  |Action                                        |
+|------------------------------------|----------------------|----------------------------------------------|
+|`<leader>r`                        |_Normal_               |:REPLToggle                                   |
+|`<leader>w`                        |_Normal_               |Send to vim repl                              |
+
+
+### Vim Notes 
+
+|Command                             |Mode                  |Action                                        |
+|------------------------------------|----------------------|----------------------------------------------|
+|`gf`                                |_Normal_              |Open Link to another notes                    |
+|`:RecentNotes`                      |_Normal_              |Open lists all notes                          |
+|`:Note`                             |_Normal_              |Create new note                               |
+|`:edit note:<namenote>`             |_Normal_              |Edit exist note                               |
+|`:DeleteNote`                       |_Normal_              |Delete exist note                               |
+
+
+### How Much
+
+Block-wise selection (Ctrl-V)
+
+|Command              |Mode              |Action                                                 |
+|---------------------|------------------|-------------------------------------------------------|
+|`<Leader>?=`         |_Normal_          |Append result after each expression, separated with '='|
+|`<leader><Leader>?`  |_Normal_          |Replace selected expressions with result               |
+|`<Leader>?s`         |_Normal_          |Append result after each expressions (with Err)        |
+
 ### Surround
 
 |Command           |Mode              |Action                                      |
@@ -118,17 +147,6 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |Command              |Mode              |Action                                      |
 |---------------------|------------------|--------------------------------------------|
 |`:%CSVArrangeColum!` |_Normal_          |Tab correctly all columns                   |
-
-
-### How Much
-
-Block-wise selection (Ctrl-V)
-
-|Command              |Mode              |Action                                                 |
-|---------------------|------------------|-------------------------------------------------------|
-|`<Leader>?=`         |_Normal_          |Append result after each expression, separated with '='|
-|`<leader><Leader>?`  |_Normal_          |Replace selected expressions with result               |
-|`<Leader>?s`         |_Normal_          |Append result after each expressions (with Err)        |
 
 ### Commentary
 
@@ -155,12 +173,6 @@ Block-wise selection (Ctrl-V)
 |------------------------------------|----------------------|----------------------------------------------|
 |`:VimtexCompile`                    |_Normal_              |Compile and start preview                     |
 
-### Vim-Repl 
-
-|Command                             |Mode                  |Action                                        |
-|------------------------------------|----------------------|----------------------------------------------|
-|`<leader>r`                        |_Normal_              |:REPLToggle                                   |
-|`<leader>w`                        |_Normal_              |Send to vim repl                              |
 
 ### Vim Instant Markdown
 

@@ -1,11 +1,15 @@
 " To run this you have to install plugin manager from https://github.com/junegunn/vim-plug.git
 
 call plug#begin('~/.vim/plugged')
+    Plug 'https://github.com/xolox/vim-misc'
+    Plug 'https://github.com/xolox/vim-notes'
+
     Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Color font Retro Scheme
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
     Plug 'https://github.com/vim-airline/vim-airline' " Status bar
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
+    Plug 'https://github.com/chrisbra/csv.vim' " csv files 
 
     Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
@@ -15,19 +19,19 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/voldikss/vim-floaterm' "terminal 
     Plug 'https://github.com/airblade/vim-gitgutter' " git integration 
     Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
-    Plug 'https://github.com/sillybun/vim-repl'
+    Plug 'https://github.com/sillybun/vim-repl' " vim repl
 
+
+    Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
     Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
     Plug 'https://github.com/godlygeek/tabular' " Tabularize 
 
-    Plug 'https://github.com/chrisbra/csv.vim'
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
     Plug 'https://github.com/instant-markdown/vim-instant-markdown'
     Plug 'https://github.com/untitled-ai/jupyter_ascending.vim'
 
-    Plug 'https://github.com/sk1418/HowMuch'
 
     " Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal

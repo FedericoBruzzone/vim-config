@@ -22,3 +22,4 @@ source $VIM_HOME/.vim/vim-plug/airline-themes.vim
 source $VIM_HOME/.vim/vim-plug/vimtex.vim
 source $VIM_HOME/.vim/vim-plug/vim-repl.vim
 source $VIM_HOME/.vim/vim-plug/csv-vim.vim
+source $VIM_HOME/.vim/vim-plug/vim-notes.vim
