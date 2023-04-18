@@ -152,3 +152,5 @@ nnoremap <S-RIGHT> <c-w>>
 
 :imap <C-DOWN> <Esc>}
 :imap <C-UP> <Esc>{
+
+let g:gruvbox_italic=1
