@@ -188,11 +188,16 @@ alias javaformatall="java -jar /home/federicobruzzoneplasma/Documents/FedericoBr
 # ==================python==================
 export ANTLR4_JAR="/home/federicobruzzoneplasma/Documents/FedericoBruzzone/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
+# ==================STM32===========
+alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.0.500.202209151145/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
+export PATH="$PATH:/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.linux64_1.0.100.202210260954/tools/bin" # /arm-none-eabi-gcc"
+
 # ==================starship===========
 export STARSHIP_CONFIG=~/.config/starship.toml
 HISTSIZE=1000
 PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 eval "$(starship init bash)"
+
 
 ######################################################################
 
