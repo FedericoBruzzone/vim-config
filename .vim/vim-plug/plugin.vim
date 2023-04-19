@@ -1,6 +1,7 @@
 " To run this you have to install plugin manager from https://github.com/junegunn/vim-plug.git
 
 call plug#begin('~/.vim/plugged')
+    " Used with vim-notes
     Plug 'https://github.com/xolox/vim-misc'
     Plug 'https://github.com/xolox/vim-notes'
 
@@ -32,6 +33,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/instant-markdown/vim-instant-markdown'
     Plug 'https://github.com/untitled-ai/jupyter_ascending.vim'
 
+    Plug 'https://github.com/makerj/vim-pdf'
 
     " Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
