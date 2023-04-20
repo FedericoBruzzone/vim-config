@@ -253,16 +253,18 @@ _Commands_:
 |`:>`                                 |tab                                     |
 |`:<`                                 |back tab                                |
 |`:Ex` and `<SHIFT>` + `d`            |delete file                             |
+|`"0o`                                |paste and don't copy                    |
+|`<ctrl-v> select` + `<shift-i>`      |write multiple lines                    |
 
 |Command                              |Action                                    |
 |-------------------------------------|------------------------------------------|
 |`ci` + `<c>`                         |delete the word inside the character `<c>`|
 |`za`                                 |fold and un-fold                          |
 |`<CTRL>` + `j`/`k`                   |move line/lines                           |
-|`dw`                                 |delete a work after cursor              |
-|`0p`                                 |paste without copy                      |
-|`/<word>`                            |search word "word"                      |
-|`n`/`N`                              |go to the next searched word            |
+|`dw`                                 |delete a work after cursor                |
+|`0p`                                 |paste without copy                        |
+|`/<word>`                            |search word "word"                        |
+|`n`/`N`                              |go to the next searched word              |
 
 ---
 
