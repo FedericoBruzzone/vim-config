@@ -8,8 +8,12 @@ set clipboard^=unnamedplus
 set clipboard^=unnamed
 " set guicursor=
 " :set paste
-:set colorcolumn=80
 
+
+" nnoremap <Leader>ncc :highlight MyColorColumn ctermbg=red guibg=red<CR>:highlight link ColorColumn MyColorColumn<CR>:set colorcolumn-=80<CR>
+highlight ColorColumn ctermbg=red guibg=red
+nnoremap <Leader>cc :highlight ColorColumn ctermbg=red guibg=red<cr>:set colorcolumn=80 <cr> 
+nnoremap <Leader>ncc :set colorcolumn-=80<cr> 
 
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
@@ -41,7 +45,7 @@ endif
 :set encoding=utf-8
 
 :set showtabline=2
-
+:set laststatus=2
 """"""""""""""""""""
 
 :set backspace=indent,eol,start
@@ -124,8 +128,8 @@ set ttimeoutlen=0
 " Open terminal in a new windows
 map t :tabnew<esc>:terminal ++curwin<cr>
 
-inoremap jj <esc>
-nnoremap <space> :
+" inoremap jj <esc>
+" nnoremap <space> :
 
 " Move line/lines
 nmap <C-j> mz:m+<cr>`z
@@ -153,6 +157,7 @@ nnoremap <S-RIGHT> <c-w>>
 :imap <C-DOWN> <Esc>}
 :imap <C-UP> <Esc>{
 
-let g:gruvbox_italic=1
 
-nnoremap <silent> p :set paste<CR>"0p:set nopaste<CR>
+nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
+
+

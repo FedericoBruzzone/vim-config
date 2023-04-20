@@ -11,6 +11,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
     Plug 'https://github.com/chrisbra/csv.vim' " csv files 
+    Plug 'https://github.com/liuchengxu/vim-which-key'
+    Plug 'https://github.com/frazrepo/vim-rainbow' 
+    Plug 'https://github.com/Yggdroot/indentLine'
 
     Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation

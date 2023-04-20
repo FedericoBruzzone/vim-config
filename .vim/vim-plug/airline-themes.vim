@@ -12,5 +12,10 @@
 
 "let g:airline_theme='deep_space'
 "let g:airline_theme='jellybeans'
-let g:airline_theme='base16_gruvbox_dark_hard'
+"let g:airline_theme='base16_gruvbox_dark_hard'
 "let g:airline_theme='base16_gruvbox_light_hard'
+
+" let g:airline_theme='sierra'
+
+
+let g:airline_theme='jellybeans'

@@ -23,3 +23,7 @@ source $VIM_HOME/.vim/vim-plug/vimtex.vim
 source $VIM_HOME/.vim/vim-plug/vim-repl.vim
 source $VIM_HOME/.vim/vim-plug/csv-vim.vim
 source $VIM_HOME/.vim/vim-plug/vim-notes.vim
+source $VIM_HOME/.vim/vim-plug/vim-which-key.vim
+source $VIM_HOME/.vim/vim-plug/vim-rainbow.vim
+source $VIM_HOME/.vim/vim-plug/indentline.vim
+source $VIM_HOME/.vim/vim-plug/vim-devicons.vim
