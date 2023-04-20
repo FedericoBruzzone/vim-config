@@ -21,9 +21,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/airblade/vim-gitgutter' " git integration 
     Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
     Plug 'https://github.com/sillybun/vim-repl' " vim repl
-
-
     Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
+
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
     Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
@@ -32,8 +31,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
     Plug 'https://github.com/instant-markdown/vim-instant-markdown'
     Plug 'https://github.com/untitled-ai/jupyter_ascending.vim'
-
     Plug 'https://github.com/makerj/vim-pdf'
+
 
     " Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal

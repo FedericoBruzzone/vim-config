@@ -1,4 +1,3 @@
-" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
 set encoding=utf-8
 " Some servers have issues with backup files, see #649
@@ -158,3 +157,9 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+
+" My
+autocmd FileType c setl omnifunc=coc#on_coc_completion
+autocmd FileType h setl omnifunc=coc#on_coc_completion

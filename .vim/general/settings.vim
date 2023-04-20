@@ -7,7 +7,7 @@ endif
 set clipboard^=unnamedplus
 set clipboard^=unnamed
 " set guicursor=
-":set paste
+" :set paste
 :set colorcolumn=80
 
 
@@ -154,3 +154,5 @@ nnoremap <S-RIGHT> <c-w>>
 :imap <C-UP> <Esc>{
 
 let g:gruvbox_italic=1
+
+nnoremap <silent> p :set paste<CR>"0p:set nopaste<CR>
