@@ -11,9 +11,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
     Plug 'https://github.com/chrisbra/csv.vim' " csv files 
-    Plug 'https://github.com/liuchengxu/vim-which-key'
-    Plug 'https://github.com/frazrepo/vim-rainbow' 
-    Plug 'https://github.com/Yggdroot/indentLine'
+    Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
+    Plug 'https://github.com/Yggdroot/indentLine' " show indentation
 
     Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
@@ -24,18 +23,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/airblade/vim-gitgutter' " git integration 
     Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
     Plug 'https://github.com/sillybun/vim-repl' " vim repl
-    Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
 
+    Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
     Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
     Plug 'https://github.com/godlygeek/tabular' " Tabularize 
+    Plug 'https://github.com/rhysd/vim-grammarous' " grammar checker
 
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
-    Plug 'https://github.com/instant-markdown/vim-instant-markdown'
-    Plug 'https://github.com/untitled-ai/jupyter_ascending.vim'
-    Plug 'https://github.com/makerj/vim-pdf'
-
+    Plug 'https://github.com/instant-markdown/vim-instant-markdown' " markdown Preview
+    Plug 'https://github.com/untitled-ai/jupyter_ascending.vim' " jupyter preview
+    Plug 'https://github.com/makerj/vim-pdf' " view pdf 
 
     " Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
@@ -44,6 +43,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
     " Plug 'https://github.com/sheerun/vim-polyglot'
     " Plug 'https://github.com/SirVer/ultisnips' " It needs vim with python3 installed 
+    " Plug 'https://github.com/liuchengxu/vim-which-key' "  show which key, only for binding
 call plug#end()
 
 " --- Just Some Notes ---
