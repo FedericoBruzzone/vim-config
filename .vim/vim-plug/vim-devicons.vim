@@ -7,5 +7,9 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+
 let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ' '
 let g:DevIconsDefaultFolderOpenSymbol = ' '
+
+let g:webdevicons_conceal_nerdtree_brackets=1

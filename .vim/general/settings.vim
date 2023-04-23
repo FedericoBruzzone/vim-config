@@ -160,4 +160,5 @@ nnoremap <S-RIGHT> <c-w>>
 
 nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
+:set! conceallevel=3
 

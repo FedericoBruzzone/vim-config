@@ -39,9 +39,17 @@ let g:airline#extensions#tabline#excluded_buffers = ['Tagbar']
 let g:airline#extensions#fileinfo#show_file_path = 0
 let g:airline#extensions#hunks#enabled=1
 let g:airline#extensions#branch#enabled=1
-
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 
 "let g:airline_section_c = ''
 
+function! QuitOrDeleteBuffer()
+  if !(bufnr('$') == bufnr(''))
+    quit
+  else
+    bd
+  endif
+endfunction
+
+nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>

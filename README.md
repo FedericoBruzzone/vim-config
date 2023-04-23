@@ -226,10 +226,10 @@ _Commands_:
 
 |Command                              |Action                                  |
 |-------------------------------------|----------------------------------------|
-|`<jj>`                               |switch to _NORMAL_ MODE                 |
 |`e`                                  |go to the end of the word               |
 |`f` + `<ch>`                         |go to the first `<ch>` character        |
 |`F` + `<ch>`                         |go to the first `<ch>` character back   |
+|:bd                                  |close current buffer                    |
 
 ---
 
@@ -239,7 +239,6 @@ _Mapping_:
 
 |NewCommand                           |Vim Command                             |
 |-------------------------------------|----------------------------------------|
-|`<SPACE>`                            | `:`                                    |
 |`++`                                 | `:Commentary`                          | 
 |`t`                                  |`:tabnew<esc>:terminal ++curwin`        |
 
