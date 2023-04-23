@@ -29,3 +29,5 @@ source $VIM_HOME/.vim/vim-plug/indentline.vim
 source $VIM_HOME/.vim/vim-plug/vim-devicons.vim
 source $VIM_HOME/.vim/vim-plug/vim-grammarous.vim
 source $VIM_HOME/.vim/vim-plug/ale.vim
+source $VIM_HOME/.vim/vim-plug/deoplete.vim
+

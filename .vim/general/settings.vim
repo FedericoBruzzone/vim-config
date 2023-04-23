@@ -162,3 +162,19 @@ nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
 :set! conceallevel=3
 
+
+function! QuitOrDeleteBuffer()
+  if !(bufnr('$') == bufnr(''))
+    quit
+  else
+    bd
+  endif
+endfunction
+
+command Q :call QuitOrDeleteBuffer()
+
+" inoremap <leader>w <esc>:w<CR>
+" inoremap <leader>q <esc>:call QuitOrDeleteBuffer()<CR>
+" map <leader>w :w<CR>
+" " nnoremap <leader>w :w<CR>
+" nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>

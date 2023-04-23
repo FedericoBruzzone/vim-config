@@ -3,12 +3,13 @@ let g:ale_linters = {
 \   'json': [],    
 \   'java': [],
 \   'scala': [],
-\   'python': ['bandit', 'cspell', 'flake8', 'flakehell', 
-                \ 'jedils', 'mypy', 'prospector', 'pycln', 
-                \ 'pycodestyle', 'pydocstyle', 'pyflakes', 
-                \ 'pylama', 'pylsp', 'pyre', 'pyright', 
-                \ 'refurb', 'ruff', 'unimport', 'vulture'],
+\   'python': [],
 \}
+" \   'python': ['bandit', 'cspell', 'flake8', 'flakehell', 
+"                 \ 'jedils', 'mypy', 'prospector', 'pycln', 
+"                 \ 'pycodestyle', 'pydocstyle', 'pyflakes', 
+"                 \ 'pylama', 'pylsp', 'pyre', 'pyright', 
+"                 \ 'refurb', 'ruff', 'unimport', 'vulture'],
 " 'pylint',  
 
 " Set this. Airline will handle the rest.

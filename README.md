@@ -62,7 +62,12 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |--------------------------|-----------------------------|------------------------------------------|
 |`<CTRL>` + `o`            |_Normal_                     |Go back after `gd`                        |
 
-`:CocInstall coc-vimtex`
+
+### ALE
+
+|Command                   |Mode                         |Action                                    |
+|--------------------------|-----------------------------|------------------------------------------|
+|<Enter>                   |_Insert_                     |Confirm choice                            |
 
 ### NERD Tree
 
@@ -217,9 +222,10 @@ Create editable real-time `.py` copy: `jupytext --set-formats ipynb,py:percent <
 
 _Mapping_:
 
-|NewCommand                           |Vim Command                             |
-|-------------------------------------|----------------------------------------|
-|`<jj>`                               |`<ESC>`                                 |
+|NewCommand                           |Vim Command                                        |
+|-------------------------------------|---------------------------------------------------|
+|:`Q`                                 |close current buffer or quit if it is the last one |
+|`<jj>`                               |`<ESC>`                                            |
 
 
 _Commands_:
@@ -253,7 +259,7 @@ _Commands_:
 |`:>`                                 |tab                                     |
 |`:<`                                 |back tab                                |
 |`:Ex` and `<SHIFT>` + `d`            |delete file                             |
-|`"0o`                                |paste and don't copy                    |
+|`"0p`                                |paste and don't copy                    |
 |`<ctrl-v> select` + `<shift-i>`      |write multiple lines                    |
 
 |Command                              |Action                                    |

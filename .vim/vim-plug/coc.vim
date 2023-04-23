@@ -9,9 +9,9 @@ let g:coc_global_extensions = [
   \ 'coc-metals',
   \ 'coc-vimtex',
   \ 'coc-protobuf',
+  \ 'coc-python',
   \ ]
   " \ 'coc-explorer',
-  " \ 'coc-python',
 
 " utf-8 byte sequence
 set encoding=utf-8

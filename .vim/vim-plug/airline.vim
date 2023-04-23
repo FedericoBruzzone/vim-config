@@ -44,12 +44,3 @@ let g:airline#extensions#branch#enabled=1
 
 "let g:airline_section_c = ''
 
-function! QuitOrDeleteBuffer()
-  if !(bufnr('$') == bufnr(''))
-    quit
-  else
-    bd
-  endif
-endfunction
-
-nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
