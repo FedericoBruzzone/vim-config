@@ -9,12 +9,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
     Plug 'https://github.com/vim-airline/vim-airline' " Status bar
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
+    Plug 'https://github.com/psliwka/vim-smoothie' " Smooth scroll down
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
     Plug 'https://github.com/chrisbra/csv.vim' " csv files 
     Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
     Plug 'https://github.com/Yggdroot/indentLine' " show indentation
 
-    Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
+    Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
+    Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion for java and scala
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
     Plug 'https://github.com/preservim/nerdtree' " Nerd Tree  
     Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -38,7 +40,6 @@ call plug#begin('~/.vim/plugged')
 
     " Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
-    " Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
     " Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal  
     " Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
     " Plug 'https://github.com/sheerun/vim-polyglot'

@@ -73,7 +73,7 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |`i`               |_NERDTree_                   |open file in orizontal mode             |
 |`s`               |_NERDTree_                   |open file in vertical mode              |
 |`t`               |_NERDTree_                   |open file in a new tab                  |
-
+|:T                |_Normal_                     |open NERDTree in a current directory    |
 
 ### Tag bar
 
@@ -99,6 +99,7 @@ Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimt
 |`<CTRL>` + `t`    |_File mode_                  |open file in new tab                    |
 |`<CTRL>` + `v`    |_File mode_                  |open file in vertical split             |
 |`<CTRL>` + `x`    |_File mode_                  |open file in horizontal split           |
+|:F                |_Normal_                     |open fzf in the current directory       |
 
 ### Vim-Repl 
 

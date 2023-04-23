@@ -1,3 +1,18 @@
+let g:coc_global_extensions = [ 
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-java',
+  \ 'coc-metals',
+  \ 'coc-vimtex',
+  \ 'coc-protobuf',
+  \ ]
+  " \ 'coc-explorer',
+  " \ 'coc-python',
+
 " utf-8 byte sequence
 set encoding=utf-8
 " Some servers have issues with backup files, see #649
