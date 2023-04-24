@@ -1,3 +1,7 @@
+# NERD FONT FOLDER
+# /usr/local/share/fonts/
+# fc-cache -fv
+
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
