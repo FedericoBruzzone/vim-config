@@ -4,6 +4,8 @@ let g:ale_linters = {
 \   'java': [],
 \   'scala': [],
 \   'python': [],
+\   'c': ['clang'],
+\   'c++': ['clang'],
 \}
 " \   'python': ['bandit', 'cspell', 'flake8', 'flakehell', 
 "                 \ 'jedils', 'mypy', 'prospector', 'pycln', 
@@ -16,8 +18,9 @@ let g:ale_linters = {
 let g:airline#extensions#ale#enabled = 1
 
 let g:ale_virtualtext_cursor = 'current' " disable
+let g:ale_c_parse_compile_commands = 1
 
-" Chenge error message
+" Change error message
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

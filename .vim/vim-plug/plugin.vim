@@ -15,12 +15,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
     Plug 'https://github.com/Yggdroot/indentLine' " show indentation
 
-    Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
-    Plug 'https://github.com/Shougo/deoplete.nvim' " Auto completition 
-    Plug 'https://github.com/roxma/nvim-yarp' " Used by deoplete
-    Plug 'https://github.com/roxma/vim-hug-neovim-rpc' " Used by deoplete
+    " Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
+    " Plug 'https://github.com/Shougo/deoplete.nvim' " Auto completition 
+    " Plug 'https://github.com/roxma/nvim-yarp' " Used by deoplete
+    " Plug 'https://github.com/roxma/vim-hug-neovim-rpc' " Used by deoplete
     " Plug 'https://github.com/deoplete-plugins/deoplete-jedi' " deoplete for python
-
+    " Plug 'https://github.com/tweekmonster/deoplete-clang2' " deoplete for clang 
 
     Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion for java and scala
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation

@@ -1,3 +1,25 @@
+" For coc-clangd
+"ADD THIS to coc-settings.json
+""languageserver": {
+"    "ccls": {
+"      "command": "ccls",
+"      "args": ["--log-file=/tmp/ccls.log", "-v=1"],
+"      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+"      "rootPatterns": [".ccls", "compile_commands.json"],
+"      "initializationOptions": { 
+"         "cache": {
+"           "directory": "/tmp/ccls"
+"         },
+"         "client": {
+"          "snippetSupport": true
+"         }
+"       }
+"    }
+"  },
+" sudo apt-get install ccls
+" sudo apt-get install bear
+" bear -- make
+
 let g:coc_global_extensions = [ 
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -10,6 +32,7 @@ let g:coc_global_extensions = [
   \ 'coc-vimtex',
   \ 'coc-protobuf',
   \ 'coc-python',
+  \ 'coc-clangd',
   \ ]
   " \ 'coc-explorer',
 
