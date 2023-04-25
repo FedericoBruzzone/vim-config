@@ -194,6 +194,7 @@ export ANTLR4_JAR="/home/federicobruzzoneplasma/Documents/FedericoBruzzone/maste
 
 # ==================STM32===========
 alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.0.500.202209151145/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
+alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
 export PATH="$PATH:/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.linux64_1.0.100.202210260954/tools/bin" # /arm-none-eabi-gcc"
 
 # ==================starship===========
