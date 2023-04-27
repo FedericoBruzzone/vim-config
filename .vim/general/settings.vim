@@ -93,8 +93,8 @@ set cursorcolumn
 set nobackup
 
 " Do not wrap lines. Allow long lines to extend as far as the line goes.
-" set nowrap
-set wrap
+set nowrap
+" set wrap
 
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
