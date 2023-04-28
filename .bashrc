@@ -164,8 +164,8 @@ calc() {
 # ==================alias=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
 alias browsh='docker run -it --rm browsh/browsh'
-export VIM_HOME="/home/federicobruzzoneplasma"
-
+# export VIM_HOME="/home/federicobruzzoneplasma"
+export VIM_HOME=~
 alias ble='source ~/ble.sh/out/ble.sh'
 
 # ==================s-search=================
