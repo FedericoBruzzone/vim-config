@@ -57,6 +57,7 @@
 " colorscheme gotham256
 
 " Jellybeans config
+" set termguicolors
 :colorscheme jellybeans
 let g:jellybeans_use_term_italics = 1
 
@@ -66,9 +67,9 @@ let g:jellybeans_overrides = {
 \              'attr': 'bold' },
 \    'Comment': { 'guifg': 'cccccc' },
 \}
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
-\}
+" let g:jellybeans_overrides = {
+" \    'background': { 'guibg': '000000' },
+" \}
 let g:jellybeans_overrides = {
 \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
 \}
