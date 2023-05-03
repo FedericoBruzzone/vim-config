@@ -83,12 +83,13 @@ alias gpushf='git push --force'
 alias gpull='git pull'
 ########################################  FAST  ########################################
 alias vi='vim'
-alias c='/usr/bin/clear'
+# alias c='/usr/bin/clear'
 alias ee='exit'
 alias code.='code . && exit'
 alias tree='tree -CAhF --dirsfirst'
 alias cp='cp -r'
 alias rmhistory='rm ~/.bash_history'
+alias c='clear && __prompt_to_bottom_line'
 
 ######################################## OTHERS ########################################
 # Chmod
@@ -159,6 +160,9 @@ calc() {
   printf "%s\n" "$*" | bc
 }
 
+__prompt_to_bottom_line() {
+  tput cup $LINES
+}
 
 #######################################    My    #######################################  
 # ==================alias=================
@@ -205,5 +209,7 @@ eval "$(starship init bash)"
 
 
 ######################################################################
+
+__prompt_to_bottom_line
 
 ble
