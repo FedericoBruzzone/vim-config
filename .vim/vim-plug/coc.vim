@@ -1,3 +1,6 @@
+" Coc for java doesn't work
+" RUN rm -rf ~/.config/coc/extensions/coc-java-data/*
+
 " For coc-clangd
 "ADD THIS to coc-settings.json
 ""languageserver": {

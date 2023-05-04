@@ -43,8 +43,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/instant-markdown/vim-instant-markdown' " markdown Preview
     Plug 'https://github.com/untitled-ai/jupyter_ascending.vim' " jupyter preview
     Plug 'https://github.com/makerj/vim-pdf' " view pdf 
-
-    " Plug 'github/copilot.vim'
+    
+    Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
     " Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal  
     " Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
