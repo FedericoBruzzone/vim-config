@@ -2,6 +2,10 @@
 # /usr/local/share/fonts/
 # fc-cache -fv
 
+# add-apt-repository
+# ppa:cwchien/gradle
+
+
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
