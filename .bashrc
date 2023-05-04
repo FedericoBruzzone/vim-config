@@ -87,13 +87,14 @@ alias gpushf='git push --force'
 alias gpull='git pull'
 ########################################  FAST  ########################################
 alias vi='vim'
+alias vi.='vim .'
 # alias c='/usr/bin/clear'
+alias c='clear && __prompt_to_bottom_line'
 alias ee='exit'
 alias code.='code . && exit'
 alias tree='tree -CAhF --dirsfirst'
 alias cp='cp -r'
 alias rmhistory='rm ~/.bash_history'
-alias c='clear && __prompt_to_bottom_line'
 
 ######################################## OTHERS ########################################
 # Chmod
@@ -169,9 +170,12 @@ __prompt_to_bottom_line() {
 }
 
 #######################################    My    #######################################  
+# ==================Useless=================
+alias browsh='docker run -it --rm browsh/browsh'
+
 # ==================alias=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
-alias browsh='docker run -it --rm browsh/browsh'
+alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 # export VIM_HOME="/home/federicobruzzoneplasma"
 export VIM_HOME=~
 alias ble='source ~/ble.sh/out/ble.sh'
