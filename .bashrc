@@ -218,6 +218,9 @@ eval "$(starship init bash)"
 
 ######################################################################
 
+
 __prompt_to_bottom_line
+
+neofetch
 
 ble
