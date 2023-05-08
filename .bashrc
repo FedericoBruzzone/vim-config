@@ -161,8 +161,17 @@ ffile() {
   find . | grep --color=always "$1"  
 }
 
+
 calc() {
   printf "%s\n" "$*" | bc
+}
+
+get_max_files() {
+    du -a . | sort -n -r | head -n 20
+}
+
+jupyter_notebook_clear_output() {
+    jupyter nbconvert --clear-output --inplace "$1"
 }
 
 __prompt_to_bottom_line() {
@@ -172,10 +181,10 @@ __prompt_to_bottom_line() {
 #######################################    My    #######################################  
 # ==================Useless=================
 alias browsh='docker run -it --rm browsh/browsh'
+alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 
 # ==================alias=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
-alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 # export VIM_HOME="/home/federicobruzzoneplasma"
 export VIM_HOME=~
 alias ble='source ~/ble.sh/out/ble.sh'
