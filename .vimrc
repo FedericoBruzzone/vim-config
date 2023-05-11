@@ -33,4 +33,4 @@ source ~/.vim/vim-plug/vim-devicons.vim
 source ~/.vim/vim-plug/vim-grammarous.vim
 " source $VIM_HOME/.vim/vim-plug/ale.vim
 " source $VIM_HOME/.vim/vim-plug/deoplete.vim
-
+source ~/.vim/vim-plug/vim-visual-multi.vim

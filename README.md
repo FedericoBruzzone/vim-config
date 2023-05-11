@@ -139,17 +139,22 @@ Block-wise selection (Ctrl-V)
 |`ysw` + `<c>`     |_Normal_          |wrap the word with the character `<c>`      |
 |`yss` + `<c>`     |_Normal_          |wrap the line with the character `<c>`      |
 
-### Vim Visual Multi(Multiple Cursor)
+### Vim Visual Multi (Multiple Cursor)
 
 
 |Command                                                                         |Mode                |Action                |
 |--------------------------------------------------------------------------------|--------------------|----------------------|
 |`<CTRL>` + `N`                                                                  |_Normal_            |Select word           |
 |`<SHIFT>` + `arrow`                                                             |_Normal_            |Select char           |
-|`<CTRL>` + `up`                                                                 |_Normal_            |Multi cursor          |
-|`<CTRL>` + `down`                                                               |_Normal_            |Multi cursor          |
+|`<SHIFT>` + `up`                                                                |_Normal_            |Multi cursor          |
+|`<SHIFT>` + `down`                                                              |_Normal_            |Multi cursor          |
+|<leader>\                                                                       |_Normal_            |Add cursor            |
 |`q`                                                                             |_Multi Cursor_      |skip current word     |
 |`n` / `N`                                                                       |_Multi Cursor_      |go to the next/prev   |
+<!-- |`<CTRL>` + `N`                                                                  |_Normal_            |Select word           | -->
+<!-- |`<SHIFT>` + `arrow`                                                             |_Normal_            |Select char           | -->
+<!-- |`<CTRL>` + `up`                                                                 |_Normal_            |Multi cursor          | -->
+<!-- |`<CTRL>` + `down`                                                               |_Normal_            |Multi cursor          | -->
 
 <!--
 |Command                                                                         |Mode                |Action                |
