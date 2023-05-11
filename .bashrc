@@ -228,7 +228,10 @@ PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 eval "$(starship init bash)"
 
 # ==================i3===========
-alias i3_start_second_monitor='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
+alias start_second_monitor_right='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
+alias start_second_monitor_left='xrandr --output HDMI-1-0 --auto --left-of eDP-1'
+alias start_second_monitor_above='xrandr --output HDMI-1-0 --auto --above eDP-1'
+alias start_second_monitor_below='xrandr --output HDMI-1-0 --auto --below eDP-1'
 
 ######################################################################
 
