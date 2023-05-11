@@ -48,9 +48,6 @@ $ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
 <img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/4.gif"/>
 </details>
 
-<!--
-Plugins in action: NERDTree - TagBar - Floaterm - Fzf - Jupyter ascending - Vimtex - Instant markdown - Tabular - Multiple cursors - GitGutter - Fugitive  
--->
 
 ---
 
@@ -142,11 +139,24 @@ Block-wise selection (Ctrl-V)
 |`ysw` + `<c>`     |_Normal_          |wrap the word with the character `<c>`      |
 |`yss` + `<c>`     |_Normal_          |wrap the line with the character `<c>`      |
 
-### Multiple Cursor
+### Vim Visual Multi(Multiple Cursor)
+
 
 |Command                                                                         |Mode                |Action                |
 |--------------------------------------------------------------------------------|--------------------|----------------------|
+|`<CTRL>` + `N`                                                                  |_Normal_            |Select word           |
+|`<SHIFT>` + `arrow`                                                             |_Normal_            |Select char           |
+|`<CTRL>` + `up`                                                                 |_Normal_            |Multi cursor          |
+|`<CTRL>` + `down`                                                               |_Normal_            |Multi cursor          |
+|`q`                                                                             |_Multi Cursor_      |skip current word     |
+|`n` / `N`                                                                       |_Multi Cursor_      |go to the next/prev   |
+
+<!--
+|Command                                                                         |Mode                |Action                |
+|--------------------------------------------------------------------------------|--------------------|----------------------|
 |`<CTRL>` + `n`, `<DOWN>` to select multiple lines, `<CTRL>` + `n`, `i` (insert) |_Normal_ / _Visual_ |multiple cursors      |
+-->
+
 
 ### CSV Vim
 

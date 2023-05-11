@@ -35,7 +35,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-    Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+    "Deprecated Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+    Plug 'https://github.com/mg979/vim-visual-multi'
     Plug 'https://github.com/godlygeek/tabular' " Tabularize 
     Plug 'https://github.com/rhysd/vim-grammarous' " grammar checker
 
