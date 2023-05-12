@@ -52,6 +52,7 @@ if [[ $iatest > 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 alias l='ls --color=always'            
 alias l.='ls -d .* --color=always'     
 alias ll='ls -lhrt --color=always'     
+alias lla='ls -lhrta --color=always'     
 alias lld='ls -lUd */ --color=always'  
 alias la='ls -a --color=always'        
 
