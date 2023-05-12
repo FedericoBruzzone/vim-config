@@ -12,4 +12,3 @@
 
 - Move window to the previous workspace: <alt><ctrl><shift>-left
 
-# i3
