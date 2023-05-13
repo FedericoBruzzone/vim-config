@@ -86,6 +86,7 @@ alias gdiff='git diff'
 alias gpush='git push'
 alias gpushf='git push --force'
 alias gpull='git pull'
+alias gclearcache='git rm -r --cached .'
 ########################################  FAST  ########################################
 alias vi='vim'
 alias vi.='vim .'
