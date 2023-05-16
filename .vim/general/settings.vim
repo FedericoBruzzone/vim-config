@@ -168,8 +168,8 @@ nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 :set! conceallevel=3
 
 " from insert to normal mode cursor in the same position
-:set virtualedit=onemore
-:inoremap <Esc> <Esc>`^
+" :set virtualedit=onemore
+" :inoremap <Esc> <Esc>`^
 
 noremap <C-Right> e
 " inoremap <C-Right> <Esc>e
