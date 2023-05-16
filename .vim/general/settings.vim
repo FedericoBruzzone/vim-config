@@ -64,7 +64,7 @@ nnoremap <C-H> <C-W><C-H>
 :set foldmethod=indent
 :set foldlevel=99
 " Enable folding with the spacebar
-nnoremap <space> za
+" nnoremap <space> za
 
 """"""""""""""""""""
 
@@ -155,8 +155,10 @@ nnoremap <S-RIGHT> <c-w>>
 ":nmap <C-RIGHT> :normal! w<CR>
 ":nmap <C-LEFT> :normal! b<CR>
 
-:imap <C-DOWN> <Esc>}
-:imap <C-UP> <Esc>{
+" :imap <C-DOWN> <Esc>}
+" :imap <C-UP> <Esc>{
+:imap <C-DOWN> <C-\><C-n>}a
+:imap <C-UP> <C-\><C-n>{a
 
 :vmap <C-UP> {
 :vmap <C-DOWN> }
@@ -165,6 +167,15 @@ nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
 :set! conceallevel=3
 
+" from insert to normal mode cursor in the same position
+:set virtualedit=onemore
+:inoremap <Esc> <Esc>`^
+
+noremap <C-Right> e
+" inoremap <C-Right> <Esc>e
+" inoremap <C-Right> <Esc>ea
+inoremap <C-Right> <C-\><C-n>ea
+vnoremap <C-Right> e
 
 function! QuitOrDeleteBuffer()
   if !(bufnr('$') == bufnr(''))

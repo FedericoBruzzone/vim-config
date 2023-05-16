@@ -31,12 +31,12 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ 'coc-java',
-  \ 'coc-metals',
   \ 'coc-vimtex',
   \ 'coc-protobuf',
   \ 'coc-python',
   \ 'coc-clangd',
   \ ]
+  " \ 'coc-metals',
   " \ 'coc-explorer',
 
 " utf-8 byte sequence
