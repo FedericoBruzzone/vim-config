@@ -84,10 +84,10 @@ filetype indent on
 syntax on
 
 " Highlight cursor line underneath the cursor horizontally.
-set cursorline
+" set cursorline
 
 " Highlight cursor line underneath the cursor vertically.
-set cursorcolumn
+" set cursorcolumn
 
 " Do not save backup files.
 set nobackup
@@ -158,6 +158,8 @@ nnoremap <S-RIGHT> <c-w>>
 :imap <C-DOWN> <Esc>}
 :imap <C-UP> <Esc>{
 
+:vmap <C-UP> {
+:vmap <C-DOWN> }
 
 nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
