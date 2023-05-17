@@ -23,6 +23,9 @@
 " sudo apt-get install bear
 " bear -- make
 
+autocmd BufNew,BufEnter *.java,*.aj,*.scala execute "silent! CocEnable"
+autocmd BufLeave *.java,*.aj,*.scala execute "silent! CocDisable"
+
 let g:coc_global_extensions = [ 
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -31,12 +34,12 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ 'coc-java',
+  \ 'coc-metals', 
   \ 'coc-vimtex',
   \ 'coc-protobuf',
   \ 'coc-python',
   \ 'coc-clangd',
   \ ]
-  " \ 'coc-metals',
   " \ 'coc-explorer',
 
 " utf-8 byte sequence
