@@ -7,9 +7,6 @@
 
 " Change ~ with $VIM_HOME 
 
-" General settings
-source ~/.vim/general/settings.vim
-source ~/.vim/vim-plug/plugin.vim
 
 " Plugin configuration
 source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
@@ -34,3 +31,7 @@ source ~/.vim/vim-plug/vim-grammarous.vim
 " source $VIM_HOME/.vim/vim-plug/ale.vim
 " source $VIM_HOME/.vim/vim-plug/deoplete.vim
 source ~/.vim/vim-plug/vim-visual-multi.vim
+
+" General settings
+source ~/.vim/general/settings.vim
+source ~/.vim/vim-plug/plugin.vim

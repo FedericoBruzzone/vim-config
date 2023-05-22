@@ -23,6 +23,11 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " see ":help vimtex-compiler".
 let g:vimtex_compiler_method = 'latexmk'
 
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \]
+
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 " let maplocalleader = "," 

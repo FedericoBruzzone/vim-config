@@ -46,7 +46,7 @@ endif
 
 :set showtabline=2
 :set laststatus=2
-:set conceallevel=0 "2
+
 """"""""""""""""""""
 
 :set backspace=indent,eol,start
@@ -193,3 +193,6 @@ command Q :call QuitOrDeleteBuffer()
 " map <leader>w :w<CR>
 " " nnoremap <leader>w :w<CR>
 " nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
+
+:set conceallevel=0 "2
+set wrap
