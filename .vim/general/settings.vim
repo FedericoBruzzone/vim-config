@@ -46,6 +46,7 @@ endif
 
 :set showtabline=2
 :set laststatus=2
+:set conceallevel=0 "2
 """"""""""""""""""""
 
 :set backspace=indent,eol,start
