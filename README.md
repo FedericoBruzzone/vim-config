@@ -26,31 +26,6 @@ $ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
 
 ---
 
-## Videos
-
-<details open>
-<summary>1</summary>
-<img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/1.gif"/>
-</details>
-
-<details open>
-<summary>2</summary>
-<img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/2.gif"/>
-</details>
-
-<details open>
-<summary>3</summary>
-<img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/3.gif"/>
-</details>
-
-<details open>
-<summary>4</summary>
-<img src="https://github.com/FedericoBruzzone/vim-config/blob/main/.video/4.gif"/>
-</details>
-
-
----
-
 ## Plugins
 
 ### Coc
