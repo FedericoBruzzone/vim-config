@@ -166,7 +166,6 @@ nnoremap <S-RIGHT> <c-w>>
 
 nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
-:set! conceallevel=3
 
 " from insert to normal mode cursor in the same position
 " :set virtualedit=onemore
@@ -175,8 +174,14 @@ nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 noremap <C-Right> e
 " inoremap <C-Right> <Esc>e
 " inoremap <C-Right> <Esc>ea
-inoremap <C-Right> <C-\><C-n>ea
+" inoremap <C-Right> <C-\><C-n>ea
 vnoremap <C-Right> e
+
+" :set! conceallevel=3
+set! conceallevel=0 "2
+set wrap
+
+autocmd TextChanged,TextChangedI * silent write
 
 function! QuitOrDeleteBuffer()
   if !(bufnr('$') == bufnr(''))
@@ -194,5 +199,3 @@ command Q :call QuitOrDeleteBuffer()
 " " nnoremap <leader>w :w<CR>
 " nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
 
-:set conceallevel=0 "2
-set wrap
