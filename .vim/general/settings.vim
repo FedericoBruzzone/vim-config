@@ -181,7 +181,7 @@ vnoremap <C-Right> e
 set! conceallevel=0 "2
 set wrap
 
-autocmd TextChanged,TextChangedI * silent write
+" autocmd TextChanged,TextChangedI * silent write
 
 function! QuitOrDeleteBuffer()
   if !(bufnr('$') == bufnr(''))
