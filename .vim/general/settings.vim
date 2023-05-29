@@ -85,10 +85,10 @@ filetype indent on
 syntax on
 
 " Highlight cursor line underneath the cursor horizontally.
-" set cursorline
+set cursorline
 
 " Highlight cursor line underneath the cursor vertically.
-" set cursorcolumn
+set cursorcolumn
 
 " Do not save backup files.
 set nobackup
@@ -130,6 +130,8 @@ set ttimeoutlen=0
 " Open terminal in a new windows
 map t :tabnew<esc>:terminal ++curwin<cr>
 
+
+
 " inoremap jj <esc>
 " nnoremap <space> :
 
@@ -167,6 +169,7 @@ nnoremap <S-RIGHT> <c-w>>
 nnoremap, <silent> p :set paste<CR>"0p:set nopaste<CR>
 
 
+
 " from insert to normal mode cursor in the same position
 " :set virtualedit=onemore
 " :inoremap <Esc> <Esc>`^
@@ -176,10 +179,6 @@ noremap <C-Right> e
 " inoremap <C-Right> <Esc>ea
 " inoremap <C-Right> <C-\><C-n>ea
 vnoremap <C-Right> e
-
-" :set! conceallevel=3
-set! conceallevel=0 "2
-set wrap
 
 " autocmd TextChanged,TextChangedI * silent write
 
@@ -199,3 +198,6 @@ command Q :call QuitOrDeleteBuffer()
 " " nnoremap <leader>w :w<CR>
 " nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
 
+" :set conceallevel=0 "2
+set! conceallevel=0
+set wrap
