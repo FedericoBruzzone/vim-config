@@ -13,8 +13,8 @@ syntax enable
 " let g:vimtex_view_method = 'okular'
 
 " Or with a generic interface:
-let g:vimtex_view_general_viewer = 'okular'
-" let g:vimtex_view_general_viewer = 'zathura'
+" let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
