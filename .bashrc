@@ -149,8 +149,9 @@ extract() {
 
 # convert pdf to png
 pdf2png() {
-  convert -density 300 "$1" -quality 100 -colorspace RGB -background white -alpha off "$2"/"${1%.*}.png"  
-  #  -alpha remove
+  convert -density 300 "$1" -quality 100 -background white -alpha off "$2"/"${1%.*}.png"  
+# -alpha remove  -colorspace RGB
+#convert -density 300 3_treepred.pdf -quality 100 -background white -alpha off ./tmp/test.png
 }
 
 # Searches for text in all files in the current folder
