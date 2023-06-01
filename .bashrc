@@ -149,8 +149,7 @@ extract() {
 
 # convert pdf to png
 pdf2png() {
-  convert -density 300 "$1" -quality 100 -colorspace RGB -background white -alpha remove -alpha off "${1%.*}.png"  
-  # convert -density 300 "$1" -quality 90 "${1%.*}.png"
+  convert -density 300 "$1" -quality 100 -colorspace RGB -background white -alpha remove -alpha off "$2"/"${1%.*}.png"  
 }
 
 # Searches for text in all files in the current folder
