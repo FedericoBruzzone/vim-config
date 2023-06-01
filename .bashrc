@@ -68,10 +68,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias cdd='cd ~/Documents && c && l'
-alias cdmc='cd ~/Documents/FedericoBruzzone/master-courses && c && l'
+alias cdd='cd ~/Documents && c && ll'
+alias cdmc='cd ~/Documents/master-courses && c && ll'
 # mkdir + cd
-md() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
+mkdircd() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
 # Autoriser le cd'ing sans taper la partie cd si la version bash> = 4
 [ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
 
@@ -147,6 +147,12 @@ extract() {
   fi
 }
 
+# convert pdf to png
+pdf2png() {
+  convert -density 300 "$1" -quality 100 -colorspace RGB -background white -alpha remove -alpha off "${1%.*}.png"  
+  # convert -density 300 "$1" -quality 90 "${1%.*}.png"
+}
+
 # Searches for text in all files in the current folder
 ftext() {
   # -i case-insensitive
@@ -182,7 +188,6 @@ __prompt_to_bottom_line() {
 
 #######################################    My    #######################################  
 # ==================Useless=================
-alias browsh='docker run -it --rm browsh/browsh'
 alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 
 # ==================alias=================
@@ -201,7 +206,7 @@ alias sy='s-search -p youtube'
 . "$HOME/.cargo/env"
 
 # ==================dart/flutter==================
-export PATH="$PATH:/home/federicobruzzoneplasma/Documents/flutterdev/flutter/bin"
+export PATH="$PATH:/home/federicobruzzoneplasma/flutterdev/flutter/bin"
 export PATH="$PATH:/usr/lib/dart/bin"
 
 # ==================java==================
@@ -209,11 +214,11 @@ export PATH="$PATH:/home/federicobruzzoneplasma/aspectj1.9/bin"
 export CLASSPATH=".:/home/federicobruzzoneplasma/aspectj1.9/lib/aspectjrt.jar"
 export CLASSPATH="$CLASSPATH:/usr/share/java/javassist.jar"
 
-alias javaformat="java -jar /home/federicobruzzoneplasma/Documents/FedericoBruzzone/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r"
-alias javaformatall="java -jar /home/federicobruzzoneplasma/Documents/FedericoBruzzone/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r *.java"
+alias javaformat="java -jar /home/federicobruzzoneplasma/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r"
+alias javaformatall="java -jar /home/federicobruzzoneplasma/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r *.java"
 
 # ==================python==================
-export ANTLR4_JAR="/home/federicobruzzoneplasma/Documents/FedericoBruzzone/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
+export ANTLR4_JAR="/home/federicobruzzoneplasma/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.11.2/stm32cubeide &'
@@ -244,6 +249,6 @@ alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
 __prompt_to_bottom_line
 
-neofetch
+# neofetch
 
 ble
