@@ -242,6 +242,14 @@ alias start_second_monitor_left='xrandr --output HDMI-1-0 --auto --left-of eDP-1
 alias start_second_monitor_above='xrandr --output HDMI-1-0 --auto --above eDP-1'
 alias start_second_monitor_below='xrandr --output HDMI-1-0 --auto --below eDP-1'
 
+# function to add 1 the brightness with xrandr
+brightness_p1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1" | bc)
+}
+
+brightness_m1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
+}
 # ==================upower===========
 alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
