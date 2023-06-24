@@ -76,16 +76,27 @@ mkdircd() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory
 [ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
 
 ######################################## GIT ########################################
-alias gstatus='git status'
+alias gstatus='git status -sb'
+alias glog='git log --oneline'
+alias glast='log -1 HEAD --stat'
+alias gdiff='git diff'
+
+alias gremote='git remote -v'
+alias gbranch='git branch -va'
+alias gfetchupstream='git fetch upstream'
+alias gmergeupstream='git merge upstream/main'
+alias gfetchorigin='git fetch origin'
+alias gmergeorigin='git merge origin/main'
+alias gcheckoutmain='git checkout main'
+
+alias gpull='git pull'
 alias gadd='git add'
 alias gadda='git add --all'
 alias gcommit='git commit -s'
-alias glog='git log --oneline'
-alias gb='git checkout -b'
-alias gdiff='git diff'
+alias gcommitm='git commit -sm'
 alias gpush='git push'
 alias gpushf='git push --force'
-alias gpull='git pull'
+
 alias gclearcache='git rm -r --cached .'
 ########################################  FAST  ########################################
 alias vi='vim'
