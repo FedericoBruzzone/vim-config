@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "Exporter": {
+    "extra_template_paths": [
+      ".",
+      "/home/federicobruzzoneplasma/.local/lib/python3.10/site-packages/jupyter_contrib_nbextensions/templates",
+      "/home/federicobruzzoneplasma/Documents/FedericoBruzzone/test/env/lib/python3.10/site-packages/jupyter_contrib_nbextensions/templates"
+    ],
+    "preprocessors": [
+      "jupyter_contrib_nbextensions.nbconvert_support.CodeFoldingPreprocessor",
+      "jupyter_contrib_nbextensions.nbconvert_support.PyMarkdownPreprocessor"
+    ]
+  }
+}
