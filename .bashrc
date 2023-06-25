@@ -105,7 +105,7 @@ alias vi.='vim .'
 alias c='clear && __prompt_to_bottom_line'
 alias ee='exit'
 alias code.='code . && exit'
-alias tree='tree -CAhF --dirsfirst'
+# alias tree='tree -CAhF --dirsfirst'
 alias cp='cp -r'
 alias rmhistory='rm ~/.bash_history'
 
