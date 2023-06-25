@@ -78,7 +78,7 @@ mkdircd() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory
 ######################################## GIT ########################################
 alias gstatus='git status -sb'
 alias glog='git log --oneline'
-alias glast='log -1 HEAD --stat'
+alias glast='git log -1 HEAD --stat'
 alias gdiff='git diff'
 
 alias gremote='git remote -v'
