@@ -284,3 +284,15 @@ _Commands_:
 |`:terminal ++curwin`                 |Open a new terminal in current window     |
 |`<CTRL-w>` + `<SHFT-n>`              |Scroll up/down in terminal                |
 
+# Latex config
+
+Find `texmf.cnf` file and find the line containing the varibale TEXMFLOCAL. In the path where this variable points to:
+
+Run: `chown -R fcb.federicobruzzoneplasma (that path) /usr/local/share/texmf` 
+
+Put: `adapt-lab` folder into it and remove from thesis the sample folder
+
+Run `sudo texconfig` -> REHASH
+
+copy all config files
+
