@@ -261,11 +261,32 @@ brightness_p1() {
 brightness_m1() {
     xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
 }
+
 # ==================upower===========
 alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
-######################################################################
+# ==================latex===========
+export BIBINPUTS=${HOME}/Documents/adapt-lab/bibs:.
+l4p() {  # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
+  BIB_DIR=${BIBINPUTS%%:*}
+  grep -rin"$2" -ie "$1" "$BIB_DIR"/*.bib
+}
+vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
+  BIB_DIR=${BIBINPUTS%%:*}
+  # local bibs=()
+  # for bib in "$@"
+  # do
+  #    bibs+=($BIB_DIR/"$bib"".bib")
+  # done
+  local bibs=($@)
+  bibs=("${bibs[@]/%/.bib}")
+  bibs=( "${bibs[@]/#/$BIB_DIR/}" )
+  echo "${bibs[@]}"
 
+  vim -p "${bibs[@]}"
+}
+
+######################################################################
 
 __prompt_to_bottom_line
 
