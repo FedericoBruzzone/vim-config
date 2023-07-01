@@ -208,12 +208,6 @@ alias to_py='jupytext --set-formats ipynb,py:percent'
 export VIM_HOME=~
 alias ble='source ~/ble.sh/out/ble.sh'
 
-# ==================s-search=================
-alias s='s-search'
-alias sg='s-search -p google'
-alias sw='s-search -p wikipedia'
-alias sy='s-search -p youtube'
-
 # ==================rust==================
 . "$HOME/.cargo/env"
 
@@ -262,6 +256,11 @@ brightness_m1() {
     xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
 }
 
+# ==================xdg===========
+open_pdf() { 
+    nohup xdg-open "$1".pdf >/dev/null 2>&1 & 
+}
+
 # ==================upower===========
 alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
@@ -294,3 +293,4 @@ __prompt_to_bottom_line
 # neofetch
 
 ble
+
