@@ -227,11 +227,6 @@ STM32_Programmer_CLI() {
 alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
 export PATH="$PATH:/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.linux64_1.0.100.202210260954/tools/bin" # /arm-none-eabi-gcc"
 
-# ==================starship===========
-export STARSHIP_CONFIG=~/.config/starship.toml
-HISTSIZE=1000
-PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
-eval "$(starship init bash)"
 
 # ==================xrandr===========
 alias start_second_monitor_right='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
@@ -277,6 +272,12 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
   vim -p "${bibs[@]}"
 }
 alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
+
+# ==================starship===========
+export STARSHIP_CONFIG=~/.config/starship.toml
+HISTSIZE=1000
+PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+eval "$(starship init bash)"
 
 ######################################################################
 
