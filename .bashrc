@@ -1,11 +1,3 @@
-# NERD FONT FOLDER
-# /usr/local/share/fonts/
-# fc-cache -fv
-
-# add-apt-repository
-# ppa:cwchien/gradle
-
-
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
@@ -293,4 +285,21 @@ __prompt_to_bottom_line
 # neofetch
 
 ble
+
+
+
+
+
+# ==================notes==================
+#
+# NERD FONT FOLDER
+# /usr/local/share/fonts/
+# fc-cache -fv
+
+# add-apt-repository
+# ppa:cwchien/gradle installed from ppa
+
+# apt-cache policy
+# sudo add-apt-repository --remove "https://zotero.retorque.re/file/apt-package-archive"
+
 
