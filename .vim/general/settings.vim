@@ -166,7 +166,7 @@ nnoremap <S-RIGHT> <c-w>>
 :vmap <C-UP> {
 :vmap <C-DOWN> }
 
-nnoremap <silent> p :set paste<CR>"0p:set nopaste<CR>
+" nnoremap <silent> p :set paste<CR>"0p:set nopaste<CR>
 
 
 " from insert to normal mode cursor in the same position
