@@ -23,15 +23,17 @@ source ~/.vim/vim-plug/vimtex.vim
 source ~/.vim/vim-plug/vim-repl.vim
 source ~/.vim/vim-plug/csv-vim.vim
 source ~/.vim/vim-plug/vim-notes.vim
-source ~/.vim/vim-plug/vim-which-key.vim
 source ~/.vim/vim-plug/vim-rainbow.vim
 source ~/.vim/vim-plug/indentline.vim
 source ~/.vim/vim-plug/vim-devicons.vim
-source ~/.vim/vim-plug/vim-grammarous.vim
+source ~/.vim/vim-plug/vim-visual-multi.vim
+
+" source ~/.vim/vim-plug/vim-which-key.vim
+" source ~/.vim/vim-plug/vim-grammarous.vim
 " source $VIM_HOME/.vim/vim-plug/ale.vim
 " source $VIM_HOME/.vim/vim-plug/deoplete.vim
-source ~/.vim/vim-plug/vim-visual-multi.vim
 
 " General settings
 source ~/.vim/general/settings.vim
 source ~/.vim/vim-plug/plugin.vim
+

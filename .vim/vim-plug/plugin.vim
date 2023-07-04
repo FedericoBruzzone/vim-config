@@ -32,13 +32,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
     Plug 'https://github.com/sillybun/vim-repl' " vim repl
 
-    Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
+    " Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
     "Deprecated Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
     Plug 'https://github.com/mg979/vim-visual-multi'
     Plug 'https://github.com/godlygeek/tabular' " Tabularize 
-    Plug 'https://github.com/rhysd/vim-grammarous' " grammar checker
+    " Plug 'https://github.com/rhysd/vim-grammarous' " grammar checker
 
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
     Plug 'https://github.com/instant-markdown/vim-instant-markdown' " markdown Preview
