@@ -27,6 +27,7 @@ source ~/.vim/vim-plug/vim-rainbow.vim
 source ~/.vim/vim-plug/indentline.vim
 source ~/.vim/vim-plug/vim-devicons.vim
 source ~/.vim/vim-plug/vim-visual-multi.vim
+source ~/.vim/vim-plug/jupyter-ascending.vim
 
 " source ~/.vim/vim-plug/vim-which-key.vim
 " source ~/.vim/vim-plug/vim-grammarous.vim
