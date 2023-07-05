@@ -65,7 +65,7 @@ alias cdmc='cd ~/Documents/master-courses && c && ll'
 # mkdir + cd
 mkdircd() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
 # Autoriser le cd'ing sans taper la partie cd si la version bash> = 4
-[ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
+# [ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
 
 ######################################## GIT ########################################
 alias gstatus='git status -sb'
