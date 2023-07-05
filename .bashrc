@@ -194,10 +194,10 @@ __prompt_to_bottom_line() {
 # ==================Useless=================
 alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 alias gcollect="find ~ -xdev \( -type f \( -name .DS_Store -o -name .directory -o -name ._.DS_Store -o -name logfile.wget -o -name core -o -name Thumbs.db -o -name \*.bck -o -name .\*.bck -o -iname .\*.bak -o -name .\*~ -o -name \*.o -o -name \*.ilg -o -name \*.nav -o -name \*.snm -o -name \*.vrb -o -name \*.log -o -name \*.blg -o -name \*.bcf -o -name \*-blx.bib -o -name \*.run.xml -o -name \*.synctex.gz -o -name \*.aux -o -name a.out -o -name DEADJOE -o -name \*~ -o -iname \*.bak -o -name \*.crashdump -o -name erl_crash.dump -o -name \*.fls -o -name \*.fdb_latexmk -o -name %tmp%\* \) \) -exec rm -fv {} \;"
-# ==================alias=================
+# ==================Jupyter=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
-# export VIM_HOME="/home/federicobruzzoneplasma"
-export VIM_HOME=~
+
+# ==================ble==================
 alias ble='source ~/ble.sh/out/ble.sh'
 
 # ==================rust==================

@@ -1,8 +1,6 @@
 # Configuration file for jupyter-notebook.
 
-c = get_config()  # noqa
-c.NotebookApp.disable_check_xsrf = True
-#c.NotebookApp.notebook_dir='/home/federicobruzzoneplasma/test_vim/'
+c = get_config()  #noqa
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
@@ -210,7 +208,6 @@ c.NotebookApp.disable_check_xsrf = True
 #                        BROWSER environment variable to override it.
 #  Default: ''
 # c.NotebookApp.browser = ''
-c.NotebookApp.browser = 'firefox %s'
 
 ## The full path to an SSL/TLS certificate file.
 #  Default: ''
@@ -515,6 +512,12 @@ c.NotebookApp.browser = 'firefox %s'
 #  Default: 'notebook.services.sessions.sessionmanager.SessionManager'
 # c.NotebookApp.session_manager_class = 'notebook.services.sessions.sessionmanager.SessionManager'
 
+## Whether the banner is displayed on the page.
+#  
+#                          By default, the banner is displayed.
+#  Default: True
+# c.NotebookApp.show_banner = True
+
 ## Instead of starting the Application, dump configuration to stdout
 #  See also: Application.show_config
 # c.NotebookApp.show_config = False
@@ -601,6 +604,7 @@ c.NotebookApp.browser = 'firefox %s'
 #          to launch by using a URL and visible token (as before).
 #  Default: True
 # c.NotebookApp.use_redirect_file = True
+c.NotebookApp.use_redirect_file = False # MY 
 
 ## DEPRECATED, use tornado_settings
 #  Default: {}
@@ -927,6 +931,8 @@ c.NotebookApp.browser = 'firefox %s'
 #------------------------------------------------------------------------------
 # KernelSpecManager(LoggingConfigurable) configuration
 #------------------------------------------------------------------------------
+## A manager for kernel specs.
+
 ## List of allowed kernel names.
 #  
 #          By default, all installed kernels are allowed.
@@ -1144,7 +1150,7 @@ c.NotebookApp.browser = 'firefox %s'
 ## A class for computing and verifying notebook signatures.
 
 ## The hashing algorithm used to sign notebooks.
-#  Choices: any of ['sha3_384', 'md5', 'blake2b', 'sha3_512', 'sha256', 'sha384', 'sha512', 'sha224', 'sha3_224', 'sha3_256', 'blake2s', 'sha1']
+#  Choices: any of ['sha3_256', 'sha3_224', 'sha256', 'sha384', 'sha512', 'sha1', 'md5', 'sha3_384', 'sha224', 'blake2s', 'sha3_512', 'blake2b']
 #  Default: 'sha256'
 # c.NotebookNotary.algorithm = 'sha256'
 
