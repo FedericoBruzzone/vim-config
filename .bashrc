@@ -300,6 +300,9 @@ ble
 # add-apt-repository
 # ppa:cwchien/gradle installed from ppa
 
+# debian.sur5r.net/i3
+# i3
+
 # apt-cache policy
 # sudo add-apt-repository --remove "https://zotero.retorque.re/file/apt-package-archive"
 
