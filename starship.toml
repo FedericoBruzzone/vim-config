@@ -21,7 +21,7 @@ symbol = " "
 read_only = " "
 truncation_length = 7
 # truncation_symbol = "…/"
-truncate_symbol = ""
+truncation_symbol = ""
 
 [hostname]
 ssh_only = false
