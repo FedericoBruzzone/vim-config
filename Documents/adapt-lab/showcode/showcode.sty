@@ -1,0 +1,1825 @@
+\PassOptionsToPackage{table,svgnames}{xcolor}
+\PassOptionsToPackage{greek, italian, russian, english}{babel}
+\PassOptionsToPackage{scaled=.8}{beramono}
+%%----------------------------------------------------------------------------------
+%% showcode.sty
+%% author: Walter Cazzola (13-06-2018) last update: (02-03-2023)
+%%----------------------------------------------------------------------------------
+
+% chktex-file 36
+
+\def\filename{showcode}
+\def\fileversion{V0.9.4 (Walter Cazzola)}
+\def\filedate{2018/06/13}
+\def\filedate{2019/06/02}
+\def\filedate{2020/05/10}
+\def\filedate{2020/06/04}
+\def\filedate{2023/03/02}
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{\filename}[\filedate{} \fileversion]
+\typeout{Package \filename, \fileversion, <\filedate>}
+
+%%% OPTIONS PROCESSING %%%
+\newif\ifshowcode@default
+\newif\ifshowcode@finalize
+\newif\ifshowcode@frozen
+\newif\ifshowcode@inputenc
+\newif\ifshowcode@inputenx
+
+\DeclareOption{default}{\showcode@defaulttrue\showcode@finalizefalse\showcode@frozenfalse}
+\DeclareOption{finalize}{\showcode@defaultfalse\showcode@finalizetrue\showcode@frozenfalse}
+\DeclareOption{frozen}{\showcode@defaultfalse\showcode@finalizefalse\showcode@frozentrue}
+\DeclareOption{inputenc}{\showcode@inputenctrue\showcode@inputenxfalse}
+\DeclareOption{inputenx}{\showcode@inputenxtrue\showcode@inputencfalse}
+
+\ExecuteOptions{default} % default is default
+
+\ProcessOptions\relax
+
+% use this option to prepare the document to drop the need for python/pygmentize
+\ifshowcode@finalize
+   \RequirePackage[finalizecache,cachedir=.\jobname-cache]{minted}
+   \showcode@defaultfalse
+\fi
+
+% use this option to use a finalized cache (no need for --shell-escape, useful for a camera ready)
+\ifshowcode@frozen
+   \RequirePackage[frozencache,cachedir=.\jobname-cache]{minted}
+   \showcode@defaultfalse
+\fi
+
+\ifshowcode@default
+   %%% the whole package relies on minted
+   \RequirePackage[cachedir=.\jobname-cache]{minted}
+\fi
+%%----------------------------------------------------------------------
+
+
+%%% LOAD REQUIRED PACKAGES %%%
+
+%%% font packages needed to print most of the special characters in the listings
+\RequirePackage{textgreek} % This enables Greek chars
+\RequirePackage{pmboxdraw} % This enables graphical glyps, e.g., ├── └──
+\RequirePackage{stmaryrd}  % This enables some fancy arrows
+\RequirePackage[nointegrals]{wasysym}
+\RequirePackage{amssymb} % se in neverlang opto per ▷ e non ▶ questo va rimosso
+
+%%% fonts related configurations
+%% T1 and utf8 are needed to have most chars working correctly
+\ifshowcode@inputenc
+   \RequirePackage[utf8]{inputenc}
+   \showcode@inputenxfalse
+\fi
+\ifshowcode@inputenx
+   \RequirePackage[utf8]{inputenx}
+   \showcode@inputencfalse
+\fi
+
+\RequirePackage[LGR,OT1,LY1,T1]{fontenc}
+%% Beramono is the monodimensional font used in typesetting the code
+\RequirePackage{beramono}
+%% without the option greek passed to babel, the Greek unicode characters are not recognized
+%% remaining options are to avoid option clashes
+\RequirePackage{babel}
+%% to have size based on where a command is issued.
+\RequirePackage{relsize}
+
+%%% unicode characters are not supported natively
+\RequirePackage{newunicodechar}
+%% arrows used by Neverlang (unfortunately also by APL)
+\newunicodechar{⇒}{\ensuremath{\Rightarrow}} % ⇒
+\newunicodechar{←}{\ensuremath{\leftarrowtriangle}} % ←
+\newunicodechar{→}{\ensuremath{\rightarrowtriangle}} % →
+\DeclareUnicodeCharacter{9654}{\raisebox{1pt}{\tiny\ensuremath{\RHD}}} % ▶
+\DeclareUnicodeCharacter{9655}{\raisebox{1pt}{\tiny\ensuremath{triangleright}}} % ▷
+%% APL ... but the results are quite approximative
+\newunicodechar{≢}{\ensuremath{\nequiv}} % ≢
+\newunicodechar{≥}{\ensuremath{\ge}} % ≥
+\newunicodechar{⍵}{\textomega} % ⍵
+\newunicodechar{⍺}{\textalpha} % ⍺
+\newunicodechar{⍴}{\textrho} % ⍴
+\newunicodechar{⋄}{\ensuremath{\diamond}} % ⋄
+\newunicodechar{∊}{\ensuremath{\in}} % ∊
+\newunicodechar{∇}{\ensuremath{\APLdown}} % ∇
+\newunicodechar{⍢}{\"{\ensuremath{\APLdown}}} % ∇
+\newunicodechar{⌿}{\ensuremath{\notslash}} % ⌿
+\newunicodechar{⍝}{\APLcomment} % ⍝
+\newunicodechar{⍨}{\"\textasciitilde} % ⍨
+\newunicodechar{⌷}{\APLbox} % ⌷
+\newunicodechar{∘}{\raisebox{-1pt}{\textdegree}}% ∘
+\newunicodechar{↓}{\rotatebox{-90}{\ensuremath{\rightarrowtriangle}}} % ↓
+\newunicodechar{↑}{\rotatebox{90}{\ensuremath{\rightarrowtriangle}}} % ↑
+\newunicodechar{⍳}{\textiota} %⍳
+\newunicodechar{∨}{\ensuremath{\vee}} % ∨
+\newunicodechar{∧}{\ensuremath{\wedge}} % ∧
+\newunicodechar{⍟}{\ensuremath{\ostar}}% ⍟
+\newunicodechar{⊂}{\ensuremath{\subset}} % ⊂
+\newunicodechar{⊖}{\ensuremath{\ominus}} % ⊖
+\newunicodechar{⌽}{\ensuremath{\overt}} % ⌽
+\newunicodechar{⊣}{\ensuremath{\leftvdash}} % ⊣
+\newunicodechar{⊢}{\ensuremath{\vdash}} % ⊢
+\newunicodechar{⌈}{\ensuremath{\lceil}} % ⌈
+\newunicodechar{⍣}{\"{\ensuremath{\filledstar}}} % ⍣
+
+%%% color definitions
+%% xcolor is used to provide and define colors
+\RequirePackage{xcolor}
+%\RequirePackage[table, svgnames]{xcolor}
+%% user-defined colors
+\definecolor{BloodRed}{rgb}{.86,0,0}
+\definecolor{RustColor}{rgb}{0.72,0.25,0.05}
+\definecolor{Lily}{rgb}{0.87,0.79,0.96}
+\definecolor{LightPeony}{rgb}{0.8,0.47,0.61}
+\definecolor{DarkPeony}{rgb}{0.62,0.32,0.49}
+\definecolor{IvoryGreen}{rgb}{0.88,0.91,0.75}
+\definecolor{IceBlue}{rgb}{0.82,0.89,0.86}
+\definecolor{DarkShellGray}{rgb}{0.35,0.35,0.33}
+\definecolor{BananaYellow}{rgb}{0.97,0.89,0}
+\definecolor{PeachYellow}{rgb}{0.98,0.88,0.56}
+\definecolor{PantoneYellow}{rgb}{0.98,0.88,0.08}
+\definecolor{LightPeaGreen}{rgb}{0.81,0.98,0.62}
+\definecolor{DarkCoral}{rgb}{0.85,0.29,0.2}
+\definecolor{SolidCoral}{rgb}{0.91,0.43,0.33}
+\definecolor{PinkCoral}{rgb}{0.97,0.67,0.6}
+\definecolor{MaizeYellow}{rgb}{0.99,0.94,0.76}
+\definecolor{CurryYellow}{rgb}{0.91,0.71,0.29}
+\definecolor{ButterCupYellow}{rgb}{0.98,0.87,0.33}
+\definecolor{SolidOrange}{rgb}{1,0.31,0.02}
+\definecolor{TangerineColor}{rgb}{1,0.6,0.2}
+\definecolor{PeachOrange}{rgb}{1,0.6,0.2}
+\definecolor{TerracottaBrown}{rgb}{0.66,0.14,0.08}
+\definecolor{TerracottaOrange}{rgb}{0.73,0.22,0.08}
+\definecolor{ShittyBrown}{rgb}{0.72,0.25,0.06}
+\definecolor{DarkYellow}{rgb}{1,0.86,0}
+\definecolor{BrightPeaGreen}{rgb}{0.42,0.72,0.3}
+\definecolor{CarbonGray}{rgb}{0.28,0.28,0.28}
+\definecolor{SolidGray}{rgb}{0.47,0.47,0.47}
+\definecolor{WhiteSmoke}{rgb}{0.69,0.71,0.69}
+\definecolor{ReallyBrightCyan}{rgb}{0.47,0.67,1}
+\definecolor{BrightCyan}{rgb}{0.39,0.62,1}
+\definecolor{SolidCyan}{rgb}{0.25,0.53,1}
+\definecolor{BlueJeanColor}{rgb}{0.01,0.31,0.59}
+\definecolor{LightBlueJeanColor}{rgb}{0.22,0.49,0.78}
+\definecolor{PlumColor}{rgb}{0.51,0.01,0.38}
+\definecolor{DarkPlumColor}{rgb}{0.32,0.1,0.22}
+\definecolor{AntiqueFuchsia}{rgb}{0.56,0.36,0.51}
+\definecolor{Vermiglione}{rgb}{0.89,0.13,0.1}
+\definecolor{DarkBloodRed}{rgb}{0.59,0,0}
+\definecolor{ZakuGreen}{rgb}{0.42,0.64,0.25}
+\definecolor{LightZakuGreen}{rgb}{0.49,0.71,0.26}
+\definecolor{HTMLBorderColor}{rgb}{0.42,0.72,0.15}
+\definecolor{CSSBorderColor}{rgb}{0.8,0.8,0}
+\definecolor{CyanPurpleColor}{rgb}{0.48,0.6,0.83}
+
+%%% graphical engines used to draw the borders and background
+%% TiKZ is the basic engine
+\RequirePackage{tikz}
+\usetikzlibrary{calc, shapes.geometric, fit, shadows, decorations, arrows, trees, positioning}
+%% mdframed is used for pieces of code that should break over the page end
+%\RequirePackage{mdframed}
+%\RequirePackage[framemethod=TiKZ]{mdframed}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+%%% to have them floating in conjunction with \showcode (not to be used with \showlongcode)
+\RequirePackage{float}
+\RequirePackage{subcaption}
+\floatstyle{plain}
+
+\ifcsundef{chapter}{\newfloat{Listing}{tbph}{lol}}{\newfloat{Listing}{tbph}{lol}[chapter]}
+\floatname{Listing}{Listing}
+\providecommand{\listoflistings}{} % this fake the presence of \listoflistings, so that the \renewcommand doesn't fail when not defined.
+\renewcommand{\listoflistings}{\listof{Listing}{List of Listings}}
+\DeclareCaptionSubType{Listing}
+\renewcommand\thesubListing{(\alph{subListing})}
+\DeclareCaptionLabelFormat{single}{#2}
+\captionsetup[subListing]{labelformat=single}
+%%% to set the caption properties
+%\RequirePackage{caption}
+%\captionsetup[Listing]{font=small, labelfont=bf, textfont=up, skip=-50pt}
+%\setlength{\abovecaptionskip}{-5pt plus 3pt minus 2pt}
+\setlength{\belowcaptionskip}{-5pt plus 3pt minus 2pt}
+
+\@ifpackageloaded{cleveref}{%
+% \RequirePackage[capitalize,nameinlink]{cleveref}
+\crefname{Listing}{Listing}{Listings}
+\Crefname{Listing}{Listing}{Listings}
+}{}
+%%%----------------------------------------------------------------------------------------%%%
+
+%%% The following is an hack to halves the heights of empty lines in minted.
+\let\FV@ListProcessLine@NoBreak@Orig\FV@ListProcessLine@NoBreak
+\let\FV@ListProcessLine@Break@Orig\FV@ListProcessLine@Break
+\def\FV@ListProcessLine@NoBreak#1{%
+  \ifx\FV@Line\empty%
+    \hbox{}\vspace{\dimexpr-\baselineskip+\smallskipamount}%
+  \else
+    \FV@ListProcessLine@NoBreak@Orig{#1}%
+  \fi}
+\def\FV@ListProcessLine@Break#1{%
+  \ifx\FV@Line\empty%
+    \hbox{}\vspace{\dimexpr-\baselineskip+\smallskipamount}%
+  \else
+    \FV@ListProcessLine@Break@Orig{#1}%
+  \fi}
+
+\let\FV@ListProcessLineOrig\FV@ListProcessLine
+\def\FV@ListProcessLine#1{%
+  \ifx\FV@Line\empty%
+    \hbox{}\vspace{\dimexpr-\baselineskip+\smallskipamount}%
+  \else
+    \FV@ListProcessLineOrig{#1}%
+  \fi}
+
+%%% commands to pretty typesetting pieces of code
+
+%% \showcode and \showshell are used for unbreakable and potentially floating pieces of code
+
+\RequirePackage{suffix}
+
+\providecommand{\showcode}{}
+\renewcommand{\showcode}[5][\linewidth]{%
+   \begin{tcolorbox}[%
+      unbreakable, enhanced, colback={#2}, colframe={#3}, boxrule=1pt,width=#1,%
+      boxsep=0pt, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt]
+
+      \inputminted{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+\WithSuffix\newcommand\showcode*[5][\linewidth]{%
+   \renewcommand{\theFancyVerbLine}{\ttfamily\scriptsize\arabic{FancyVerbLine}}
+   \begin{tcolorbox}[%
+      unbreakable, enhanced, colback={#2}, colframe={#3}, sharp corners, boxrule=1pt,%
+      boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+      % borderline={1pt}{-1pt}{#3},
+      overlay={%
+        \begin{tcbclipinterior}%
+           \fill[#3!50] (frame.south west) rectangle ([xshift=5mm]frame.north west);%
+           \draw[#3,line width=1pt] ([xshift=5mm-.5pt]frame.north west) -- ([xshift=5mm-.5pt]frame.south west) ;% chktex 26 chktex 8
+        \end{tcbclipinterior}}]
+
+      \inputminted[xleftmargin=5mm,linenos,numbersep=3mm]{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+% \RequirePackage{xparse}
+% \NewDocumentCommand{\showcode}{ s O{\linewidth} m m m m }{%
+%    @one :- #1\\@two:-#2\\
+%    @three :- #3\\@four:-#4\\
+%    @five :- #5\\@six:-#6\\
+%    \IfBooleanTF{#1}{%
+%       \begin{tcolorbox}[%
+%          unbreakable, enhanced, colback={#3}, colframe={#4}, boxrule=1pt,%
+%          text width=8.47415cm -6pt -5mm -2pt,
+%          boxsep=0pt, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+%          overlay={%
+%            \begin{tcbclipinterior}%
+%               \fill[Black!40!#3] (frame.south west) rectangle ([xshift=5mm]frame.north west);%
+%            \end{tcbclipinterior}}]
+%
+%          \inputminted[xleftmargin=5mm,linenos,numbersep=3mm]{#5}{code/#6}%
+%       \end{tcolorbox}%
+%    }{\protect%
+%       \begin{tcolorbox}[%
+%          enhanced, colback={#3}, colframe={#4}, boxrule=1pt,%
+%          text width=#2 -6pt -2pt,
+%          boxsep=0pt, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt]
+%
+%          \inputminted{#5}{code/#6}%
+%       \end{tcolorbox}%
+%    }
+% }
+
+% \newcommand{\showcode}[5][\linewidth]{%
+%    \begin{tcolorbox}[%
+%       breakable, enhanced, colback={#2}, colframe={#3},%
+%       width=#1, boxrule=1pt, boxsep=0pt,%
+%       left=3pt, right=3pt, top=3pt, bottom=2pt,%
+%       arc=0pt, outer arc=0pt]
+%
+%       \inputminted{#4}{code/#5}%
+%    \end{tcolorbox}%
+% }
+
+% \newcommand{\showcode}[5][\linewidth]{%
+%    \tikz%
+%       \node[draw=#3, thick, fill={#2}, shape=rectangle, %
+%             opacity=1, draw opacity=1, text opacity=1, text width=#1 -6pt, %
+%             inner xsep=3pt, inner ysep=2pt, outer sep=0pt] (codebox) {\vspace*{-7pt}%
+%           \inputminted{#4}{code/#5}%
+%    } ;
+%    \vskip -2pt
+%    %\vspace*{1cm}
+% }%
+
+\newcommand{\shellfgcolor}{%
+  \def\FancyVerbFormatLine##1{\textcolor{white}{##1}}%
+}
+
+\providecommand{\showshell}{}
+\renewcommand{\showshell}[5][\linewidth]{%
+   \begin{tcolorbox}[%
+      unbreakable, enhanced, colback={#3}, colframe={#2}, sharp corners, boxrule=1pt,%
+      boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+      borderline={1pt}{-1pt}{#3}]
+
+      \inputminted[formatcom=\shellfgcolor]{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+% \renewcommand{\showshell}[5][\linewidth]{%
+%   \tikz%
+%      \node[draw=#2, semithick, fill=Black, double=#3, double distance=.75pt, shape=rectangle,%
+%            opacity=1, draw opacity=1, text opacity=1, text width=#1 -6pt, %
+%            inner xsep=3pt, inner ysep=2pt,outer sep=0pt] {\vspace*{-3pt}%
+%         \inputminted[%
+%            formatcom=\color{White}%
+%            %,breakanywhere,%breaksymbolright=\raisebox{.8ex}{\small\carriagereturn}
+%         ]{#4}{code/#5}%
+%      } ;
+%      \vskip -2pt
+% }%
+
+\WithSuffix\newcommand\showshell*[5][\linewidth]{%
+   \renewcommand{\theFancyVerbLine}{\ttfamily\scriptsize\arabic{FancyVerbLine}}
+   \begin{tcolorbox}[%
+      unbreakable, enhanced, colback={#3}, colframe={#2}, sharp corners, boxrule=1pt,%
+      boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+      borderline={1pt}{-1pt}{#3},
+      overlay={%
+        \begin{tcbclipinterior}%
+           \fill[#3!50] ([yshift=1pt]frame.south west) rectangle ([xshift=5mm,yshift=-1pt]frame.north west);%
+           \draw[#2,line width=1pt] ([xshift=5mm-.5pt]frame.north west) -- ([xshift=5mm-.5pt]frame.south west) ;% chktex 26 chktex 8
+        \end{tcbclipinterior}}]%
+
+      \inputminted[formatcom=\shellfgcolor,xleftmargin=5mm,linenos,numbersep=3mm]{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+%% \showlongcode and \showlongshell are used for code that breaks over the page end.
+%% It can't be used in a Listing
+
+\newcommand{\showlongcode}[5][\linewidth]{%
+   \begin{tcolorbox}[%
+      breakable, enhanced, colback={#2}, colframe={#3},%
+      width=#1, boxrule=1pt, boxsep=0pt,%
+      left=3pt, right=3pt, top=3pt, bottom=2pt,%
+      arc=0pt, outer arc=0pt]
+
+      \inputminted{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+\newcommand{\showlongshell}[5][\linewidth]{%
+   \begin{tcolorbox}[%
+      breakable, enhanced, colback={Black}, frame hidden, %
+      overlay unbroken={%
+         \draw[semithick, double distance=.75pt, double=#3, draw=#2] (interior.north west)--(interior.south west)--(interior.south east)--(interior.north east) --cycle ;% chktex 26 chktex 8
+        },%
+      overlay first={%
+         \draw[semithick, double distance=.75pt, double=#3, draw=#2] (interior.south west)--(interior.north west)--(interior.north east)--(interior.south east) ;% chktex 26 chktex 8
+        },%
+      overlay middle={%
+         \draw[semithick, double distance=.75pt, double=#3, draw=#2] (interior.north west)--(interior.south west) (interior.north east)--(interior.south east);
+        },%
+      overlay last={%
+         \draw[semithick, double distance=.75pt, double=#3, draw=#2] (interior.north west)--(interior.south west)--(interior.south east)--(interior.north east) ;% chktex 26 chktex 8
+        },%
+      width=#1, boxrule=1pt, boxsep=0pt,%
+      left=3pt, right=3pt, top=3pt, bottom=2pt,%
+      arc=0pt, outer arc=0pt]
+
+      \inputminted[formatcom=\shellfgcolor]{#4}{code/#5}%
+   \end{tcolorbox}%
+}
+
+%% \slidecode and \slideshell are used for unbreakable pieces of code to be shown in slides
+% this is layers savvy. This needs beamer class loaded.
+
+\@ifclassloaded{beamer}{%
+\def\defaultfontsize{\footnotesize}
+
+\newcommand<>{\slidecode}[5][\linewidth]{%
+   \uncover#6{%
+      \begin{tcolorbox}[%
+         unbreakable, enhanced, colback={#2}, colframe={#3}, sharp corners, boxrule=1pt, enhanced jigsaw, opacityback=.75,%
+         boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt]
+
+         \setminted{fontsize=\defaultfontsize}%
+         \inputminted{#4}{code/#5}%
+      \end{tcolorbox}%
+   }%
+}
+
+\WithSuffix{\newcommand<>}{\slidecode}*[5][\linewidth]{%
+   \renewcommand{\theFancyVerbLine}{\ttfamily\scriptsize\arabic{FancyVerbLine}}
+   \uncover#6{%
+      \begin{tcolorbox}[%
+         unbreakable, enhanced, colback={#2}, colframe={#3}, sharp corners, boxrule=1pt, enhanced jigsaw, opacityback=.75,%
+         width=#1, boxsep=0pt, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+         overlay={%
+           \begin{tcbclipinterior}%
+              \fill[#3!50] (frame.south west) rectangle ([xshift=5mm]frame.north west);%
+              \draw[#3,line width=1pt] ([xshift=5mm-.5pt]frame.north west) -- ([xshift=5mm-.5pt]frame.south west) ;% chktex 8 chktex 26
+           \end{tcbclipinterior}}]
+
+         \setminted{fontsize=\defaultfontsize}%
+         \inputminted[xleftmargin=5mm,linenos,numbersep=3mm]{#4}{code/#5}%
+      \end{tcolorbox}%
+   }%
+}
+
+\newcommand<>{\slideshell}[5][\linewidth]{%
+   \uncover#6{%
+      \begin{tcolorbox}[%
+         unbreakable, enhanced, colback={#3}, colframe={#2}, sharp corners, boxrule=1pt, enhanced jigsaw, opacityback=.75,%
+         boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+         borderline={1pt}{-1pt}{#3}]
+
+         \inputminted[formatcom=\shellfgcolor]{#4}{code/#5}%
+      \end{tcolorbox}%
+   }%
+}%
+
+% non sembra funzionare, compila ma direi che usa la versione senza *
+
+\WithSuffix{\newcommand<>}{\slideshell}*[5][\linewidth]{%
+   \renewcommand{\theFancyVerbLine}{\ttfamily\scriptsize\arabic{FancyVerbLine}}
+   \uncover#6{%
+      \begin{tcolorbox}[%
+         unbreakable, enhanced, colback={#3}, colframe={#2}, sharp corners, boxrule=1pt, opacityback=.5,%
+         boxsep=0pt, width=#1, left=3pt, right=3pt, top=3pt, bottom=2pt, arc=0pt, outer arc=0pt,%
+         borderline={1pt}{-1pt}{#3},
+         overlay={%
+           \begin{tcbclipinterior}%
+              \fill[#3!50] ([yshift=1pt]frame.south west) rectangle ([xshift=5mm,yshift=-1pt]frame.north west);%
+              \draw[#2,line width=1pt] ([xshift=5mm-.5pt]frame.north west) -- ([xshift=5mm-.5pt]frame.south west) ;% chktex 26 chktex 8
+           \end{tcbclipinterior}}]%
+
+         \inputminted[formatcom=\shellfgcolor,xleftmargin=5mm,linenos,numbersep=3mm]{#4}{code/#5}%
+      \end{tcolorbox}%
+   }%
+}%
+
+% \newcommand<>{\slideshell}[5][\linewidth]{%
+%   \tikz%
+%   {\uncover#6{%
+%         \node[draw=#2, semithick, fill=Black, double=#3, double distance=.75pt, shape=rectangle,%
+%               opacity=1, draw opacity=1, text opacity=1, text width=#1 -6pt, %
+%               inner xsep=3pt, inner ysep=-2pt,outer sep=0pt] {%
+%            \vspace*{-3pt}%
+%            \setminted{fontsize=\defaultfontsize}%
+%            \inputminted[formatcom=\shellfgcolor]{#4}{code/#5}%
+%         } ;
+%      }}
+%      \vskip -2pt
+% }%
+}{}
+
+%%% These are minted configurations
+%% global minted configs
+\setminted{fontfamily=tt,fontsize=\footnotesize,encoding=utf8,outencoding=utf8,style=trac}
+%% global inline minted configs
+\setmintedinline{fontfamily=tt,fontsize=\normalsize,breaklines,style=bw}
+% \setmintedinline{fontfamily=tt,fontsize=\relsize{0},breaklines,style=bw}
+
+%%% Hack for the inline code with special symbols as % and #
+\RequirePackage{xparse}
+\ExplSyntaxOn%
+\NewDocumentCommand{\delayedminted}{mv}{%
+  \tl_clear_new:c {l_minted_string_#1_tl}%
+  \tl_set:cn {l_minted_string_#1_tl} {#2}%
+}
+\NewDocumentCommand{\mintinlinedelayed}{mm}{%
+  \minted_inline_string:nv {#1} {l_minted_string_#2_tl}%
+}
+\cs_new_protected:Nn \minted_inline_string:nn{%
+  \mintinline{#1}{#2}%
+}
+\cs_generate_variant:Nn \minted_inline_string:nn {nv}
+\ExplSyntaxOff%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Per language Configs and Commands
+
+%% Configurations and commands for the Ada language
+\setminted[ada]{}
+\definecolor{AdaColor}{rgb}{0.88,0.91,0.75}
+\colorlet{AdaFGColor}{AdaColor!150}
+\colorlet{AdaBGColor}{AdaColor!50}
+\providecommand{\showada}{}
+\renewcommand{\showada}[2][\linewidth]{\showcode[#1]{AdaBGColor}{AdaFGColor}{ada}{ada/#2}}
+\WithSuffix\newcommand\showada*[2][\linewidth]{\showcode*[#1]{AdaBGColor}{AdaFGColor}{ada}{ada/#2}}
+\newcommand{\showlongada}[2][\linewidth]{\showlongcode[#1]{AdaBGColor}{AdaFGColor}{ada}{ada/#2}}
+\newcommand{\delayedinlineada}[1]{\mintinlinedelayed{ada}{#1}}
+\newmintinline[inlineada]{ada}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideada[2][\linewidth]{\slidecode#3[#1]{AdaBGColor}{AdaFGColor}{ada}{ada/#2}}
+  \WithSuffix{\newcommand<>}\slideada*[2][\linewidth]{\slidecode#3*[#1]{AdaBGColor}{AdaFGColor}{ada}{ada/#2}}
+}{}
+
+%% Configurations and commands for the Agda language
+\setminted[agda]{}
+\definecolor{AgdaColor}{rgb}{0.88,0.91,0.75}
+\colorlet{AgdaFGColor}{AgdaColor!150}
+\colorlet{AgdaBGColor}{AgdaColor!50}
+\providecommand{\showagda}{}
+\renewcommand{\showagda}[2][\linewidth]{\showcode[#1]{AgdaBGColor}{AgdaFGColor}{agda}{agda/#2}}
+\WithSuffix\newcommand\showagda*[2][\linewidth]{\showcode*[#1]{AgdaBGColor}{AgdaFGColor}{agda}{agda/#2}}
+\newcommand{\showlongagda}[2][\linewidth]{\showlongcode[#1]{AgdaBGColor}{AgdaFGColor}{agda}{agda/#2}}
+\newcommand{\delayedinlineagda}[1]{\mintinlinedelayed{agda}{#1}}
+\newmintinline[inlineagda]{agda}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideagda[2][\linewidth]{\slidecode#3[#1]{AgdaBGColor}{AgdaFGColor}{agda}{agda/#2}}
+  \WithSuffix{\newcommand<>}\slideagda*[2][\linewidth]{\slidecode#3*[#1]{AgdaBGColor}{AgdaFGColor}{agda}{agda/#2}}
+}{}
+
+%% Configurations and commands for the Apl language
+\setminted[apl]{style=autumn}
+\providecommand{\showapl}{}
+\colorlet{APLFGColor}{LimeGreen}
+\colorlet{APLBGColor}{LimeGreen!25}
+\renewcommand{\showapl}[2][\linewidth]{\showcode[#1]{APLBGColor}{APLFGColor}{apl}{apl/#2}}
+\WithSuffix\newcommand\showapl*[2][\linewidth]{\showcode[#1]{APLBGColor}{APLFGColor}{apl}{apl/#2}}
+\newcommand{\showlongapl}[2][\linewidth]{\showlongcode[#1]{APLBGColor}{APLFGColor}{apl}{apl/#2}}
+\newcommand{\delayedinlineapl}[1]{\mintinlinedelayed{apl}{#1}}
+\newmintinline[inlineapl]{apl}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideapl[2][\linewidth]{\slidecode#3[#1]{APLBGColor}{APLFGColor}{apl}{apl/#2}}
+  \WithSuffix{\newcommand<>}\slideapl*[2][\linewidth]{\slidecode#3*[#1]{APLBGColor}{APLFGColor}{apl}{apl/#2}}
+}{}
+
+%% Configurations and commands for the AspectJ language
+\setminted[aspectj]{}
+\definecolor{AspectJFGColor}{rgb}{0.97,0.89,0}
+\colorlet{AspectJBGColor}{AspectJFGColor!25}
+\providecommand{\showaspectj}{}
+\renewcommand{\showaspectj}[2][\linewidth]{\showcode[#1]{AspectJBGColor}{AspectJFGColor}{aspectj}{aspectj/#2}}
+\WithSuffix\newcommand\showaspectj*[2][\linewidth]{\showcode*[#1]{AspectJBGColor}{AspectJFGColor}{aspectj}{aspectj/#2}}
+\newcommand{\showlongaspectj}[2][\linewidth]{\showlongcode[#1]{AspectJBGColor}{AspectJFGColor}{aspectj}{aspectj/#2}}
+\newcommand{\delayedinlineaspectj}[1]{\mintinlinedelayed{aspectj}{#1}}
+\newmintinline[inlineaspectj]{aspectj}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideaspectj[2][\linewidth]{\slidecode#3[#1]{AspectJBGColor}{AspectJFGColor}{aspectj}{aspectj/#2}}
+  \WithSuffix{\newcommand<>}\slideaspectj*[2][\linewidth]{\slidecode#3*[#1]{AspectJBGColor}{AspectJFGColor}{aspectj}{aspectj/#2}}
+}{}
+
+%% Configurations and commands for the Bash scripting language
+\setminted[bash]{}
+\providecommand{\showbash}{}
+\colorlet{BashFGColor}{Black}
+\colorlet{BashBGColor}{White}
+\renewcommand{\showbash}[2][\linewidth]{\showcode[#1]{BashBGColor}{BashFGColor}{bash}{bash/#2}}
+\WithSuffix\newcommand\showbash*[2][\linewidth]{\showcode*[#1]{BashBGColor}{BashFGColor}{bash}{bash/#2}}
+\newcommand{\showlongbash}[2][\linewidth]{\showlongcode[#1]{BashBGColor}{BashFGColor}{bash}{bash/#2}}
+\newcommand{\delayedinlinebash}[1]{\mintinlinedelayed{bash}{#1}}
+\newmintinline[inlinebash]{bash}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidebash[2][\linewidth]{\slidecode#3[#1]{BashBGColor}{BashFGColor}{bash}{bash/#2}}
+  \WithSuffix{\newcommand<>}\slidebash*[2][\linewidth]{\slidecode#3*[#1]{BashBGColor}{BashFGColor}{bash}{bash/#2}}
+}{}
+
+%% Configurations and commands for the Bash Session language
+\setminted[bashcon]{style=lilypond}
+\setminted[shell-session]{style=lilypond}
+\colorlet{BashConFGColor}{Black}
+\colorlet{BashConBGColor}{White}
+\providecommand{\showbashcon}{}
+\renewcommand{\showbashcon}[2][\linewidth]{\showshell[#1]{BashConBGColor}{BashConFGColor}{shell-session}{bash-session/#2}}
+\WithSuffix\newcommand\showbashcon*[2][\linewidth]{\showshell*[#1]{BashConBGColor}{BashConFGColor}{shell-session}{bash-session/#2}}
+\newcommand{\showlongbashcon}[2][\linewidth]{\showlongshell[#1]{BashConFGColor}{BashConBGColor}{shell-session}{bash-session/#2}}
+\newcommand{\delayedinlinebashcon}[1]{\mintinlinedelayed{shell-session}{#1}}
+\newmintinline[inlinebashcon]{shell-session}{}
+\@ifclassloaded{beamer}{%
+   \newcommand<>\slidebashcon[2][\linewidth]{\slideshell#3[#1]{BashConBGColor}{BashConFGColor}{shell-session}{bash-session/#2}}
+   \WithSuffix{\newcommand<>}\slidebashcon*[2][\linewidth]{\slideshell#3*[#1]{BashConBGColor}{BashConFGColor}{shell-session}{bash-session/#2}}
+}{}
+
+%% Configurations and commands for the BibTeX language
+\setminted[bibtex]{breaklines,breakindent=1cm,breakanywhere}
+\definecolor{BibTeXFGColor}{rgb}{0.42,0.64,0.25}
+\colorlet{BibTeXBGColor}{BibTeXFGColor!25}
+\providecommand{\showbibtex}{}
+\renewcommand{\showbibtex}[2][\linewidth]{\showcode[#1]{BibTeXBGColor}{BibTeXFGColor}{bibtex}{bibtex/#2}}
+\WithSuffix\newcommand\showbibtex*[2][\linewidth]{\showcode*[#1]{BibTeXBGColor}{BibTeXFGColor}{bibtex}{bibtex/#2}}
+\newcommand{\showlongbibtex}[2][\linewidth]{\showlongcode[#1]{BibTeXBGColor}{BibTeXFGColor}{bibtex}{bibtex/#2}}
+\newcommand{\delayedinlinebibtex}[1]{\mintinlinedelayed{bibtex}{#1}}
+\newmintinline[inlinebibtex]{bibtex}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidebibtex[2][\linewidth]{\slidecode#3[#1]{BibTeXBGColor}{BibTeXFGColor}{bibtex}{bibtex/#2}}
+  \WithSuffix{\newcommand<>}\slidebibtex*[2][\linewidth]{\slidecode#3*[#1]{BibTeXBGColor}{BibTeXFGColor}{bibtex}{bibtex/#2}}
+}{}
+
+%% Configurations and commands for the C++ language
+\setminted[c++]{style=friendly}
+\providecommand{\showcpp}{}
+\definecolor{CppFGColor}{rgb}{0.72,0.25,0.06}
+\colorlet{CppBGColor}{CppFGColor!25}
+\renewcommand{\showcpp}[2][\linewidth]{\showcode[#1]{CppBGColor}{CppFGColor}{c++}{c++/#2}}
+\WithSuffix\newcommand\showcpp*[2][\linewidth]{\showcode*[#1]{CppBGColor}{CppFGColor}{c++}{c++/#2}}
+\newcommand{\showlongcpp}[2][\linewidth]{\showlongcode[#1]{CppBGColor}{CppFGColor}{c++}{c++/#2}}
+\newcommand{\delayedinlinecpp}[1]{\mintinlinedelayed{cpp}{#1}}
+\newmintinline[inlinecpp]{cpp}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidecpp[2][\linewidth]{\slidecode#3[#1]{CppBGColor}{CppFGColor}{c++}{c++/#2}}
+  \WithSuffix{\newcommand<>}\slidecpp*[2][\linewidth]{\slidecode#3*[#1]{CppBGColor}{CppFGColor}{c++}{c++/#2}}
+}{}
+
+%% Configurations and commands for the C language
+\setminted[c]{style=friendly}
+\definecolor{CFGColor}{rgb}{0.73,0.22,0.08}
+\colorlet{CBGColor}{CFGColor!25}
+\providecommand{\showc}{}
+\renewcommand{\showc}[2][\linewidth]{\showcode[#1]{CBGColor}{CFGColor}{c}{c/#2}}
+\WithSuffix\newcommand\showc*[2][\linewidth]{\showcode*[#1]{CBGColor}{CFGColor}{c}{c/#2}}
+\newcommand{\showlongc}[2][\linewidth]{\showlongcode[#1]{CBGColor}{CFGColor}{c}{c/#2}}
+\newcommand{\delayedinlinec}[1]{\mintinlinedelayed{c}{#1}}
+\newmintinline[inlinec]{c}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidec[2][\linewidth]{\slidecode#3[#1]{CBGColor}{CFGColor}{c}{c/#2}}
+  \WithSuffix{\newcommand<>}\slidec*[2][\linewidth]{\slidecode#3*[#1]{CBGColor}{CFGColor}{c}{c/#2}}
+}{}
+
+%% Configurations and commands for the Clojure language
+\setminted[clojure]{style=arduino} % possible alternative: lovelace
+\definecolor{ClojureColor}{rgb}{0.99,0.94,0.76}
+\colorlet{ClojureFGColor}{ClojureColor!150}
+\colorlet{ClojureBGColor}{ClojureColor!25}
+\providecommand{\showclojure}{}
+\renewcommand{\showclojure}[2][\linewidth]{\showcode[#1]{ClojureBGColor}{ClojureFGColor}{clojure}{clojure/#2}}
+\WithSuffix\newcommand\showclojure*[2][\linewidth]{\showcode*[#1]{ClojureBGColor}{ClojureFGColor}{clojure}{clojure/#2}}
+\newcommand{\showlongclojure}[2][\linewidth]{\showlongcode[#1]{ClojureBGColor}{ClojureFGColor}{clojure}{clojure/#2}}
+\newcommand{\delayedinlineclojure}[1]{\mintinlinedelayed{clojure}{#1}}
+\newmintinline[inlineclojure]{clojure}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideclojure[2][\linewidth]{\slidecode#3[#1]{ClojureBGColor}{ClojureFGColor}{clojure}{clojure/#2}}
+  \WithSuffix{\newcommand<>}\slideclojure*[2][\linewidth]{\slidecode#3*[#1]{ClojureBGColor}{ClojureFGColor}{clojure}{clojure/#2}}
+}{}
+
+%% Configurations and commands for the CoBOL language
+\setminted[cobol]{keywordcase=upper}
+\definecolor{COBOLFGColor}{rgb}{0.66,0.14,0.08}
+\colorlet{COBOLBGColor}{COBOLFGColor!25}
+\providecommand{\showcobol}{}
+\renewcommand{\showcobol}[2][\linewidth]{\showcode[#1]{COBOLBGColor}{COBOLFGColor}{cobol}{cobol/#2}}
+\WithSuffix\newcommand\showcobol*[2][\linewidth]{\showcode*[#1]{COBOLBGColor}{COBOLFGColor}{cobol}{cobol/#2}}
+\newcommand{\showlongcobol}[2][\linewidth]{\showlongcode[#1]{COBOLBGColor}{COBOLFGColor}{cobol}{cobol/#2}}
+\newcommand{\delayedinlinecobol}[1]{\mintinlinedelayed{cobol}{#1}}
+\newmintinline[inlinecobol]{cobol}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidecobol[2][\linewidth]{\slidecode#3[#1]{COBOLBGColor}{COBOLFGColor}{cobol}{cobol/#2}}
+  \WithSuffix{\newcommand<>}\slidecobol*[2][\linewidth]{\slidecode#3*[#1]{COBOLBGColor}{COBOLFGColor}{cobol}{cobol/#2}}
+}{}
+
+%% Configurations and commands for the ComponentPascal/Oberon language
+\setminted[componentpascal]{style=friendly}
+\definecolor{OberonColor}{rgb}{0.88,0.91,0.75}
+\colorlet{OberonFGColor}{OberonColor!150}
+\colorlet{OberonBGColor}{OberonColor!50}
+\providecommand{\showoberon}{}
+\renewcommand{\showoberon}[2][\linewidth]{\showcode[#1]{OberonBGColor}{OberonFGColor}{componentpascal}{oberon/#2}}
+\WithSuffix\newcommand\showoberon*[2][\linewidth]{\showcode*[#1]{OberonBGColor}{OberonFGColor}{componentpascal}{oberon/#2}}
+\newcommand{\showlongoberon}[2][\linewidth]{\showlongcode[#1]{OberonBGColor}{OberonFGColor}{componentpascal}{oberon/#2}}
+\newcommand{\delayedinlineoberon}[1]{\mintinlinedelayed{componentpascal}{#1}}
+\newmintinline[inlineoberon]{componentpascal}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideoberon[2][\linewidth]{\slidecode#3[#1]{OberonBGColor}{OberonFGColor}{componentpascal}{oberon/#2}}
+  \WithSuffix{\newcommand<>}\slideoberon*[2][\linewidth]{\slidecode#3*[#1]{OberonBGColor}{OberonFGColor}{componentpascal}{oberon/#2}}
+}{}
+
+%% Configurations and commands for the C# language
+\setminted[csharp]{style=friendly}
+\definecolor{CSharpColor}{rgb}{1,0.86,0}
+\colorlet{CSharpFGColor}{CSharpColor}
+\colorlet{CSharpBGColor}{CSharpColor!25}
+\providecommand{\showcsharp}{}
+\renewcommand{\showcsharp}[2][\linewidth]{\showcode[#1]{CSharpBGColor}{CSharpFGColor}{csharp}{c\#/#2}}
+\WithSuffix\newcommand\showcsharp*[2][\linewidth]{\showcode*[#1]{CSharpBGColor}{CSharpFGColor}{csharp}{c\#/#2}}
+\newcommand{\showlongcsharp}[2][\linewidth]{\showlongcode[#1]{CSharpBGColor}{CSharpFGColor}{csharp}{c\#/#2}}
+\newcommand{\delayedinlinecsharp}[1]{\mintinlinedelayed{csharp}{#1}}
+\newmintinline[inlinecsharp]{csharp}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidecsharp[2][\linewidth]{\slidecode#3[#1]{CSharpBGColor}{CSharpFGColor}{csharp}{c\#/#2}}
+  \WithSuffix{\newcommand<>}\slidecsharp*[2][\linewidth]{\slidecode#3*[#1]{CSharpBGColor}{CSharpFGColor}{csharp}{c\#/#2}}
+}{}
+
+%% Configurations and commands for the CSS language
+\setminted[css]{style=vim}
+\definecolor{CSSColor}{rgb}{0.8,0.8,0}
+\colorlet{CSSFGColor}{Black}
+\colorlet{CSSBGColor}{CSSColor}
+\providecommand{\showcss}{}
+\renewcommand{\showcss}[2][\linewidth]{\showshell[#1]{CSSBGColor}{CSSFGColor}{css}{css/#2}}
+\WithSuffix\newcommand\showcss*[2][\linewidth]{\showshell*[#1]{CSSBGColor}{CSSFGColor}{css}{css/#2}}
+\newcommand{\showlongcss}[2][\linewidth]{\showlongshell[#1]{CSSBGColor}{CSSFGColor}{css}{css/#2}}
+\newcommand{\delayedinlinecss}[1]{\mintinlinedelayed{css}{#1}}
+\newmintinline[inlinecss]{css}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidecss[2][\linewidth]{\slideshell#3[#1]{CSSBGColor}{CSSFGColor}{css}{css/#2}}
+  \WithSuffix{\newcommand<>}\slidecss*[2][\linewidth]{\slideshell#3*[#1]{CSSBGColor}{CSSFGColor}{css}{css/#2}}
+}{}
+
+%% Configurations and commands for the CUDA language
+\setminted[cuda]{style=default} % possible alternative: friendly, trac
+\providecommand{\showcuda}{}
+\renewcommand{\showcuda}[2][\linewidth]{\showcode[#1]{ShittyBrown!25}{ShittyBrown}{cuda}{cuda/#2}}
+\WithSuffix\newcommand\showcuda*[2][\linewidth]{\showcode*[#1]{ShittyBrown!25}{ShittyBrown}{cuda}{cuda/#2}}
+\newcommand{\showlongcuda}[2][\linewidth]{\showlongcode[#1]{ShittyBrown!25}{ShittyBrown}{cuda}{cuda/#2}}
+\newcommand{\delayedinlinecuda}[1]{\mintinlinedelayed{cuda}{#1}}
+\newmintinline[inlinecuda]{cuda}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidecuda[2][\linewidth]{\slidecode#3[#1]{ShittyBrown!25}{ShittyBrown}{cuda}{cuda/#2}}
+  \WithSuffix{\newcommand<>}\slidecuda*[2][\linewidth]{\slidecode#3*[#1]{ShittyBrown!25}{ShittyBrown}{cuda}{cuda/#2}}
+}{}
+
+%% Configurations and commands for the D language
+\setminted[d]{style=friendly}
+\providecommand{\showd}{}
+\renewcommand{\showd}[2][\linewidth]{\showcode[#1]{CyanPurpleColor!25}{CyanPurpleColor}{d}{d/#2}}
+\WithSuffix\newcommand\showd*[2][\linewidth]{\showcode*[#1]{CyanPurpleColor!25}{CyanPurpleColor}{d}{d/#2}}
+\newcommand{\showlongd}[2][\linewidth]{\showlongcode[#1]{CyanPurpleColor!25}{CyanPurpleColor}{d}{d/#2}}
+\newcommand{\delayedinlined}[1]{\mintinlinedelayed{d}{#1}}
+\newmintinline[inlined]{d}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slided[2][\linewidth]{\slidecode#3[#1]{CyanPurpleColor!25}{CyanPurpleColor}{d}{d/#2}}
+  \WithSuffix{\newcommand<>}\slided*[2][\linewidth]{\slidecode#3*[#1]{CyanPurpleColor!25}{CyanPurpleColor}{d}{d/#2}}
+}{}
+
+%% Configurations and commands for the Dart language
+\setminted[dart]{style=manni}
+\providecommand{\showdart}{}
+\renewcommand{\showdart}[2][\linewidth]{\showcode[#1]{ReallyBrightCyan!25}{ReallyBrightCyan}{dart}{dart/#2}}
+\WithSuffix\newcommand\showdart*[2][\linewidth]{\showcode*[#1]{ReallyBrightCyan!25}{ReallyBrightCyan}{dart}{dart/#2}}
+\newcommand{\showlongdart}[2][\linewidth]{\showlongcode[#1]{ReallyBrightCyan!25}{ReallyBrightCyan}{dart}{dart/#2}}
+\newcommand{\delayedinlinedart}[1]{\mintinlinedelayed{dart}{#1}}
+\newmintinline[inlinedart]{dart}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidedart[2][\linewidth]{\slidecode#3[#1]{ReallyBrightCyan!25}{ReallyBrightCyan}{dart}{dart/#2}}
+  \WithSuffix{\newcommand<>}\slidedart*[2][\linewidth]{\slidecode#3*[#1]{ReallyBrightCyan!25}{ReallyBrightCyan}{dart}{dart/#2}}
+}{}
+
+%% Configurations and commands for the Diff language
+\setminted[diff]{}
+\providecommand{\showdiff}{}
+\renewcommand{\showdiff}[2][\linewidth]{\showshell[#1]{BloodRed}{Black}{diff}{diff/#2}}
+\WithSuffix\newcommand\showdiff*[2][\linewidth]{\showshell*[#1]{BloodRed}{Black}{diff}{diff/#2}}
+\newcommand{\showlongdiff}[2][\linewidth]{\showlongshell[#1]{BloodRed}{Black}{diff}{diff/#2}}
+\newcommand{\delayedinlinediff}[1]{\mintinlinedelayed{diff}{#1}}
+\newmintinline[inlinediff]{diff}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidediff[2][\linewidth]{\slideshell#3[#1]{BloodRed}{Black}{diff}{diff/#2}}
+  \WithSuffix{\newcommand<>}\slidediff*[2][\linewidth]{\slideshell#3*[#1]{BloodRed}{Black}{diff}{diff/#2}}
+}{}
+
+%% Configurations and commands for EBNF grammars
+\setminted[ebnf]{style=trac}
+\definecolor{EBNFColor}{rgb}{0.88,0.91,0.75}
+\colorlet{EBNFFGColor}{EBNFColor!150}
+\colorlet{EBNFBGColor}{EBNFColor!50}
+\providecommand{\showebnf}{}
+\renewcommand{\showebnf}[2][\linewidth]{\showcode[#1]{EBNFBGColor}{EBNFFGColor}{ebnf}{ebnf/#2}}
+\WithSuffix\newcommand\showebnf*[2][\linewidth]{\showcode*[#1]{EBNFBGColor}{EBNFFGColor}{ebnf}{ebnf/#2}}
+\newcommand{\showlongebnf}[2][\linewidth]{\showlongcode[#1]{EBNFBGColor}{EBNFFGColor}{ebnf}{ebnf/#2}}
+\newcommand{\delayedinlineebnf}[1]{\mintinlinedelayed{ebnf}{#1}}
+\newmintinline[inlineebnf]{ebnf}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideebnf[2][\linewidth]{\slidecode#3[#1]{EBNFBGColor}{EBNFFGColor}{ebnf}{ebnf/#2}}
+  \WithSuffix{\newcommand<>}\slideebnf*[2][\linewidth]{\slidecode#3*[#1]{EBNFBGColor}{EBNFFGColor}{ebnf}{ebnf/#2}}
+}{}
+
+%% Configurations and commands for the Eiffel language
+\setminted[eiffel]{style=friendly}
+\providecommand{\showeiffel}{}
+\renewcommand{\showeiffel}[2][\linewidth]{\showcode[#1]{Lily!25}{Lily}{eiffel}{eiffel/#2}}
+\WithSuffix\newcommand\showeiffel*[2][\linewidth]{\showcode*[#1]{Lily!25}{Lily}{eiffel}{eiffel/#2}}
+\newcommand{\showlongeiffel}[2][\linewidth]{\showlongcode[#1]{Lily!25}{Lily}{eiffel}{eiffel/#2}}
+\newcommand{\delayedinlineeiffel}[1]{\mintinlinedelayed{eiffel}{#1}}
+\newmintinline[inlineeiffel]{eiffel}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideeiffel[2][\linewidth]{\slidecode#3[#1]{Lily!25}{Lily}{eiffel}{eiffel/#2}}
+  \WithSuffix{\newcommand<>}\slideeiffel*[2][\linewidth]{\slidecode#3*[#1]{Lily!25}{Lily}{eiffel}{eiffel/#2}}
+}{}
+
+%% Configurations and commands for the Elixir language
+\setminted[elixir]{}
+\providecommand{\showelixir}{}
+\renewcommand{\showelixir}[2][\linewidth]{\showcode[#1]{MediumTurquoise!25}{MediumTurquoise}{elixir}{elixir/#2}}
+\WithSuffix\newcommand\showelixir*[2][\linewidth]{\showcode*[#1]{MediumTurquoise!25}{MediumTurquoise}{elixir}{elixir/#2}}
+\newcommand{\showlongelixir}[2][\linewidth]{\showlongcode[#1]{MediumTurquoise!25}{MediumTurquoise}{elixir}{elixir/#2}}
+\newcommand{\delayedinlineelixir}[1]{\mintinlinedelayed{elixir}{#1}}
+\newmintinline[inlineelixir]{elixir}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideelixir[2][\linewidth]{\slidecode#3[#1]{MediumTurquoise!25}{MediumTurquoise}{elixir}{elixir/#2}}
+  \WithSuffix{\newcommand<>}\slideelixir*[2][\linewidth]{\slidecode#3*[#1]{MediumTurquoise!25}{MediumTurquoise}{elixir}{elixir/#2}}
+}{}
+
+%% Configurations and commands for the Erlang Session
+\setminted[erl]{}
+\providecommand{\showerl}{}
+\renewcommand{\showerl}[2][\linewidth]{\showcode[#1]{IceBlue!50}{Teal}{erl}{erlang-session/#2}}
+\WithSuffix\newcommand\showerl*[2][\linewidth]{\showcode*[#1]{IceBlue!50}{Teal}{erl}{erlang-session/#2}}
+\newcommand{\showlongerl}[2][\linewidth]{\showlongcode[#1]{IceBlue!50}{Teal}{erl}{erlang-session/#2}}
+\newcommand{\delayedinlineerl}[1]{\mintinlinedelayed{erl}{#1}}
+\newmintinline[inlineerl]{erl}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideerl[2][\linewidth]{\slidecode#3[#1]{IceBlue!50}{Teal}{erl}{erlang-session/#2}}
+  \WithSuffix{\newcommand<>}\slideerl*[2][\linewidth]{\slidecode#3*[#1]{IceBlue!50}{Teal}{erl}{erlang-session/#2}}
+}{}
+
+%% Configurations and commands for the Erlang language
+\setminted[erlang]{}
+\colorlet{ErlangBGColor}{Teal!25}
+\colorlet{ErlangFGColor}{Teal}
+\providecommand{\showerlang}{}
+\renewcommand{\showerlang}[2][\linewidth]{\showcode[#1]{ErlangBGColor}{ErlangFGColor}{erlang}{erlang/#2}}
+\WithSuffix\newcommand\showerlang*[2][\linewidth]{\showcode*[#1]{ErlangBGColor}{ErlangFGColor}{erlang}{erlang/#2}}
+\newcommand{\showlongerlang}[2][\linewidth]{\showlongcode[#1]{ErlangBGColor}{ErlangFGColor}{erlang}{erlang/#2}}
+\newcommand{\delayedinlineerlang}[1]{\mintinlinedelayed{erlang}{#1}}
+\newmintinline[inlineerlang]{erlang}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideerlang[2][\linewidth]{\slidecode#3[#1]{ErlangBGColor}{ErlangFGColor}{erlang}{erlang/#2}}
+  \WithSuffix{\newcommand<>}\slideerlang*[2][\linewidth]{\slidecode#3*[#1]{ErlangBGColor}{ErlangFGColor}{erlang}{erlang/#2}}
+}{}
+
+%% Configurations and commands for the Evil language
+\setminted[evil]{style=murphy}
+\providecommand{\showevil}{}
+\renewcommand{\showevil}[2][\linewidth]{\showcode[#1]{LimeGreen!20}{LimeGreen}{evil}{evil/#2}}
+\WithSuffix\newcommand\showevil*[2][\linewidth]{\showcode*[#1]{LimeGreen!20}{LimeGreen}{evil}{evil/#2}}
+\newcommand{\showlongevil}[2][\linewidth]{\showlongcode[#1]{LimeGreen!20}{LimeGreen}{evil}{evil/#2}}
+\newcommand{\delayedinlineevil}[1]{\mintinlinedelayed{evil}{#1}}
+\newmintinline[inlineevil]{evil}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideevil[2][\linewidth]{\slidecode#3[#1]{LimeGreen!20}{LimeGreen}{evil}{evil/#2}}
+  \WithSuffix{\newcommand<>}\slideevil*[2][\linewidth]{\slidecode#3*[#1]{LimeGreen!20}{LimeGreen}{evil}{evil/#2}}
+}{}
+
+%% Configurations and commands for the Forth language
+\setminted[forth]{}
+\providecommand{\showforth}{}
+\renewcommand{\showforth}[2][\linewidth]{\showcode[#1]{CarbonGray!25}{CarbonGray}{forth}{forth/#2}}
+\WithSuffix\newcommand\showforth*[2][\linewidth]{\showcode*[#1]{CarbonGray!25}{CarbonGray}{forth}{forth/#2}}
+\newcommand{\showlongforth}[2][\linewidth]{\showlongcode[#1]{CarbonGray!25}{CarbonGray}{forth}{forth/#2}}
+\newcommand{\delayedinlineforth}[1]{\mintinlinedelayed{forth}{#1}}
+\newmintinline[inlineforth]{forth}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideforth[2][\linewidth]{\slidecode#3[#1]{CarbonGray!25}{CarbonGray}{forth}{forth/#2}}
+  \WithSuffix{\newcommand<>}\slideforth*[2][\linewidth]{\slidecode#3*[#1]{CarbonGray!25}{CarbonGray}{forth}{forth/#2}}
+}{}
+
+%% Configurations and commands for the Fortran language
+\setminted[fortran]{style=friendly}
+\providecommand{\showfortran}{}
+\renewcommand{\showfortran}[2][\linewidth]{\showcode[#1]{BlueJeanColor!25}{BlueJeanColor}{fortran}{fortran/#2}}
+\WithSuffix\newcommand\showfortran*[2][\linewidth]{\showcode*[#1]{BlueJeanColor!25}{BlueJeanColor}{fortran}{fortran/#2}}
+\newcommand{\showlongfortran}[2][\linewidth]{\showlongcode[#1]{BlueJeanColor!25}{BlueJeanColor}{fortran}{fortran/#2}}
+\newcommand{\delayedinlinefortran}[1]{\mintinlinedelayed{fortran}{#1}}
+\newmintinline[inlinefortran]{fortran}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidefortran[2][\linewidth]{\slidecode#3[#1]{BlueJeanColor!25}{BlueJeanColor}{fortran}{fortran/#2}}
+  \WithSuffix{\newcommand<>}\slidefortran*[2][\linewidth]{\slidecode#3*[#1]{BlueJeanColor!25}{BlueJeanColor}{fortran}{fortran/#2}}
+}{}
+
+%% Configurations and commands for the F# language
+\setminted[fsharp]{}
+\providecommand{\showfsharp}{}
+\renewcommand{\showfsharp}[2][\linewidth]{\showcode[#1]{DarkCoral!25}{DarkCoral}{fsharp}{f\#/#2}}
+\WithSuffix\newcommand\showfsharp*[2][\linewidth]{\showcode*[#1]{DarkCoral!25}{DarkCoral}{fsharp}{f\#/#2}}
+\newcommand{\showlongfsharp}[2][\linewidth]{\showlongcode[#1]{DarkCoral!25}{DarkCoral}{fsharp}{f\#/#2}}
+\newcommand{\delayedinlinefsharp}[1]{\mintinlinedelayed{fsharp}{#1}}
+\newmintinline[inlinefsharp]{fsharp}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidefsharp[2][\linewidth]{\slidecode#3[#1]{DarkCoral!25}{DarkCoral}{fsharp}{f\#/#2}}
+  \WithSuffix{\newcommand<>}\slidefsharp*[2][\linewidth]{\slidecode#3*[#1]{DarkCoral!25}{DarkCoral}{fsharp}{f\#/#2}}
+}{}
+
+%% Configurations and commands for the Go language
+\setminted[go]{style=friendly}
+\providecommand{\showgo}{}
+\renewcommand{\showgo}[2][\linewidth]{\showcode[#1]{DarkPeony!25}{DarkPeony}{go}{go/#2}}
+\WithSuffix\newcommand\showgo*[2][\linewidth]{\showcode*[#1]{DarkPeony!25}{DarkPeony}{go}{go/#2}}
+\newcommand{\showlonggo}[2][\linewidth]{\showlongcode[#1]{DarkPeony!25}{DarkPeony}{go}{go/#2}}
+\newcommand{\delayedinlinego}[1]{\mintinlinedelayed{go}{#1}}
+\newmintinline[inlinego]{go}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidego[2][\linewidth]{\slidecode#3[#1]{DarkPeony!25}{DarkPeony}{go}{go/#2}}
+  \WithSuffix{\newcommand<>}\slidego*[2][\linewidth]{\slidecode#3*[#1]{DarkPeony!25}{DarkPeony}{go}{go/#2}}
+}{}
+
+%% Configurations and commands for the Groovy language
+\setminted[groovy]{}
+\providecommand{\showgroovy}{}
+\renewcommand{\showgroovy}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{groovy}{groovy/#2}}
+\WithSuffix\newcommand\showgroovy*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{groovy}{groovy/#2}}
+\newcommand{\showlonggroovy}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{groovy}{groovy/#2}}
+\newcommand{\delayedinlinegroovy}[1]{\mintinlinedelayed{groovy}{#1}}
+\newmintinline[inlinegroovy]{groovy}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidegroovy[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{groovy}{groovy/#2}}
+  \WithSuffix{\newcommand<>}\slidegroovy*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{groovy}{groovy/#2}}
+}{}
+
+%% Configurations and commands for the GLSL language
+\setminted[glsl]{}
+\providecommand{\showglsl}{}
+\renewcommand{\showglsl}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{glsl}{glsl/#2}}
+\WithSuffix\newcommand\showglsl*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{glsl}{glsl/#2}}
+\newcommand{\showlongglsl}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{glsl}{glsl/#2}}
+\newcommand{\delayedinlineglsl}[1]{\mintinlinedelayed{glsl}{#1}}
+\newmintinline[inlineglsl]{glsl}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideglsl[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{glsl}{glsl/#2}}
+  \WithSuffix{\newcommand<>}\slideglsl*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{glsl}{glsl/#2}}
+}{}
+
+%% Configurations and commands for the Haskell language
+\setminted[haskell]{}
+\providecommand{\showhaskell}{}
+\renewcommand{\showhaskell}[2][\linewidth]{\showcode[#1]{LightBlueJeanColor!25}{LightBlueJeanColor}{haskell}{haskell/#2}}
+\WithSuffix\newcommand\showhaskell*[2][\linewidth]{\showcode*[#1]{LightBlueJeanColor!25}{LightBlueJeanColor}{haskell}{haskell/#2}}
+\newcommand{\showlonghaskell}[2][\linewidth]{\showlongcode[#1]{LightBlueJeanColor!25}{LightBlueJeanColor}{haskell}{haskell/#2}}
+\newcommand{\delayedinlinehaskell}[1]{\mintinlinedelayed{haskell}{#1}}
+\newmintinline[inlinehaskell]{haskell}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidehaskell[2][\linewidth]{\slidecode#3[#1]{LightBlueJeanColor!25}{LightBlueJeanColor}{haskell}{haskell/#2}}
+  \WithSuffix{\newcommand<>}\slidehaskell*[2][\linewidth]{\slidecode#3*[#1]{LightBlueJeanColor!25}{LightBlueJeanColor}{haskell}{haskell/#2}}
+}{}
+
+%% Configurations and commands for the Hexdump language
+\setminted[hexdump]{style=monokai}
+\providecommand{\showhexdump}{}
+\renewcommand{\showhexdump}[2][\linewidth]{\showshell[#1]{Green}{Black}{hexdump}{hexdump/#2}}
+\WithSuffix\newcommand\showhexdump*[2][\linewidth]{\showshell*[#1]{Green}{Black}{hexdump}{hexdump/#2}}
+\newcommand{\showlonghexdump}[2][\linewidth]{\showlongshell[#1]{Green}{Black}{hexdump}{hexdump/#2}}
+\newcommand{\delayedinlinehexdump}[1]{\mintinlinedelayed{hexdump}{#1}}
+\newmintinline[inlinehexdump]{hexdump}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidehexdump[2][\linewidth]{\slideshell#3[#1]{Green}{Black}{hexdump}{hexdump/#2}}
+  \WithSuffix{\newcommand<>}\slidehexdump*[2][\linewidth]{\slideshell#3*[#1]{Green}{Black}{hexdump}{hexdump/#2}}
+}{}
+
+
+%% Configurations and commands for the HTML language
+\setminted[html]{breaklines,breakindent=1cm,breakanywhere,style=native}
+\providecommand{\showhtml}{}
+\renewcommand{\showhtml}[2][\linewidth]{\showshell[#1]{HTMLBorderColor}{Black}{html}{html/#2}}
+\WithSuffix\newcommand\showhtml*[2][\linewidth]{\showshell*[#1]{HTMLBorderColor}{Black}{html}{html/#2}}
+\newcommand{\showlonghtml}[2][\linewidth]{\showlongshell[#1]{HTMLBorderColor}{Black}{html}{html/#2}}
+\newcommand{\delayedinlinehtml}[1]{\mintinlinedelayed{html}{#1}}
+\newmintinline[inlinehtml]{html}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidehtml[2][\linewidth]{\slideshell#3[#1]{HTMLBorderColor}{Black}{html}{html/#2}}
+  \WithSuffix{\newcommand<>}\slidehtml*[2][\linewidth]{\slideshell#3*[#1]{HTMLBorderColor}{Black}{html}{html/#2}}
+}{}
+
+%% Configurations and commands for the Hy language
+\setminted[hylang]{style=rainbowdash}
+\providecommand{\showhy}{}
+\renewcommand{\showhy}[2][\linewidth]{\showcode[#1]{ButterCupYellow!25}{ButterCupYellow!150}{hylang}{hy/#2}}
+\WithSuffix\newcommand\showhy*[2][\linewidth]{\showcode*[#1]{ButterCupYellow!25}{ButterCupYellow!150}{hylang}{hy/#2}}
+\newcommand{\showlonghy}[2][\linewidth]{\showlongcode[#1]{ButterCupYellow!25}{ButterCupYellow!150}{hylang}{hy/#2}}
+\newcommand{\delayedinlinehy}[1]{\mintinlinedelayed{hylang}{#1}}
+\newmintinline[inlinehy]{hylang}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidehy[2][\linewidth]{\slidecode#3[#1]{ButterCupYellow!25}{ButterCupYellow!150}{hylang}{hy/#2}}
+  \WithSuffix{\newcommand<>}\slidehy*[2][\linewidth]{\slidecode#3*[#1]{ButterCupYellow!25}{ButterCupYellow!150}{hylang}{hy/#2}}
+}{}
+
+%% Configurations and commands for the Elixir Sessions
+\setminted[iex]{}
+\providecommand{\showiex}{}
+\renewcommand{\showiex}[2][\linewidth]{\showcode[#1]{IceBlue!50}{Teal}{iex}{elixir-session/#2}}
+\WithSuffix\newcommand\showiex*[2][\linewidth]{\showcode*[#1]{IceBlue!50}{Teal}{iex}{elixir-session/#2}}
+\newcommand{\showlongiex}[2][\linewidth]{\showlongcode[#1]{IceBlue!50}{Teal}{iex}{elixir-session/#2}}
+\newcommand{\delayedinlineiex}[1]{\mintinlinedelayed{iex}{#1}}
+\newmintinline[inlineiex]{iex}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideiex[2][\linewidth]{\slidecode#3[#1]{IceBlue!50}{Teal}{iex}{elixir-session/#2}}
+  \WithSuffix{\newcommand<>}\slideiex*[2][\linewidth]{\slidecode#3*[#1]{IceBlue!50}{Teal}{iex}{elixir-session/#2}}
+}{}
+
+%% Configurations and commands for the Ruby sessions
+\setminted[irb]{style=colorful}
+\providecommand{\showirb}{}
+\renewcommand{\showirb}[2][\linewidth]{\showcode[#1]{BloodRed!25}{BloodRed}{irb}{ruby-session/#2}}
+\WithSuffix\newcommand\showirb*[2][\linewidth]{\showcode*[#1]{BloodRed!25}{BloodRed}{irb}{ruby-session/#2}}
+\newcommand{\showlongirb}[2][\linewidth]{\showlongcode[#1]{BloodRed!25}{BloodRed}{irb}{ruby-session/#2}}
+\newcommand{\delayedinlineirb}[1]{\mintinlinedelayed{irb}{#1}}
+\newmintinline[inlineirb]{irb}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideirb[2][\linewidth]{\slidecode#3[#1]{BloodRed!25}{BloodRed}{irb}{ruby-session/#2}}
+  \WithSuffix{\newcommand<>}\slideirb*[2][\linewidth]{\slidecode#3*[#1]{BloodRed!25}{BloodRed}{irb}{ruby-session/#2}}
+}{}
+
+%% Configurations and commands for the Jasmin language
+\setminted[jasmin]{}
+\providecommand{\showjasmin}{}
+\renewcommand{\showjasmin}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{jasmin}{jasmin/#2}}
+\WithSuffix\newcommand\showjasmin*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{jasmin}{jasmin/#2}}
+\newcommand{\showlongjasmin}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{jasmin}{jasmin/#2}}
+\newcommand{\delayedinlinejasmin}[1]{\mintinlinedelayed{jasmin}{#1}}
+\newmintinline[inlinejasmin]{jasmin}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejasmin[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{jasmin}{jasmin/#2}}
+  \WithSuffix{\newcommand<>}\slidejasmin*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{jasmin}{jasmin/#2}}
+}{}
+
+%% Configurations and commands for the JastAddAst language
+\setminted[jastaddast]{}
+\definecolor{JastAddColor}{rgb}{0.88,0.91,0.75}
+\colorlet{JastAddFGColor}{JastAddColor!150}
+\colorlet{JastAddBGColor}{JastAddColor!50}
+\providecommand{\showjastaddast}{}
+\renewcommand{\showjastaddast}[2][\linewidth]{\showcode[#1]{JastAddBGColor}{JastAddFGColor}{jastaddast}{jastadd/#2}}
+\WithSuffix\newcommand\showjastaddast*[2][\linewidth]{\showcode*[#1]{JastAddBGColor}{JastAddFGColor}{jastaddast}{jastadd/#2}}
+\newcommand{\showlongjastaddast}[2][\linewidth]{\showlongcode[#1]{JastAddBGColor}{JastAddFGColor}{jastaddast}{jastadd/#2}}
+\newcommand{\delayedinlinejastaddast}[1]{\mintinlinedelayed{jastaddast}{#1}}
+\newmintinline[inlinejastaddast]{jastaddast}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejastaddast[2][\linewidth]{\slidecode#3[#1]{JastAddBGColor}{JastAddFGColor}{jastaddast}{jastadd/#2}}
+  \WithSuffix{\newcommand<>}\slidejastaddast*[2][\linewidth]{\slidecode#3*[#1]{JastAddBGColor}{JastAddFGColor}{jastaddast}{jastadd/#2}}
+}{}
+
+%% Configurations and commands for the JastAddConc language
+\setminted[jastaddconc]{}
+\definecolor{JastAddConcColor}{rgb}{0.88,0.91,0.75}
+\colorlet{JastAddConcFGColor}{JastAddConcColor!150}
+\colorlet{JastAddConcBGColor}{JastAddConcColor!50}
+\providecommand{\showjastaddconc}{}
+\renewcommand{\showjastaddconc}[2][\linewidth]{\showcode[#1]{JastAddConcBGColor}{JastAddConcFGColor}{jastaddconc}{jastadd/#2}}
+\WithSuffix\newcommand\showjastaddconc*[2][\linewidth]{\showcode*[#1]{JastAddConcBGColor}{JastAddConcFGColor}{jastaddconc}{jastadd/#2}}
+\newcommand{\showlongjastaddconc}[2][\linewidth]{\showlongcode[#1]{JastAddConcBGColor}{JastAddConcFGColor}{jastaddconc}{jastadd/#2}}
+\newcommand{\delayedinlinejastaddconc}[1]{\mintinlinedelayed{jastaddconc}{#1}}
+\newmintinline[inlinejastaddconc]{jastaddconc}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejastaddconc[2][\linewidth]{\slidecode#3[#1]{JastAddConcBGColor}{JastAddConcFGColor}{jastaddconc}{jastadd/#2}}
+  \WithSuffix{\newcommand<>}\slidejastaddconc*[2][\linewidth]{\slidecode#3*[#1]{JastAddConcBGColor}{JastAddConcFGColor}{jastaddconc}{jastadd/#2}}
+}{}
+
+%% Configurations and commands for the JastAddJrag language
+\setminted[jastaddjrag]{}
+\definecolor{JastAddJRagColor}{rgb}{0.88,0.91,0.75}
+\colorlet{JastAddJRagFGColor}{JastAddJRagColor!150}
+\colorlet{JastAddJRagBGColor}{JastAddJRagColor!50}
+\providecommand{\showjastaddjrag}{}
+\renewcommand{\showjastaddjrag}[2][\linewidth]{\showcode[#1]{JastAddJRagBGColor}{JastAddJRagFGColor}{jastaddjrag}{jastadd/#2}}
+\WithSuffix\newcommand\showjastaddjrag*[2][\linewidth]{\showcode*[#1]{JastAddJRagBGColor}{JastAddJRagFGColor}{jastaddjrag}{jastadd/#2}}
+\newcommand{\showlongjastaddjrag}[2][\linewidth]{\showlongcode[#1]{JastAddJRagBGColor}{JastAddJRagFGColor}{jastaddjrag}{jastadd/#2}}
+\newcommand{\delayedinlinejastaddjrag}[1]{\mintinlinedelayed{jastaddjrag}{#1}}
+\newmintinline[inlinejastaddjrag]{jastaddjrag}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejastaddjrag[2][\linewidth]{\slidecode#3[#1]{JastAddJRagBGColor}{JastAddJRagFGColor}{jastaddjrag}{jastadd/#2}}
+  \WithSuffix{\newcommand<>}\slidejastaddjrag*[2][\linewidth]{\slidecode#3*[#1]{JastAddJRagBGColor}{JastAddJRagFGColor}{jastaddjrag}{jastadd/#2}}
+}{}
+
+%% Configurations and commands for the Java language
+\setminted[java]{} % possible alternative: manni
+\providecommand{\showjava}{}
+\renewcommand{\showjava}[2][\linewidth]{\showcode[#1]{Yellow!12}{Gold}{java}{java/#2}}
+\WithSuffix\newcommand\showjava*[2][\linewidth]{\showcode*[#1]{Yellow!12}{Gold}{java}{java/#2}}
+\newcommand{\showlongjava}[2][\linewidth]{\showlongcode[#1]{Yellow!12}{Gold}{java}{java/#2}}
+\newcommand{\delayedinlinejava}[1]{\mintinlinedelayed{java}{#1}}
+\newmintinline[inlinejava]{java}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejava[2][\linewidth]{\slidecode#3[#1]{Yellow!12}{Gold}{java}{java/#2}}
+  \WithSuffix{\newcommand<>}\slidejava*[2][\linewidth]{\slidecode#3*[#1]{Yellow!12}{Gold}{java}{java/#2}}
+}{}
+
+%% Configurations and commands for the Java+SM language
+\setminted[javasm]{} % possible alternative: manni
+\providecommand{\showjavasm}{}
+\renewcommand{\showjavasm}[2][\linewidth]{\showcode[#1]{Yellow!12}{Gold}{javasm}{java+sm/#2}}
+\WithSuffix\newcommand\showjavasm*[2][\linewidth]{\showcode*[#1]{Yellow!12}{Gold}{javasm}{java+sm/#2}}
+\newcommand{\showlongjavasm}[2][\linewidth]{\showlongcode[#1]{Yellow!12}{Gold}{javasm}{java+sm/#2}}
+\newcommand{\delayedinlinejavasm}[1]{\mintinlinedelayed{javasm}{#1}}
+\newmintinline[inlinejavasm]{javasm}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejavasm[2][\linewidth]{\slidecode#3[#1]{Yellow!12}{Gold}{javasm}{java+sm/#2}}
+  \WithSuffix{\newcommand<>}\slidejavasm*[2][\linewidth]{\slidecode#3*[#1]{Yellow!12}{Gold}{javasm}{java+sm/#2}}
+}{}
+
+%% Configurations and commands for the @Java language
+% \setminted[atjava]{style=manni} % possible alternative: manni
+\providecommand{\showatjava}{}
+\renewcommand{\showatjava}[2][\linewidth]{\showcode[#1]{Yellow!12}{Gold}{java}{@java/#2}}
+\WithSuffix\newcommand\showatjava*[2][\linewidth]{\showcode*[#1]{Yellow!12}{Gold}{java}{@java/#2}}
+\newcommand{\showlongatjava}[2][\linewidth]{\showlongcode[#1]{Yellow!12}{Gold}{java}{@java/#2}}
+\newcommand{\delayedinlineatjava}[1]{\mintinlinedelayed{java}{#1}}
+\newmintinline[inlineatjava]{java}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideatjava[2][\linewidth]{\slidecode#3[#1]{Yellow!12}{Gold}{java}{@java/#2}}
+  \WithSuffix{\newcommand<>}\slideatjava*[2][\linewidth]{\slidecode#3*[#1]{Yellow!12}{Gold}{java}{@java/#2}}
+}{}
+
+%% Configurations and commands for the JavaScript language
+\setminted[javascript]{}
+\providecommand{\showjs}{}
+\renewcommand{\showjs}[2][\linewidth]{\showcode[#1]{SolidGray!25}{SolidGray}{javascript}{javascript/#2}}
+\WithSuffix\newcommand\showjs*[2][\linewidth]{\showcode*[#1]{SolidGray!25}{SolidGray}{javascript}{javascript/#2}}
+\newcommand{\showlongjs}[2][\linewidth]{\showlongcode[#1]{SolidGray!25}{SolidGray}{javascript}{javascript/#2}}
+\newcommand{\delayedinlinejs}[1]{\mintinlinedelayed{javascript}{#1}}
+\newmintinline[inlinejs]{javascript}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejs[2][\linewidth]{\slidecode#3[#1]{SolidGray!25}{SolidGray}{javascript}{javascript/#2}}
+  \WithSuffix{\newcommand<>}\slidejs*[2][\linewidth]{\slidecode#3*[#1]{SolidGray!25}{SolidGray}{javascript}{javascript/#2}}
+}{}
+
+%% Configurations and commands for the JSON language
+\setminted[json]{breaklines,breakindent=1cm,breakanywhere,style=friendly}
+\providecommand{\showjson}{}
+\renewcommand{\showjson}[2][\linewidth]{\showcode[#1]{LightZakuGreen!25}{LightZakuGreen}{json}{json/#2}}
+\WithSuffix\newcommand\showjson*[2][\linewidth]{\showcode*[#1]{LightZakuGreen!25}{LightZakuGreen}{json}{json/#2}}
+\newcommand{\showlongjson}[2][\linewidth]{\showlongcode[#1]{LightZakuGreen!25}{LightZakuGreen}{json}{json/#2}}
+\newcommand{\delayedinlinejson}[1]{\mintinlinedelayed{json}{#1}}
+\newmintinline[inlinejson]{json}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidejson[2][\linewidth]{\slidecode#3[#1]{LightZakuGreen!25}{LightZakuGreen}{json}{json/#2}}
+  \WithSuffix{\newcommand<>}\slidejson*[2][\linewidth]{\slidecode#3*[#1]{LightZakuGreen!25}{LightZakuGreen}{json}{json/#2}}
+}{}
+
+%% Configurations and commands for the Kotlin language
+\setminted[kotlin]{style=perldoc}
+\providecommand{\showkotlin}{}
+\renewcommand{\showkotlin}[2][\linewidth]{\showcode[#1]{LightPeony!15}{LightPeony}{kotlin}{kotlin/#2}}
+\WithSuffix\newcommand\showkotlin*[2][\linewidth]{\showcode*[#1]{LightPeony!15}{LightPeony}{kotlin}{kotlin/#2}}
+\newcommand{\showlongkotlin}[2][\linewidth]{\showlongcode[#1]{LightPeony!15}{LightPeony}{kotlin}{kotlin/#2}}
+\newcommand{\delayedinlinekotlin}[1]{\mintinlinedelayed{kotlin}{#1}}
+\newmintinline[inlinekotlin]{kotlin}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidekotlin[2][\linewidth]{\slidecode#3[#1]{LightPeony!15}{LightPeony}{kotlin}{kotlin/#2}}
+  \WithSuffix{\newcommand<>}\slidekotlin*[2][\linewidth]{\slidecode#3*[#1]{LightPeony!15}{LightPeony}{kotlin}{kotlin/#2}}
+}{}
+
+%% Configurations and commands for the LaTeX language
+\setminted[latex]{breaklines,breakindent=1cm,breakanywhere,style=manni} % possible alternative: trac, friendly
+\providecommand{\showlatex}{}
+\renewcommand{\showlatex}[2][\linewidth]{\showcode[#1]{ZakuGreen!25}{ZakuGreen}{latex}{latex/#2}}
+\WithSuffix\newcommand\showlatex*[2][\linewidth]{\showcode*[#1]{ZakuGreen!25}{ZakuGreen}{latex}{latex/#2}}
+\newcommand{\showlonglatex}[2][\linewidth]{\showlongcode[#1]{ZakuGreen!25}{ZakuGreen}{latex}{latex/#2}}
+\newcommand{\delayedinlinelatex}[1]{\mintinlinedelayed{latex}{#1}}
+\newmintinline[inlinelatex]{latex}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidelatex[2][\linewidth]{\slidecode#3[#1]{ZakuGreen!25}{ZakuGreen}{latex}{latex/#2}}
+  \WithSuffix{\newcommand<>}\slidelatex*[2][\linewidth]{\slidecode#3*[#1]{ZakuGreen!25}{ZakuGreen}{latex}{latex/#2}}
+}{}
+
+%% Configurations and commands for the Lex language
+\setminted[lex]{style=manni}
+\definecolor{LexColor}{rgb}{0.88,0.91,0.75}
+\colorlet{LexFGColor}{LexColor!150}
+\colorlet{LexBGColor}{LexColor!50}
+\providecommand{\showlex}{}
+\renewcommand{\showlex}[2][\linewidth]{\showcode[#1]{LexBGColor}{LexFGColor}{lex}{lex/#2}}
+\WithSuffix\newcommand\showlex*[2][\linewidth]{\showcode*[#1]{LexBGColor}{LexFGColor}{lex}{lex/#2}}
+\newcommand{\showlonglex}[2][\linewidth]{\showlongcode[#1]{LexBGColor}{LexFGColor}{lex}{lex/#2}}
+\newcommand{\delayedinlinelex}[1]{\mintinlinedelayed{lex}{#1}}
+\newmintinline[inlinelex]{lex}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidelex[2][\linewidth]{\slidecode#3[#1]{LexBGColor}{LexFGColor}{lex}{lex/#2}}
+  \WithSuffix{\newcommand<>}\slidelex*[2][\linewidth]{\slidecode#3*[#1]{LexBGColor}{LexFGColor}{lex}{lex/#2}}
+}{}
+
+%% Configurations and commands for the Lisp language
+\setminted[lisp]{style=paraiso_light}
+\providecommand{\showlisp}{}
+\renewcommand{\showlisp}[2][\linewidth]{\showcode[#1]{ButterCupYellow!25}{ButterCupYellow!150}{lisp}{lisp/#2}}
+\WithSuffix\newcommand\showlisp*[2][\linewidth]{\showcode*[#1]{ButterCupYellow!25}{ButterCupYellow!150}{lisp}{lisp/#2}}
+\newcommand{\showlonglisp}[2][\linewidth]{\showlongcode[#1]{ButterCupYellow!25}{ButterCupYellow!150}{lisp}{lisp/#2}}
+\newcommand{\delayedinlinelisp}[1]{\mintinlinedelayed{lisp}{#1}}
+\newmintinline[inlinelisp]{lisp}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidelisp[2][\linewidth]{\slidecode#3[#1]{ButterCupYellow!25}{ButterCupYellow!150}{lisp}{lisp/#2}}
+  \WithSuffix{\newcommand<>}\slidelisp*[2][\linewidth]{\slidecode#3*[#1]{ButterCupYellow!25}{ButterCupYellow!150}{lisp}{lisp/#2}}
+}{}
+
+%% Configurations and commands for the LLVM language
+\setminted[llvm]{} % possible alternative: pastie
+\providecommand{\showllvm}{}
+\renewcommand{\showllvm}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{llvm}{llvm/#2}}
+\WithSuffix\newcommand\showllvm*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{llvm}{llvm/#2}}
+\newcommand{\showlongllvm}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{llvm}{llvm/#2}}
+\newcommand{\delayedinlinellvm}[1]{\mintinlinedelayed{llvm}{#1}}
+\newmintinline[inlinellvm]{llvm}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidellvm[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{llvm}{llvm/#2}}
+  \WithSuffix{\newcommand<>}\slidellvm*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{llvm}{llvm/#2}}
+}{}
+
+%% Configurations and commands for the LogLang language
+\setminted[loglang]{style=murphy}
+\providecommand{\showloglang}{}
+\renewcommand{\showloglang}[2][\linewidth]{\showcode[#1]{Bisque!25}{BloodRed}{loglang}{loglang/#2}}
+\WithSuffix\newcommand\showloglang*[2][\linewidth]{\showcode*[#1]{Bisque!25}{BloodRed}{loglang}{loglang/#2}}
+\newcommand{\showlongloglang}[2][\linewidth]{\showlongcode[#1]{Bisque!25}{BloodRed}{loglang}{loglang/#2}}
+\newcommand{\delayedinlineloglang}[1]{\mintinlinedelayed{loglang}{#1}}
+\newmintinline[inlineloglang]{loglang}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideloglang[2][\linewidth]{\slidecode#3[#1]{Bisque!25}{BloodRed}{loglang}{loglang/#2}}
+  \WithSuffix{\newcommand<>}\slideloglang*[2][\linewidth]{\slidecode#3*[#1]{Bisque!25}{BloodRed}{loglang}{loglang/#2}}
+}{}
+
+%% Configurations and commands for the Lua language
+\setminted[lua]{}
+\providecommand{\showlua}{}
+\renewcommand{\showlua}[2][\linewidth]{\showcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{lua}{lua/#2}}
+\WithSuffix\newcommand\showlua*[2][\linewidth]{\showcode*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{lua}{lua/#2}}
+\newcommand{\showlonglua}[2][\linewidth]{\showlongcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{lua}{lua/#2}}
+\newcommand{\delayedinlinelua}[1]{\mintinlinedelayed{lua}{#1}}
+\newmintinline[inlinelua]{lua}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidelua[2][\linewidth]{\slidecode#3[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{lua}{lua/#2}}
+  \WithSuffix{\newcommand<>}\slidelua*[2][\linewidth]{\slidecode#3*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{lua}{lua/#2}}
+}{}
+
+%% Configurations and commands for the Make language
+\setminted[make]{}
+\providecommand{\showmake}{}
+\renewcommand{\showmake}[2][\linewidth]{\showcode[#1]{PantoneYellow!25}{PantoneYellow}{make}{make/#2}}
+\WithSuffix\newcommand\showmake*[2][\linewidth]{\showcode*[#1]{PantoneYellow!25}{PantoneYellow}{make}{make/#2}}
+\newcommand{\showlongmake}[2][\linewidth]{\showlongcode[#1]{PantoneYellow!25}{PantoneYellow}{make}{make/#2}}
+\newcommand{\delayedinlinemake}[1]{\mintinlinedelayed{make}{#1}}
+\newmintinline[inlinemake]{make}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemake[2][\linewidth]{\slidecode#3[#1]{PantoneYellow!25}{PantoneYellow}{make}{make/#2}}
+  \WithSuffix{\newcommand<>}\slidemake*[2][\linewidth]{\slidecode#3*[#1]{PantoneYellow!25}{PantoneYellow}{make}{make/#2}}
+}{}
+
+%% Configurations and commands for the Markdown language
+\setminted[markdown]{breaklines,breakindent=1cm,breakanywhere,style=friendly}
+\providecommand{\showmarkdown}{}
+\renewcommand{\showmarkdown}[2][\linewidth]{\showcode[#1]{LightZakuGreen!25}{LightZakuGreen}{md}{markdown/#2}}
+\WithSuffix\newcommand\showmarkdown*[2][\linewidth]{\showcode*[#1]{LightZakuGreen!25}{LightZakuGreen}{md}{markdown/#2}}
+\newcommand{\showlongmarkdown}[2][\linewidth]{\showlongcode[#1]{LightZakuGreen!25}{LightZakuGreen}{md}{markdown/#2}}
+\newcommand{\delayedinlinemarkdown}[1]{\mintinlinedelayed{md}{#1}}
+\newmintinline[inlinemarkdown]{md}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemarkdown[2][\linewidth]{\slidecode#3[#1]{LightZakuGreen!25}{LightZakuGreen}{md}{markdown/#2}}
+  \WithSuffix{\newcommand<>}\slidemarkdown*[2][\linewidth]{\slidecode#3*[#1]{LightZakuGreen!25}{LightZakuGreen}{md}{markdown/#2}}
+}{}
+
+%% Configurations and commands for the Melange language
+\setminted[melange]{}
+\definecolor{MelangeColor}{rgb}{0.88,0.91,0.75}
+\colorlet{MelangeFGColor}{MelangeColor!150}
+\colorlet{MelangeBGColor}{MelangeColor!50}
+\providecommand{\showmelange}{}
+\renewcommand{\showmelange}[2][\linewidth]{\showcode[#1]{MelangeBGColor}{MelangeFGColor}{melange}{melange/#2}}
+\WithSuffix\newcommand\showmelange*[2][\linewidth]{\showcode*[#1]{MelangeBGColor}{MelangeFGColor}{melange}{melange/#2}}
+\newcommand{\showlongmelange}[2][\linewidth]{\showlongcode[#1]{LightZakuGreen!25}{LightZakuGreen}{melange}{melange/#2}}
+\newcommand{\delayedinlinemelange}[1]{\mintinlinedelayed{melange}{#1}}
+\newmintinline[inlinemelange]{melange}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemelange[2][\linewidth]{\slidecode#3[#1]{MelangeBGColor}{MelangeFGColor}{melange}{melange/#2}}
+  \WithSuffix{\newcommand<>}\slidemelange*[2][\linewidth]{\slidecode#3*[#1]{MelangeBGColor}{MelangeFGColor}{melange}{melange/#2}}
+}{}
+
+%% Configurations and commands for the Modula2 language
+\setminted[modula2]{style=arduino}
+\definecolor{ModulaColor}{rgb}{0.88,0.91,0.75}
+\colorlet{ModulaFGColor}{ModulaColor!150}
+\colorlet{ModulaBGColor}{ModulaColor!50}
+\providecommand{\showmodula}{}
+\renewcommand{\showmodula}[2][\linewidth]{\showcode[#1]{ModulaBGColor}{ModulaFGColor}{modula2}{modula2/#2}}
+\WithSuffix\newcommand\showmodula*[2][\linewidth]{\showcode*[#1]{ModulaBGColor}{ModulaFGColor}{modula2}{modula2/#2}}
+\newcommand{\showlongmodula}[2][\linewidth]{\showlongcode[#1]{ModulaBGColor}{ModulaFGColor}{modula2}{modula2/#2}}
+\newcommand{\delayedinlinemodula}[1]{\mintinlinedelayed{modula2}{#1}}
+\newmintinline[inlinemodula]{modula2}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemodula[2][\linewidth]{\slidecode#3[#1]{ModulaBGColor}{ModulaFGColor}{modula2}{modula2/#2}}
+  \WithSuffix{\newcommand<>}\slidemodula*[2][\linewidth]{\slidecode#3*[#1]{ModulaBGColor}{ModulaFGColor}{modula2}{modula2/#2}}
+}{}
+
+%% Configurations and commands for the Monticore language
+\definecolor{MonticoreColor}{rgb}{0.88,0.91,0.75}
+\colorlet{MonticoreFGColor}{MonticoreColor!150}
+\colorlet{MonticoreBGColor}{MonticoreColor!50}
+\setminted[monticore]{}
+\providecommand{\showmonticore}{}
+\renewcommand{\showmonticore}[2][\linewidth]{\showcode[#1]{MonticoreBGColor}{MonticoreFGColor}{monticore}{monticore/#2}}
+\WithSuffix\newcommand\showmonticore*[2][\linewidth]{\showcode*[#1]{MonticoreBGColor}{MonticoreFGColor}{monticore}{monticore/#2}}
+\newcommand{\showlongmonticore}[2][\linewidth]{\showlongcode[#1]{MonticoreBGColor}{MonticoreFGColor}{monticore}{monticore/#2}}
+\newcommand{\delayedinlinemonticore}[1]{\mintinlinedelayed{monticore}{#1}}
+\newmintinline[inlinemonticore]{monticore}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemonticore[2][\linewidth]{\slidecode#3[#1]{MonticoreBGColor}{MonticoreFGColor}{monticore}{monticore/#2}}
+  \WithSuffix{\newcommand<>}\slidemonticore*[2][\linewidth]{\slidecode#3*[#1]{MonticoreBGColor}{MonticoreFGColor}{monticore}{monticore/#2}}
+}{}
+
+%% Configurations and commands for the MySQL language
+\setminted[mysql]{style=manni} % possible alternative: trac, arduino
+\providecommand{\showmysql}{}
+\renewcommand{\showmysql}[2][\linewidth]{\showcode[#1]{BrightCyan!25}{BrightCyan}{mysql}{mysql/#2}}
+\WithSuffix\newcommand\showmysql*[2][\linewidth]{\showcode*[#1]{BrightCyan!25}{BrightCyan}{mysql}{mysql/#2}}
+\newcommand{\showlongmysql}[2][\linewidth]{\showlongcode[#1]{BrightCyan!25}{BrightCyan}{mysql}{mysql/#2}}
+\newcommand{\delayedinlinemysql}[1]{\mintinlinedelayed{mysql}{#1}}
+\newmintinline[inlinemysql]{mysql}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidemysql[2][\linewidth]{\slidecode#3[#1]{BrightCyan!25}{BrightCyan}{mysql}{mysql/#2}}
+  \WithSuffix{\newcommand<>}\slidemysql*[2][\linewidth]{\slidecode#3*[#1]{BrightCyan!25}{BrightCyan}{mysql}{mysql/#2}}
+}{}
+
+%% Configurations and commands for the Nasm language
+\setminted[nasm]{}
+\providecommand{\shownasm}{}
+\renewcommand{\shownasm}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{nasm}{asm/#2}}
+\WithSuffix\newcommand\shownasm*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{nasm}{asm/#2}}
+\newcommand{\showlongnasm}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{nasm}{asm/#2}}
+\newcommand{\delayedinlinenasm}[1]{\mintinlinedelayed{nasm}{#1}}
+\newmintinline[inlinenasm]{nasm}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidenasm[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{nasm}{asm/#2}}
+  \WithSuffix{\newcommand<>}\slidenasm*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{nasm}{asm/#2}}
+}{}
+
+%% Configurations and commands for the Neverlang language
+\setminted[neverlang]{style=arduino} % possible alternatives: arduino, pastie, friendly and colorful
+\providecommand{\showneverlang}{}
+\renewcommand{\showneverlang}[2][\linewidth]{\showcode[#1]{Yellow!25}{Gold}{neverlang}{neverlang/#2}}
+\WithSuffix\newcommand\showneverlang*[2][\linewidth]{\showcode*[#1]{Yellow!25}{Gold}{neverlang}{neverlang/#2}}
+\newcommand{\showlongneverlang}[2][\linewidth]{\showlongcode[#1]{Yellow!25}{Gold}{neverlang}{neverlang/#2}}
+\newcommand{\delayedinlineneverlang}[1]{\mintinlinedelayed{neverlang}{#1}}
+\newmintinline[inlineneverlang]{neverlang}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideneverlang[2][\linewidth]{\slidecode#3[#1]{Yellow!25}{Gold}{neverlang}{neverlang/#2}}
+  \WithSuffix{\newcommand<>}\slideneverlang*[2][\linewidth]{\slidecode#3*[#1]{Yellow!25}{Gold}{neverlang}{neverlang/#2}}
+}{}
+
+%% Configurations and commands for the Objective-C language
+\setminted[objective-c]{} % possible alternative: friendly
+\providecommand{\showobjc}{}
+\renewcommand{\showobjc}[2][\linewidth]{\showcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{objective-c}{objective-c/#2}}
+\WithSuffix\newcommand\showobjc*[2][\linewidth]{\showcode*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{objective-c}{objective-c/#2}}
+\newcommand{\showlongobjc}[2][\linewidth]{\showlongcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{objective-c}{objective-c/#2}}
+\newcommand{\delayedinlineobjc}[1]{\mintinlinedelayed{objective-c}{#1}}
+\newmintinline[inlineobjc]{objective-c}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideobjc[2][\linewidth]{\slidecode#3[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{objective-c}{objective-c/#2}}
+  \WithSuffix{\newcommand<>}\slideobjc*[2][\linewidth]{\slidecode#3*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{objective-c}{objective-c/#2}}
+}{}
+
+%% Configurations and commands for the OCaML language
+\setminted[ocaml]{}
+\providecommand{\showml}{}
+\renewcommand{\showml}[2][\linewidth]{\showcode[#1]{Coral!25}{Coral}{ocaml}{ocaml/#2}}
+\WithSuffix\newcommand\showml*[2][\linewidth]{\showcode*[#1]{Coral!25}{Coral}{ocaml}{ocaml/#2}}
+\newcommand{\showlongml}[2][\linewidth]{\showlongcode[#1]{Coral!25}{Coral}{ocaml}{ocaml/#2}}
+\newcommand{\delayedinlineml}[1]{\mintinlinedelayed{ocaml}{#1}}
+\newmintinline[inlineml]{ocaml}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideml[2][\linewidth]{\slidecode#3[#1]{Coral!25}{Coral}{ocaml}{ocaml/#2}}
+  \WithSuffix{\newcommand<>}\slideml*[2][\linewidth]{\slidecode#3*[#1]{Coral!25}{Coral}{ocaml}{ocaml/#2}}
+}{}
+
+%% Configurations and commands for the Parasail language
+\setminted[parasail]{}
+\definecolor{ParasailColor}{rgb}{0.88,0.91,0.75}
+\colorlet{ParasailFGColor}{ParasailColor!150}
+\colorlet{ParasailBGColor}{ParasailColor!50}
+\providecommand{\showparasail}{}
+\renewcommand{\showparasail}[2][\linewidth]{\showcode[#1]{ParasailBGColor}{ParasailFGColor}{parasail}{parasail/#2}}
+\WithSuffix\newcommand\showparasail*[2][\linewidth]{\showcode*[#1]{ParasailBGColor}{ParasailFGColor}{parasail}{parasail/#2}}
+\newcommand{\showlongparasail}[2][\linewidth]{\showlongcode[#1]{ParasailBGColor}{ParasailFGColor}{parasail}{parasail/#2}}
+\newcommand{\delayedinlineparasail}[1]{\mintinlinedelayed{parasail}{#1}}
+\newmintinline[inlineparasail]{parasail}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideparasail[2][\linewidth]{\slidecode#3[#1]{ParasailBGColor}{ParasailFGColor}{parasail}{parasail/#2}}
+  \WithSuffix{\newcommand<>}\slideparasail*[2][\linewidth]{\slidecode#3*[#1]{ParasailBGColor}{ParasailFGColor}{parasail}{parasail/#2}}
+}{}
+
+%% Configurations and commands for the Pascal language
+\setminted[pascal]{} % possible alternative: friendly
+\definecolor{PascalColor}{rgb}{0.88,0.91,0.75}
+\colorlet{PascalFGColor}{PascalColor!150}
+\colorlet{PascalBGColor}{PascalColor!50}
+\providecommand{\showpascal}{}
+\renewcommand{\showpascal}[2][\linewidth]{\showcode[#1]{PascalBGColor}{PascalFGColor}{pascal}{pascal/#2}}
+\WithSuffix\newcommand\showpascal*[2][\linewidth]{\showcode*[#1]{PascalBGColor}{PascalFGColor}{pascal}{pascal/#2}}
+\newcommand{\showlongpascal}[2][\linewidth]{\showlongcode[#1]{PascalBGColor}{PascalFGColor}{pascal}{pascal/#2}}
+\newcommand{\delayedinlinepascal}[1]{\mintinlinedelayed{pascal}{#1}}
+\newmintinline[inlinepascal]{pascal}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidepascal[2][\linewidth]{\slidecode#3[#1]{PascalBGColor}{PascalFGColor}{pascal}{pascal/#2}}
+  \WithSuffix{\newcommand<>}\slidepascal*[2][\linewidth]{\slidecode#3*[#1]{PascalBGColor}{PascalFGColor}{pascal}{pascal/#2}}
+}{}
+
+%% Configurations and commands for the Perl language
+\setminted[perl]{style=pastie}
+\providecommand{\showperl}{}
+\renewcommand{\showperl}[2][\linewidth]{\showcode[#1]{SolidOrange!25}{SolidOrange}{perl}{perl/#2}}
+\WithSuffix\newcommand\showperl*[2][\linewidth]{\showcode*[#1]{SolidOrange!25}{SolidOrange}{perl}{perl/#2}}
+\newcommand{\showlongperl}[2][\linewidth]{\showlongcode[#1]{SolidOrange!25}{SolidOrange}{perl}{perl/#2}}
+\newcommand{\delayedinlineperl}[1]{\mintinlinedelayed{perl}{#1}}
+\newmintinline[inlineperl]{perl}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideperl[2][\linewidth]{\slidecode#3[#1]{SolidOrange!25}{SolidOrange}{perl}{perl/#2}}
+  \WithSuffix{\newcommand<>}\slideperl*[2][\linewidth]{\slidecode#3*[#1]{SolidOrange!25}{SolidOrange}{perl}{perl/#2}}
+}{}
+
+%% Configurations and commands for the Pony language
+\setminted[pony]{}
+\providecommand{\showpony}{}
+\renewcommand{\showpony}[2][\linewidth]{\showcode[#1]{Teal!25}{Teal}{pony}{pony/#2}}
+\WithSuffix\newcommand\showpony*[2][\linewidth]{\showcode*[#1]{Teal!25}{Teal}{pony}{pony/#2}}
+\newcommand{\showlongpony}[2][\linewidth]{\showlongcode[#1]{Teal!25}{Teal}{pony}{pony/#2}}
+\newcommand{\delayedinlinepony}[1]{\mintinlinedelayed{pony}{#1}}
+\newmintinline[inlinepony]{pony}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidepony[2][\linewidth]{\slidecode#3[#1]{Teal!25}{Teal}{pony}{pony/#2}}
+  \WithSuffix{\newcommand<>}\slidepony*[2][\linewidth]{\slidecode#3*[#1]{Teal!25}{Teal}{pony}{pony/#2}}
+}{}
+
+%% Configurations and commands for the Prolog language
+\setminted[prolog]{}
+\providecommand{\showprolog}{}
+\renewcommand{\showprolog}[2][\linewidth]{\showcode[#1]{Vermiglione!25}{Vermiglione}{prolog}{prolog/#2}}
+\WithSuffix\newcommand\showprolog*[2][\linewidth]{\showcode*[#1]{Vermiglione!25}{Vermiglione}{prolog}{prolog/#2}}
+\newcommand{\showlongprolog}[2][\linewidth]{\showlongcode[#1]{Vermiglione!25}{Vermiglione}{prolog}{prolog/#2}}
+\newcommand{\delayedinlineprolog}[1]{\mintinlinedelayed{prolog}{#1}}
+\newmintinline[inlineprolog]{prolog}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideprolog[2][\linewidth]{\slidecode#3[#1]{Vermiglione!25}{Vermiglione}{prolog}{prolog/#2}}
+  \WithSuffix{\newcommand<>}\slideprolog*[2][\linewidth]{\slidecode#3*[#1]{Vermiglione!25}{Vermiglione}{prolog}{prolog/#2}}
+}{}
+
+%% Configurations and commands for the Python 3 sessions
+\setminted[pycon]{python3=true} % possible alternatives: colorful, friendly
+\providecommand{\showpycon}{}
+\renewcommand{\showpycon}[2][\linewidth]{\showcode[#1]{LimeGreen!15}{LimeGreen}{pycon}{python3-session/#2}}
+\WithSuffix\newcommand\showpycon*[2][\linewidth]{\showcode*[#1]{LimeGreen!15}{LimeGreen}{pycon}{python3-session/#2}}
+\newcommand{\showlongpycon}[2][\linewidth]{\showlongcode[#1]{LimeGreen!15}{LimeGreen}{pycon}{python3-session/#2}}
+\newcommand{\delayedinlinepycon}[1]{\mintinlinedelayed{pycon}{#1}}
+\newmintinline[inlinepycon]{pycon}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidepycon[2][\linewidth]{\slidecode#3[#1]{LimeGreen!15}{LimeGreen}{pycon}{python3-session/#2}}
+  \WithSuffix{\newcommand<>}\slidepycon*[2][\linewidth]{\slidecode#3*[#1]{LimeGreen!15}{LimeGreen}{pycon}{python3-session/#2}}
+}{}
+
+%% Configurations and commands for the Python3 language
+\setminted[python3]{}  % possible alternative: colorful
+\providecommand{\showpython}{}
+\renewcommand{\showpython}[2][\linewidth]{\showcode[#1]{LimeGreen!20}{LimeGreen}{python3}{python/#2}}
+\WithSuffix\newcommand\showpython*[2][\linewidth]{\showcode*[#1]{LimeGreen!20}{LimeGreen}{python3}{python/#2}}
+\newcommand{\showlongpython}[2][\linewidth]{\showlongcode[#1]{LimeGreen!20}{LimeGreen}{python3}{python/#2}}
+\newcommand{\delayedinlinepython}[1]{\mintinlinedelayed{python3}{#1}}
+\newmintinline[inlinepython]{python3}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidepython[2][\linewidth]{\slidecode#3[#1]{LimeGreen!20}{LimeGreen}{python3}{python/#2}}
+  \WithSuffix{\newcommand<>}\slidepython*[2][\linewidth]{\slidecode#3*[#1]{LimeGreen!20}{LimeGreen}{python3}{python/#2}}
+}{}
+
+%% Configurations and commands for the R language
+\setminted[r]{} % a possible alternative: trac
+\providecommand{\showr}{}
+\renewcommand{\showr}[2][\linewidth]{\showcode[#1]{TangerineColor!25}{TangerineColor}{r}{r/#2}}
+\WithSuffix\newcommand\showr*[2][\linewidth]{\showcode*[#1]{TangerineColor!25}{TangerineColor}{r}{r/#2}}
+\newcommand{\showlongr}[2][\linewidth]{\showlongcode[#1]{TangerineColor!25}{TangerineColor}{r}{r/#2}}
+\newcommand{\delayedinliner}[1]{\mintinlinedelayed{r}{#1}}
+\newmintinline[inliner]{r}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slider[2][\linewidth]{\slidecode#3[#1]{TangerineColor!25}{TangerineColor}{r}{r/#2}}
+  \WithSuffix{\newcommand<>}\slider*[2][\linewidth]{\slidecode#3*[#1]{TangerineColor!25}{TangerineColor}{r}{r/#2}}
+}{}
+
+%% Configurations and commands for the R console session
+\setminted[rconsole]{style=arduino}
+\providecommand{\showrcon}{}
+\renewcommand{\showrcon}[2][\linewidth]{\showcode[#1]{TangerineColor!25}{TangerineColor!150}{rconsole}{r-session/#2}}
+\WithSuffix\newcommand\showrcon*[2][\linewidth]{\showcode*[#1]{TangerineColor!25}{TangerineColor!150}{rconsole}{r-session/#2}}
+\newcommand{\showlongrcon}[2][\linewidth]{\showlongcode[#1]{TangerineColor!25}{TangerineColor!150}{rconsole}{r-session/#2}}
+\newcommand{\delayedinlinercon}[1]{\mintinlinedelayed{rconsole}{#1}}
+\newmintinline[inlinercon]{rconsole}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidercon[2][\linewidth]{\slidecode#3[#1]{TangerineColor!25}{TangerineColor!150}{rconsole}{r-session/#2}}
+  \WithSuffix{\newcommand<>}\slidercon*[2][\linewidth]{\slidecode#3*[#1]{TangerineColor!25}{TangerineColor!150}{rconsole}{r-session/#2}}
+}{}
+
+%% Configurations and commands for the Racket language
+\setminted[racket]{style=default} % possible alternative: arduino
+\providecommand{\showracket}{}
+\renewcommand{\showracket}[2][\linewidth]{\showcode[#1]{CurryYellow!25}{CurryYellow}{racket}{racket/#2}}
+\WithSuffix\newcommand\showracket*[2][\linewidth]{\showcode*[#1]{CurryYellow!25}{CurryYellow}{racket}{racket/#2}}
+\newcommand{\showlongracket}[2][\linewidth]{\showlongcode[#1]{CurryYellow!25}{CurryYellow}{racket}{racket/#2}}
+\newcommand{\delayedinlineracket}[1]{\mintinlinedelayed{racket}{#1}}
+\newmintinline[inlineracket]{racket}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideracket[2][\linewidth]{\slidecode#3[#1]{CurryYellow!25}{CurryYellow}{racket}{racket/#2}}
+  \WithSuffix{\newcommand<>}\slideracket*[2][\linewidth]{\slidecode#3*[#1]{CurryYellow!25}{CurryYellow}{racket}{racket/#2}}
+}{}
+
+%% Configurations and commands for the Rascal language
+\setminted[rascal]{}
+\definecolor{RascalColor}{rgb}{0.88,0.91,0.75}
+\colorlet{RascalFGColor}{RascalColor!150}
+\colorlet{RascalBGColor}{RascalColor!50}
+\providecommand{\showrascal}{}
+\renewcommand{\showrascal}[2][\linewidth]{\showcode[#1]{RascalBGColor}{RascalFGColor}{rascal}{rascal/#2}}
+\WithSuffix\newcommand\showrascal*[2][\linewidth]{\showcode*[#1]{RascalBGColor}{RascalFGColor}{rascal}{rascal/#2}}
+\newcommand{\showlongrascal}[2][\linewidth]{\showlongcode[#1]{RascalBGColor}{RascalFGColor}{rascal}{rascal/#2}}
+\newcommand{\delayedinlinerascal}[1]{\mintinlinedelayed{rascal}{#1}}
+\newmintinline[inlinerascal]{rascal}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\sliderascal[2][\linewidth]{\slidecode#3[#1]{RascalBGColor}{RascalFGColor}{rascal}{rascal/#2}}
+  \WithSuffix{\newcommand<>}\sliderascal*[2][\linewidth]{\slidecode#3*[#1]{RascalBGColor}{RascalFGColor}{rascal}{rascal/#2}}
+}{}
+
+%% Configurations and commands for the ReST language
+\setminted[rest]{breaklines,breakindent=1cm,breakanywhere,style=pastie}
+\providecommand{\showrest}{}
+\renewcommand{\showrest}[2][\linewidth]{\showcode[#1]{LightZakuGreen!25}{LightZakuGreen}{rest}{rest/#2}}
+\WithSuffix\newcommand\showrest*[2][\linewidth]{\showcode*[#1]{LightZakuGreen!25}{LightZakuGreen}{rest}{rest/#2}}
+\newcommand{\showlongrest}[2][\linewidth]{\showlongcode[#1]{LightZakuGreen!25}{LightZakuGreen}{rest}{rest/#2}}
+\newcommand{\delayedinlinerest}[1]{\mintinlinedelayed{rest}{#1}}
+\newmintinline[inlinerest]{rest}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\sliderest[2][\linewidth]{\slidecode#3[#1]{LightZakuGreen!25}{LightZakuGreen}{rest}{rest/#2}}
+  \WithSuffix{\newcommand<>}\sliderest*[2][\linewidth]{\slidecode#3*[#1]{LightZakuGreen!25}{LightZakuGreen}{rest}{rest/#2}}
+}{}
+
+%% Configurations and commands for the RoleJava language
+\setminted[rolejava]{}
+\providecommand{\showrolejava}{}
+\renewcommand{\showrolejava}[2][\linewidth]{\showcode[#1]{Yellow!25}{Yellow}{rolejava}{rolejava/#2}}
+\WithSuffix\newcommand\showrolejava*[2][\linewidth]{\showcode*[#1]{Yellow!25}{Yellow}{rolejava}{rolejava/#2}}
+\newcommand{\showlongrolejava}[2][\linewidth]{\showlongcode[#1]{Yellow!25}{Yellow}{rolejava}{rolejava/#2}}
+\newcommand{\delayedinlinerolejava}[1]{\mintinlinedelayed{rolejava}{#1}}
+\newmintinline[inlinerolejava]{rolejava}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\sliderolejava[2][\linewidth]{\slidecode#3[#1]{Yellow!25}{Yellow}{rolejava}{rolejava/#2}}
+  \WithSuffix{\newcommand<>}\sliderolejava*[2][\linewidth]{\slidecode#3*[#1]{Yellow!25}{Yellow}{rolejava}{rolejava/#2}}
+}{}
+
+%% Configurations and commands for the Ruby language
+\setminted[ruby]{}
+\providecommand{\showruby}{}
+\renewcommand{\showruby}[2][\linewidth]{\showcode[#1]{BloodRed!25}{BloodRed}{ruby}{ruby/#2}}
+\WithSuffix\newcommand\showruby*[2][\linewidth]{\showcode*[#1]{BloodRed!25}{BloodRed}{ruby}{ruby/#2}}
+\newcommand{\showlongruby}[2][\linewidth]{\showlongcode[#1]{BloodRed!25}{BloodRed}{ruby}{ruby/#2}}
+\newcommand{\delayedinlineruby}[1]{\mintinlinedelayed{ruby}{#1}}
+\newmintinline[inlineruby]{ruby}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideruby[2][\linewidth]{\slidecode#3[#1]{BloodRed!25}{BloodRed}{ruby}{ruby/#2}}
+  \WithSuffix{\newcommand<>}\slideruby*[2][\linewidth]{\slidecode#3*[#1]{BloodRed!25}{BloodRed}{ruby}{ruby/#2}}
+}{}
+
+%% Configurations and commands for the Rust language
+\setminted[rust]{} % a potential alternative: friendly
+\providecommand{\showrust}{}
+\renewcommand{\showrust}[2][\linewidth]{\showcode[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+\WithSuffix\newcommand\showrust*[2][\linewidth]{\showcode*[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+\newcommand{\showlongrust}[2][\linewidth]{\showlongcode[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+\newcommand{\delayedinlinerust}[1]{\mintinlinedelayed{rust}{#1}}
+\newmintinline[inlinerust]{rust}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\sliderust[2][\linewidth]{\slidecode#3[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+  \WithSuffix{\newcommand<>}\sliderust*[2][\linewidth]{\slidecode#3*[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+}{}
+
+%% Configurations and commands for the Scala language
+\setminted[scala]{style=murphy} % potential alternatives: friendly and arduino
+\providecommand{\showscala}{}
+\renewcommand{\showscala}[2][\linewidth]{\showcode[#1]{PeachYellow!25}{PeachYellow}{scala}{scala/#2}}
+\WithSuffix\newcommand\showscala*[2][\linewidth]{\showcode*[#1]{PeachYellow!25}{PeachYellow}{scala}{scala/#2}}
+\newcommand{\showlongscala}[2][\linewidth]{\showlongcode[#1]{PeachYellow!25}{PeachYellow}{scala}{scala/#2}}
+\newcommand{\delayedinlinescala}[1]{\mintinlinedelayed{scala}{#1}}
+\newmintinline[inlinescala]{scala}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidescala[2][\linewidth]{\slidecode#3[#1]{PeachYellow!25}{PeachYellow}{scala}{scala/#2}}
+  \WithSuffix{\newcommand<>}\slidescala*[2][\linewidth]{\slidecode#3*[#1]{PeachYellow!25}{PeachYellow}{scala}{scala/#2}}
+}{}
+
+%% Configurations and commands for the SDF language
+\setminted[sdf]{}
+\definecolor{SDFColor}{rgb}{0.88,0.91,0.75}
+\colorlet{SDFFGColor}{SDFColor!150}
+\colorlet{SDFBGColor}{SDFColor!50}
+\providecommand{\showsdf}{}
+\renewcommand{\showsdf}[2][\linewidth]{\showcode[#1]{SDFBGColor}{SDFFGColor}{sdf3}{spoofax/#2}}
+\WithSuffix\newcommand\showsdf*[2][\linewidth]{\showcode*[#1]{SDFBGColor}{SDFFGColor}{sdf3}{spoofax/#2}}
+\newcommand{\showlongsdf}[2][\linewidth]{\showlongcode[#1]{PeachYellow!25}{PeachYellow}{sdf3}{spoofax/#2}}
+\newcommand{\delayedinlinesdf}[1]{\mintinlinedelayed{sdf3}{#1}}
+\newmintinline[inlinesdf]{sdf3}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidesdf[2][\linewidth]{\slidecode#3[#1]{SDFBGColor}{SDFFGColor}{sdf3}{spoofax/#2}}
+  \WithSuffix{\newcommand<>}\slidesdf*[2][\linewidth]{\slidecode#3*[#1]{SDFBGColor}{SDFFGColor}{sdf3}{spoofax/#2}}
+}{}
+
+
+%% Configurations and commands for the Silver language
+\setminted[silver]{}
+\definecolor{MeltSilverColor}{rgb}{0.88,0.91,0.75}
+\colorlet{MeltSilverFGColor}{MeltSilverColor!150}
+\colorlet{MeltSilverBGColor}{MeltSilverColor!50}
+\providecommand{\showsilver}{}
+\renewcommand{\showsilver}[2][\linewidth]{\showcode[#1]{MeltSilverBGColor}{MeltSilverFGColor}{meltsilver}{silver/#2}}
+\WithSuffix\newcommand\showsilver*[2][\linewidth]{\showcode*[#1]{MeltSilverBGColor}{MeltSilverFGColor}{meltsilver}{silver/#2}}
+\newcommand{\showlongsilver}[2][\linewidth]{\showlongcode[#1]{MeltSilverBGColor}{MeltSilverFGColor}{meltsilver}{silver/#2}}
+\newcommand{\delayedinlinesilver}[1]{\mintinlinedelayed{meltsilver}{#1}}
+\newmintinline[inlinesilver]{meltsilver}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidesilver[2][\linewidth]{\slidecode#3[#1]{MeltSilverBGColor}{MeltSilverFGColor}{meltsilver}{silver/#2}}
+  \WithSuffix{\newcommand<>}\slidesilver*[2][\linewidth]{\slidecode#3*[#1]{MeltSilverBGColor}{MeltSilverFGColor}{meltsilver}{silver/#2}}
+}{}
+
+%% Configurations and commands for the SmallTalk language
+\setminted[smalltalk]{style=friendly}
+\providecommand{\showsmalltalk}{}
+\renewcommand{\showsmalltalk}[2][\linewidth]{\showcode[#1]{BrightPeaGreen!25}{BrightPeaGreen}{smalltalk}{smalltalk/#2}}
+\WithSuffix\newcommand\showsmalltalk*[2][\linewidth]{\showcode*[#1]{BrightPeaGreen!25}{BrightPeaGreen}{smalltalk}{smalltalk/#2}}
+\newcommand{\showlongsmalltalk}[2][\linewidth]{\showlongcode[#1]{BrightPeaGreen!25}{BrightPeaGreen}{smalltalk}{smalltalk/#2}}
+\newcommand{\delayedinlinesmalltalk}[1]{\mintinlinedelayed{smalltalk}{#1}}
+\newmintinline[inlinesmalltalk]{smalltalk}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidesmalltalk[2][\linewidth]{\slidecode#3[#1]{BrightPeaGreen!25}{BrightPeaGreen}{smalltalk}{smalltalk/#2}}
+  \WithSuffix{\newcommand<>}\slidesmalltalk*[2][\linewidth]{\slidecode#3*[#1]{BrightPeaGreen!25}{BrightPeaGreen}{smalltalk}{smalltalk/#2}}
+}{}
+
+%% Configurations and commands for the Snobol language
+\setminted[snobol]{style=lovelace}
+\providecommand{\showsnobol}{}
+\renewcommand{\showsnobol}[2][\linewidth]{\showcode[#1]{SolidCyan!25}{SolidCyan}{snobol}{snobol/#2}}
+\WithSuffix\newcommand\showsnobol*[2][\linewidth]{\showcode*[#1]{SolidCyan!25}{SolidCyan}{snobol}{snobol/#2}}
+\newcommand{\showlongsnobol}[2][\linewidth]{\showlongcode[#1]{SolidCyan!25}{SolidCyan}{snobol}{snobol/#2}}
+\newcommand{\delayedinlinesnobol}[1]{\mintinlinedelayed{snobol}{#1}}
+\newmintinline[inlinesnobol]{snobol}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidesnobol[2][\linewidth]{\slidecode#3[#1]{SolidCyan!25}{SolidCyan}{snobol}{snobol/#2}}
+  \WithSuffix{\newcommand<>}\slidesnobol*[2][\linewidth]{\slidecode#3*[#1]{SolidCyan!25}{SolidCyan}{snobol}{snobol/#2}}
+}{}
+
+%% Configurations and commands for the Spir-V language
+\setminted[spir-v]{}
+\providecommand{\showspirv}{}
+\renewcommand{\showspirv}[2][\linewidth]{\showcode[#1]{WhiteSmoke!25}{WhiteSmoke}{spir-v}{spir-v/#2}}
+\WithSuffix\newcommand\showspirv*[2][\linewidth]{\showcode*[#1]{WhiteSmoke!25}{WhiteSmoke}{spir-v}{spir-v/#2}}
+\newcommand{\showlongspirv}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{spir-v}{spir-v/#2}}
+\newcommand{\delayedinlinespirv}[1]{\mintinlinedelayed{spir-v}{#1}}
+\newmintinline[inlinespirv]{spir-v}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidespirv[2][\linewidth]{\slidecode#3[#1]{WhiteSmoke!25}{WhiteSmoke}{spir-v}{spir-v/#2}}
+  \WithSuffix{\newcommand<>}\slidespirv*[2][\linewidth]{\slidecode#3*[#1]{WhiteSmoke!25}{WhiteSmoke}{spir-v}{spir-v/#2}}
+}{}
+
+%% Configurations and commands for the Stratego language
+\setminted[stratego]{}
+\definecolor{StrategoColor}{rgb}{0.88,0.91,0.75}
+\colorlet{StrategoFGColor}{StrategoColor!150}
+\colorlet{StrategoBGColor}{StrategoColor!50}
+\providecommand{\showstratego}{}
+\renewcommand{\showstratego}[2][\linewidth]{\showcode[#1]{StrategoBGColor}{StrategoFGColor}{stratego}{spoofax/#2}}
+\WithSuffix\newcommand\showstratego*[2][\linewidth]{\showcode*[#1]{StrategoBGColor}{StrategoFGColor}{stratego}{spoofax/#2}}
+\newcommand{\showlongstratego}[2][\linewidth]{\showlongcode[#1]{WhiteSmoke!25}{WhiteSmoke}{stratego}{spoofax/#2}}
+\newcommand{\delayedinlinestratego}[1]{\mintinlinedelayed{stratego}{#1}}
+\newmintinline[inlinestratego]{stratego}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidestratego[2][\linewidth]{\slidecode#3[#1]{StrategoBGColor}{StrategoFGColor}{stratego}{spoofax/#2}}
+  \WithSuffix{\newcommand<>}\slidestratego*[2][\linewidth]{\slidecode#3*[#1]{StrategoBGColor}{StrategoFGColor}{stratego}{spoofax/#2}}
+}{}
+
+%% Configurations and commands for the Swift language
+\setminted[swift]{style=perldoc} % a potential alternative: trac
+\providecommand{\showswift}{}
+\renewcommand{\showswift}[2][\linewidth]{\showcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{swift}{swift/#2}}
+\WithSuffix\newcommand\showswift*[2][\linewidth]{\showcode*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{swift}{swift/#2}}
+\newcommand{\showlongswift}[2][\linewidth]{\showlongcode[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{swift}{swift/#2}}
+\newcommand{\delayedinlineswift}[1]{\mintinlinedelayed{swift}{#1}}
+\newmintinline[inlineswift]{swift}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideswift[2][\linewidth]{\slidecode#3[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{swift}{swift/#2}}
+  \WithSuffix{\newcommand<>}\slideswift*[2][\linewidth]{\slidecode#3*[#1]{AntiqueFuchsia!25}{AntiqueFuchsia}{swift}{swift/#2}}
+}{}
+
+%% Configurations and commands for the Tcsh language
+\setminted[tcsh]{style=colorful}
+\providecommand{\showtcsh}{}
+\renewcommand{\showtcsh}[2][\linewidth]{\showcode[#1]{White}{Black}{tcsh}{tcsh/#2}}
+\WithSuffix\newcommand\showtcsh*[2][\linewidth]{\showcode*[#1]{White}{Black}{tcsh}{tcsh/#2}}
+\newcommand{\showlongtcsh}[2][\linewidth]{\showlongcode[#1]{White}{Black}{tcsh}{tcsh/#2}}
+\newcommand{\delayedinlinetcsh}[1]{\mintinlinedelayed{tcsh}{#1}}
+\newmintinline[inlinetcsh]{tcsh}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidetcsh[2][\linewidth]{\slidecode#3[#1]{White}{Black}{tcsh}{tcsh/#2}}
+  \WithSuffix{\newcommand<>}\slidetcsh*[2][\linewidth]{\slidecode#3*[#1]{White}{Black}{tcsh}{tcsh/#2}}
+}{}
+
+%% Configurations and commands for the Tcsh Sessions
+\setminted[tcshcon]{style=paraiso-light}
+\providecommand{\showtcshcon}{}
+\renewcommand{\showtcshcon}[2][\linewidth]{\showshell[#1]{White}{Black}{tcshcon}{tcsh-session/#2}}
+\WithSuffix\newcommand\showtcshcon*[2][\linewidth]{\showshell*[#1]{White}{Black}{tcshcon}{tcsh-session/#2}}
+\newcommand{\showlongtcshcon}[2][\linewidth]{\showlongshell[#1]{White}{Black}{tcshcon}{tcsh-session/#2}}
+\newcommand{\delayedinlinetcshcon}[1]{\mintinlinedelayed{tcshcon}{#1}}
+\newmintinline[inlinetcshcon]{tcshcon}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidetcshcon[2][\linewidth]{\slideshell#3[#1]{White}{Black}{tcshcon}{tcsh-session/#2}}
+  \WithSuffix{\newcommand<>}\slidetcshcon*[2][\linewidth]{\slideshell#3*[#1]{White}{Black}{tcshcon}{tcsh-session/#2}}
+}{}
+
+%% Configurations and commands for the Tyl language
+\setminted[tyl]{style=native}
+% \definecolor{TylBGColor}{rgb}{0.21,0.69,0.52}
+% \definecolor{TylFrameColor}{rgb}{0.08,0.19,0.11}
+\definecolor{TylBGColor}{rgb}{0.1,0.29,0.24}
+\definecolor{TylFrameColor}{rgb}{0.08,0.59,0.46}
+\providecommand{\showtyl}{}
+\renewcommand{\showtyl}[2][\linewidth]{\showcode[#1]{TylBGColor}{TylFrameColor}{tyl}{tyl/#2}}
+\WithSuffix\newcommand\showtyl*[2][\linewidth]{\showcode*[#1]{TylBGColor}{TylFrameColor}{tyl}{tyl/#2}}
+\newcommand{\showlongtyl}[2][\linewidth]{\showlongcode[#1]{TylBGColor}{TylFrameColor}{tyl}{tyl/#2}}
+\newcommand{\delayedinlinetyl}[1]{\mintinlinedelayed{tyl}{#1}}
+\newmintinline[inlinetyl]{tyl}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidetyl[2][\linewidth]{\slidecode#3[#1]{TylBGColor}{TylFrameColor}{tyl}{tyl/#2}}
+  \WithSuffix{\newcommand<>}\slidetyl*[2][\linewidth]{\slidecode#3*[#1]{TylBGColor}{TylFrameColor}{tyl}{tyl/#2}}
+}{}
+
+%% Configurations and commands for the X10 language
+\setminted[x10]{}
+\providecommand{\showxten}{}
+\renewcommand{\showxten}[2][\linewidth]{\showcode[#1]{PeachOrange!25}{PeachOrange}{x10}{x10/#2}} % chktex 29
+\WithSuffix\newcommand\showxten*[2][\linewidth]{\showcode*[#1]{PeachOrange!25}{PeachOrange}{x10}{x10/#2}}% chktex 29
+\newcommand{\showlongxten}[2][\linewidth]{\showlongcode[#1]{PeachOrange!25}{PeachOrange}{x10}{x10/#2}}% chktex 29
+\newcommand{\delayedinlinexten}[1]{\mintinlinedelayed{x10}{#1}}
+\newmintinline[inlinexten]{x10}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidexten[2][\linewidth]{\slidecode#3[#1]{PeachOrange!25}{PeachOrange}{x10}{x10/#2}}% chktex 29
+  \WithSuffix{\newcommand<>}\slidexten*[2][\linewidth]{\slidecode#3*[#1]{PeachOrange!25}{PeachOrange}{x10}{x10/#2}}% chktex 29
+}{}
+
+%% Configurations and commands for the XML language
+\setminted[xml]{breaklines,breakindent=1cm,breakanywhere,style=perldoc}
+\providecommand{\showxml}{}
+\renewcommand{\showxml}[2][\linewidth]{\showcode[#1]{PeachOrange!15}{PeachOrange}{xml}{xml/#2}}
+\WithSuffix\newcommand\showxml*[2][\linewidth]{\showcode*[#1]{PeachOrange!15}{PeachOrange}{xml}{xml/#2}}
+\newcommand{\showlongxml}[2][\linewidth]{\showlongcode[#1]{PeachOrange!15}{PeachOrange}{xml}{xml/#2}}
+\newcommand{\delayedinlinexml}[1]{\mintinlinedelayed{xml}{#1}}
+\newmintinline[inlinexml]{xml}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidexml[2][\linewidth]{\slidecode#3[#1]{PeachOrange!15}{PeachOrange}{xml}{xml/#2}}
+  \WithSuffix{\newcommand<>}\slidexml*[2][\linewidth]{\slidecode#3*[#1]{PeachOrange!15}{PeachOrange}{xml}{xml/#2}}
+}{}
+
+%% Configurations and commands for the XSLT language
+\setminted[xslt]{breaklines,breakindent=1cm,breakanywhere,style=monokai}
+\providecommand{\showxslt}{}
+\renewcommand{\showxslt}[2][\linewidth]{\showshell[#1]{Yellow}{Black}{xslt}{xslt/#2}}
+\WithSuffix\newcommand\showxslt*[2][\linewidth]{\showshell*[#1]{Yellow}{Black}{xslt}{xslt/#2}}
+\newcommand{\showlongxslt}[2][\linewidth]{\showlongshell[#1]{Yellow}{Black}{xslt}{xslt/#2}}
+\newcommand{\delayedinlinexslt}[1]{\mintinlinedelayed{xslt}{#1}}
+\newmintinline[inlinexslt]{xslt}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidexslt[2][\linewidth]{\slideshell#3[#1]{Yellow}{Black}{xslt}{xslt/#2}}
+  \WithSuffix{\newcommand<>}\slidexslt*[2][\linewidth]{\slideshell#3*[#1]{Yellow}{Black}{xslt}{xslt/#2}}
+}{}
+
+%% Configurations and commands for the XTend language
+\setminted[xtend]{}
+\definecolor{XTendColor}{rgb}{0.88,0.91,0.75}
+\colorlet{XTendFGColor}{XTendColor!150}
+\colorlet{XTendBGColor}{XTendColor!50}
+\providecommand{\showxtend}{}
+\renewcommand{\showxtend}[2][\linewidth]{\showcode[#1]{XTendBGColor}{XTendFGColor}{xtend}{xtend/#2}}
+\WithSuffix\newcommand\showxtend*[2][\linewidth]{\showcode*[#1]{XTendBGColor}{XTendFGColor}{xtend}{xtend/#2}}
+\newcommand{\showlongxtend}[2][\linewidth]{\showlongcode[#1]{XTendBGColor}{XTendFGColor}{xtend}{xtend/#2}}
+\newcommand{\delayedinlinextend}[1]{\mintinlinedelayed{xtend}{#1}}
+\newmintinline[inlinextend]{xtend}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidextend[2][\linewidth]{\slidecode#3[#1]{XTendBGColor}{XTendFGColor}{xtend}{xtend/#2}}
+  \WithSuffix{\newcommand<>}\slidextend*[2][\linewidth]{\slidecode#3*[#1]{XTendBGColor}{XTendFGColor}{xtend}{xtend/#2}}
+}{}
+
+%% Configurations and commands for the XText language
+\setminted[xtext]{}
+\definecolor{XTextColor}{rgb}{0.88,0.91,0.75}
+\colorlet{XTextFGColor}{XTextColor!150}
+\colorlet{XTextBGColor}{XTextColor!50}
+\providecommand{\showxtext}{}
+\renewcommand{\showxtext}[2][\linewidth]{\showcode[#1]{XTextBGColor}{XTextFGColor}{xtext}{xtext/#2}}
+\WithSuffix\newcommand\showxtext*[2][\linewidth]{\showcode*[#1]{XTextBGColor}{XTextFGColor}{xtext}{xtext/#2}}
+\newcommand{\showlongxtext}[2][\linewidth]{\showlongcode[#1]{XTextBGColor}{XTextFGColor}{xtext}{xtext/#2}}
+\newcommand{\delayedinlinextext}[1]{\mintinlinedelayed{xtext}{#1}}
+\newmintinline[inlinextext]{xtext}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slidextext[2][\linewidth]{\slidecode#3[#1]{XTextBGColor}{XTextFGColor}{xtext}{xtext/#2}}
+  \WithSuffix{\newcommand<>}\slidextext*[2][\linewidth]{\slidecode#3*[#1]{XTextBGColor}{XTextFGColor}{xtext}{xtext/#2}}
+}{}
+
+%% Configurations and commands for the YACC language
+\setminted[yacc]{style=manni}
+\definecolor{YACCColor}{rgb}{0.88,0.91,0.75}
+\colorlet{YACCFGColor}{YACCColor!150}
+\colorlet{YACCBGColor}{YACCColor!50}
+\providecommand{\showyacc}{}
+\renewcommand{\showyacc}[2][\linewidth]{\showcode[#1]{YACCBGColor}{YACCFGColor}{yacc}{yacc/#2}}
+\WithSuffix\newcommand\showyacc*[2][\linewidth]{\showcode*[#1]{YACCBGColor}{YACCFGColor}{yacc}{yacc/#2}}
+\newcommand{\showlongyacc}[2][\linewidth]{\showlongcode[#1]{YACCBGColor}{YACCFGColor}{yacc}{yacc/#2}}
+\newcommand{\delayedinlineyacc}[1]{\mintinlinedelayed{yacc}{#1}}
+\newmintinline[inlineyacc]{yacc}{}
+\@ifclassloaded{beamer}{%
+  \newcommand<>\slideyacc[2][\linewidth]{\slidecode#3[#1]{YACCBGColor}{YACCFGColor}{yacc}{yacc/#2}}
+  \WithSuffix{\newcommand<>}\slideyacc*[2][\linewidth]{\slidecode#3*[#1]{YACCBGColor}{YACCFGColor}{yacc}{yacc/#2}}
+}{}
+
+%% inlined code (delayed, needed when %, # and other special symbols are used)
+
+%%-------------------------------------------------------------------------------------------

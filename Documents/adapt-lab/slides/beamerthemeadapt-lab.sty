@@ -1,0 +1,97 @@
+\def\filename{beamerthemeadapt-lab}
+\def\fileversion{V1.0 (Walter Cazzola)}
+\def\filedate{2008/06/10}
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{\filename}[\filedate \fileversion]
+\typeout{Package \filename', \fileversion, <\filedate>}
+
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+\logo{\includegraphics[width=1.5cm]{minerva-new.pdf}}
+
+\useoutertheme[left,width=1.55cm,height=1.55cm]{adapt-lab}
+\useinnertheme[shadow=true]{rounded}
+
+\usecolortheme{adapt-lab}
+
+%\usefonttheme{serif,structurebold}
+\usefonttheme{adapt-lab}
+
+\setbeamercolor*{frametitle}{parent=palette primary}
+
+%\setbeamerfont{block title}{size={}}
+
+\setbeamertemplate{background canvas}[vertical shading][bottom=red!10,top=blue!10]
+\setbeamertemplate{frametitle}[from second]{}
+\setbeamertemplate{bibliography item}[triangle] 
+\defbeamertemplate{itemize item}{dash}{--}
+\defbeamertemplate{itemize subitem}{dash}{--}
+\defbeamertemplate{itemize subsubitem}{dash}{--}
+\setbeamertemplate{itemize item}[dash]
+\setbeamertemplate{itemize subitem}[dash]
+\setbeamertemplate{itemize subsubitem}[dash]
+\defbeamertemplate{enumerate subsubitem}{roman}{\theenumi.}
+\setbeamertemplate{enumerate subsubitem}[roman]
+\defbeamertemplate{enumerate subitem}{roman}{\theenumi.}
+\setbeamertemplate{enumerate subitem}[roman]
+\defbeamertemplate{enumerate item}{roman}{\theenumi.}
+\setbeamertemplate{enumerate item}[roman]
+\setbeamertemplate{frametitle continuation}[from second][\textbf{\insertcontinuationcount}]
+\setbeamerfont*{itemize/enumerate body}{size=\small}
+\setbeamerfont*{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamerfont*{itemize/enumerate subsubbody}{size=\scriptsize}
+\setbeamerfont*{body text}{series=\bfseries}
+
+\setbeamertemplate{sections/subsections in toc}[dash]
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand<>{\showcode}[5][\linewidth]{%
+   \uncover#6{\tikz[remember picture]%
+      \node[draw=#3, thick, fill={#2}, shape=rectangle, opacity=.5, draw opacity=1, text opacity=1,
+          text width=#1-10pt, inner xsep=5pt, inner ysep=-5pt, anchor=north west] (codebox) {%
+               \lstinputlisting[language={#4}]{code/#5}%
+   } ;}
+   %\vskip -2pt
+}
+
+\RequirePackage{xparse}
+\DeclareDocumentCommand{\showshell}{ O{\linewidth} D||{\scriptsize} m m}{%
+  \tikz[remember picture]%, overlay]%
+     \node[draw=black, semithick, fill=Black, double=white, double distance=1pt,
+         shape=rectangle, opacity=.8, draw opacity=1, text opacity=1, text width=#1-10pt, inner xsep=5pt, inner ysep=-3.5pt, outer sep=0pt, anchor=north west] {%
+              \lstinputlisting[language={#3},basicstyle=\color{white}\bfseries\ttfamily#2,keywordstyle=\color{Yellow}]{code/shell/#4}%
+     } ;
+     %\vskip -2pt
+}
+
+\newcommand<>{\showjava}[2][\linewidth]{\showcode#3[#1]{Yellow!25}{Gold}{{[11]java}}{java/#2}}
+\newcommand<>{\showaspectj}[2][\linewidth]{\showcode#3[#1]{LightSteelBlue!50}{Teal}{{[aspectj]{java}}}{aspectj/#2}}
+\newcommand<>{\showopenjava}[2][\linewidth]{\showcode#3[#1]{LightOliveGreen!25}{LightOliveGreen}{{[openjava]{java}}}{openjava/#2}}
+\newcommand<>{\showjavassist}[2][\linewidth]{\showcode#3[#1]{LightOliveGreen!25}{LightOliveGreen}{{[11]java}}{javassist/#2}}
+\newcommand<>{\showatjava}[2][\linewidth]{\showcode#3[#1]{Yellow!25}{Gold}{{@java}}{@java/#2}}
+\newcommand<>{\showataspectj}[2][\linewidth]{\showcode#3[#1]{Yellow!25}{Gold}{{@aspectj}}{@aspectj/#2}}
+\newcommand<>{\showscala}[2][\linewidth]{\showcode#3[#1]{Gold!25}{Gold}{scala}{scala/#2}}
+\newcommand<>{\showneverlang}[2][\linewidth]{\showcode#3[#1]{Bisque!50}{BloodRed}{neverlang}{nlg/#2}}
+\newcommand<>{\showsneverlang}[2][\linewidth]{\showcode#3[#1]{Bisque!50}{BloodRed}{{[scala]neverlang}}{nlg/#2}}
+\newcommand<>{\showerlang}[2][\linewidth]{\showcode#3[#1]{Teal!25}{Teal}{erlang}{erlang/#2}}
+\newcommand<>{\showml}[2][\linewidth]{\showcode#3[#1]{BloodRed!25}{BloodRed}{{[Objective]Caml}}{ml/#2}}
+\newcommand<>{\showpython}[2][\linewidth]{\showcode#3[#1]{LimeGreen!25}{LimeGreen}{{[3]python}}{python/#2}}
+\newcommand<>{\showjs}[2][\linewidth]{\showcode#3[#1]{Gray!50}{Teal}{Javascript}{javascript/#2}}
+\newcommand<>{\showevil}[2][\linewidth]{\showcode#3[#1]{LimeGreen!25}{LimeGreen}{evil}{evil/#2}}
+\newcommand<>{\showrust}[2][\linewidth]{\showcode#3[#1]{RustColor!25}{RustColor}{rust}{rust/#2}}
+\newcommand<>{\showc}[2][\linewidth]{\showcode#3[#1]{TerracottaOrange!25}{TerracottaOrange}{c}{c/#2}}
+\newcommand<>{\showxml}[2][\linewidth]{\showcode#3[#1]{TerracottaOrange!25}{TerracottaOrange}{XML}{xml/#2}}
+\newcommand<>{\showloglang}[2][\linewidth]{\showcode#3[#1]{Coral!25}{Coral}{loglang}{loglang/#2}}
+
+\AtBeginDocument{%
+  \renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+  \linespread{1.05}
+}
+
+\mode
+<all>
+

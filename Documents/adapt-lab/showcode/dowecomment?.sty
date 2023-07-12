@@ -1,0 +1,61 @@
+\PassOptionsToPackage{table,svgnames}{xcolor}
+%%----------------------------------------------------------------------------------
+%% dowecomment?.sty
+%% author: Walter Cazzola (20-06-2018) last update: (20-08-2020)
+%%----------------------------------------------------------------------------------
+
+\def\filename{dowecomment?}
+\def\fileversion{V0.9.1 (Walter Cazzola)}
+\def\filedate{2020/08/20}
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{\filename}[\filedate\ \fileversion]
+\typeout{Package \filename, \fileversion, <\filedate>}
+
+%%% LOAD REQUIRED PACKAGES %%%
+
+\RequirePackage{xcolor}
+%% user-defined colors
+\providecolor{BloodRed}{rgb}{.86,0,0}
+
+%%% graphical engines used to draw the borders and background
+%% TiKZ is the basic engine
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.callouts, shadows}
+
+%%% if-then-else and smart spaces dealing
+\RequirePackage{ifthen}
+\RequirePackage{xspace}
+
+%%----------------------------------------------------------------------------------
+\tikzset{author comment/.style={draw, fill=white, thick, drop shadow}}
+
+\newboolean{CommentON}
+
+\DeclareOption{off}{% turn off the comments
+   \setboolean{CommentON}{false}
+}
+
+\DeclareOption{on}{% turn on the comments
+   \setboolean{CommentON}{true}
+}
+\ProcessOptions\relax
+
+\newcommand{\TurnCommentsOn}{\setboolean{CommentON}{true}}%
+\newcommand{\TurnCommentsOff}{\setboolean{CommentON}{false}}%
+
+\newcommand{\usercomment}[3]{%
+  \ifthenelse{\boolean{CommentON}}{%
+     \raisebox{-.5ex}%
+       {\tikz%
+          \node[x=1ex, y=1ex, inner sep=.5ex,%
+                rectangle callout,%
+                callout pointer width=.7ex,%
+                callout relative pointer={(1.5,-0)},%
+                author comment]%
+            {\footnotesize\textsf{#1}};}~%
+     \textsf[\,\textcolor{#2}{#3}\,\textsf]\xspace%
+  }{} %else
+}
+
+%%-------------------------------------------------------------------------------------------

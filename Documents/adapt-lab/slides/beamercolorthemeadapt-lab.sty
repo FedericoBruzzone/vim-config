@@ -1,0 +1,61 @@
+\def\filename{beamercolorthemeadapt-lab}
+\def\fileversion{V1.0 (Walter Cazzola)}
+\def\filedate{2008/06/10}
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{\filename}[\filedate \fileversion]
+\typeout{Package \filename', \fileversion, <\filedate>}
+
+\setbeamercolor*{normal text}{fg=Black}
+
+\mode<presentation>
+
+\definecolor{BloodRed}{rgb}{.86,0,0}
+\definecolor{DICoRed}{RGB}{159,40,37}
+\definecolor{RustColor}{rgb}{0.72,0.25,0.05}
+\definecolor{TerracottaOrange}{rgb}{0.73,0.22,0.08}
+
+\setbeamercolor{structure}{fg=white}
+
+\setbeamercolor{palette primary}{fg=white,bg=DICoRed}
+\setbeamercolor{palette secondary}{fg=white,bg=white}
+\setbeamercolor{palette tertiary}{fg=white,bg=DICoRed!90}
+\setbeamercolor{palette quaternary}{fg=white,bg=DICoRed}
+
+\setbeamercolor{titlelike}{parent=palette quaternary}
+
+\setbeamercolor{sidebar}{bg=DICoRed}
+  
+\setbeamercolor{palette sidebar primary}{fg=white}
+\setbeamercolor{palette sidebar secondary}{fg=white}
+\setbeamercolor{palette sidebar tertiary}{fg=white}
+\setbeamercolor{palette sidebar quaternary}{fg=white}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor{item}{fg=BloodRed}
+\setbeamercolor{itemize/enumerate body}{fg=Black!60}
+\setbeamercolor{itemize/enumerate subbody}{fg=Black!40}
+\setbeamercolor{alerted text}{fg=BloodRed}
+
+\setbeamercolor*{bibliography entry}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry title}{fg=BloodRed}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+
+\setbeamercolor*{section in toc}{fg=BloodRed}
+\setbeamercolor*{subsection in toc}{fg=black}
+\setbeamercolor*{subsubsection in toc}{fg=black!50}
+
+\setbeamercolor{block title}{fg=white,bg=DICoRed}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!bg}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!bg}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+\mode
+<all>
