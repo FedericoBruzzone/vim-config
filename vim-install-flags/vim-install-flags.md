@@ -12,8 +12,8 @@
 --with-x \
 --enable-gui=auto \
 --enable-gtk2-check \
---enable-gnome-check \
+--enable-gnome-check 
 
-make 
+make
 
 sudo make install
