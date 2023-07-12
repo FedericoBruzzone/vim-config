@@ -4,6 +4,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+set guifont=Iosevka\ Nerd\ Font\ Mono
+
 set clipboard^=unnamedplus
 set clipboard^=unnamed
 " set guicursor=
