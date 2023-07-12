@@ -1,0 +1,48 @@
+\def\filename{beamerfontthemeadapt-lab}
+\def\fileversion{V1.0 (Walter Cazzola)}
+\def\filedate{2008/07/28}
+
+%\RequirePackage{emerald}
+\RequirePackage{ragged2e}
+
+\mode<presentation>
+
+% \def\beamer@tsfont{\rmfamily}
+\def\beamer@tsfont{\fontfamily{augie}\selectfont}
+
+\setbeamerfont{frametitle}{parent=structure,size=\LARGE}
+\setbeamerfont{framesubtitle}{parent=frametitle,size=\normalsize}
+
+\setbeamerfont{block title}{size={}}
+
+\ProcessOptionsBeamer
+
+\setbeamerfont{structure}{family=\beamer@tsfont}
+\setbeamerfont{tiny structure}{family=\beamer@tsfont,size=\tiny}
+\setbeamerfont{section in sidebar}{family=\beamer@tsfont,size=\tiny}
+\setbeamerfont{subsection in sidebar}{family=\beamer@tsfont,size=\Tiny}
+\setbeamerfont{author in sidebar}{family=\beamer@tsfont,size=\tiny}
+\setbeamerfont{title in sidebar}{family=\beamer@tsfont,size=\tiny}
+
+\setbeamerfont{section in toc}{family=\beamer@tsfont,size=\large}
+\setbeamerfont{subsection in toc}{family=\beamer@tsfont,size=\normalsize}
+\setbeamerfont{subsubsection in toc}{family=\beamer@tsfont,size=\small}
+
+\AtBeginDocument{%
+  %\renewcommand{\ttdefault}{fjd}
+  %\renewcommand{\rmdefault}{fjd} % JD
+  \renewcommand{\rmdefault}{fau} % Augie
+  \renewcommand{\sfdefault}{fau} % Augie
+  %\renewcommand{\rmdefault}{ftp} % Tall Paul
+
+  \justifying
+  %\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+  %\ECFJD %JD
+  %\ECFAugie % Augie
+  \fontfamily{augie}\selectfont
+  %\ECFTallPaul % Tall Paul
+}
+
+\mode
+<all>
+

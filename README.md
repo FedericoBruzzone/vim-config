@@ -289,6 +289,6 @@ _Commands_:
 Create `~/texmf` folder and add two subfolder `tex/latex` and add here all stuff
 
 For example:
-add a folder `adapt-lab` and here add all subfolders or themes
+add a folder `adapt-lab` and here add all subfolders or themes (WITH LINK)
 
 Digit `sudo texconfig`
