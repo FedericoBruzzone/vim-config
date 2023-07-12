@@ -204,19 +204,19 @@ alias ble='source ~/ble.sh/out/ble.sh'
 . "$HOME/.cargo/env"
 
 # ==================dart/flutter==================
-export PATH="$PATH:/home/federicobruzzoneplasma/flutterdev/flutter/bin"
+export PATH="$PATH:/home/fcb/flutterdev/flutter/bin"
 export PATH="$PATH:/usr/lib/dart/bin"
 
 # ==================java==================
-export PATH="$PATH:/home/federicobruzzoneplasma/aspectj1.9/bin"
-export CLASSPATH=".:/home/federicobruzzoneplasma/aspectj1.9/lib/aspectjrt.jar"
+export PATH="$PATH:/home/fcb/aspectj1.9/bin"
+export CLASSPATH=".:/home/fcb/aspectj1.9/lib/aspectjrt.jar"
 export CLASSPATH="$CLASSPATH:/usr/share/java/javassist.jar"
 
-alias javaformat="java -jar /home/federicobruzzoneplasma/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r"
-alias javaformatall="java -jar /home/federicobruzzoneplasma/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r *.java"
+alias javaformat="java -jar /home/fcb/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r"
+alias javaformatall="java -jar /home/fcb/Documents/master-courses/advanced-programming-techniques/google-java-format-1.15.0-all-deps.jar -r *.java"
 
 # ==================python==================
-export ANTLR4_JAR="/home/federicobruzzoneplasma/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
+export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.11.2/stm32cubeide &'
