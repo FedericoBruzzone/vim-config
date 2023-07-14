@@ -214,9 +214,9 @@ bindsym $mod+n exec nautilus
 bindsym $mod+z exec discord
 
 ## Screenshots
-bindsym Print exec --no-startup-id maim "~/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "~/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "~/Pictures/$(date)"
+bindsym Print exec --no-startup-id maim "/home/fcb/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/fcb/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/fcb/Pictures/$(date)"
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
