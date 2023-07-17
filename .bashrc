@@ -1,194 +1,120 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
 # If not running interactively, don't do anything
 case $- in
-*i*) ;;
-*) return ;;
+    *i*) ;;
+      *) return;;
 esac
 
-######################################## USEFUL SHIT  ########################################
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
-HISTFILESIZE=200000
-HISTCONTROL=ignoreboth:erasedups
+HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# show potential good files when trying to cd in a non existant dir
-shopt -s cdspell
-
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+#shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(cat /etc/debian_chroot)
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-iatest=$(expr index "$-" i)
-# Ignore case on auto-completion
-# Note: bind used instead of sticking these in .inputrc
-if [[ $iatest > 0 ]]; then bind "set completion-ignore-case on"; fi
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
 
-# Show auto-completion list automatically, without double tab
-if [[ $iatest > 0 ]]; then bind "set show-all-if-ambiguous On"; fi
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
-#######################################  LS    ############################################
-alias l='ls --color=always'            
-alias l.='ls -d .* --color=always'     
-alias ll='ls -lhrt --color=always'     
-alias lla='ls -lhrta --color=always'     
-alias lld='ls -lUd */ --color=always'  
-alias la='ls -a --color=always'        
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
 
-########################################   APT   ########################################
-alias sagi='sudo /bin/apt-get install'
-alias ragi='sudo /bin/apt-get remove'
-alias sagu='sudo /bin/apt-get update && sudo /bin/apt-get upgrade'
-alias saclean='sudo /bin/apt-get autoclean && sudo /bin/apt-get autoremove && sudo /bin/apt-get clean'
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
-########################################   CD    ########################################
-alias bd='cd "$OLDPWD"' # equivalent to : cd -
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias cdd='cd ~/Documents && c && ll'
-alias cdmc='cd ~/Documents/master-courses && c && ll'
-# mkdir + cd
-mkdircd() { [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; }
-# Autoriser le cd'ing sans taper la partie cd si la version bash> = 4
-# [ ${BASH_VERSINFO[0]} -ge 4 ] && shopt -s autocd
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
-######################################## GIT ########################################
-alias gstatus='git status -sb'
-alias glog='git log --oneline'
-alias glast='git log -1 HEAD --stat'
-alias gdiff='git diff'
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
 
-alias gremote='git remote -v'
-alias gbranch='git branch -va'
-alias gfetchupstream='git fetch upstream'
-alias gmergeupstream='git merge upstream/main'
-alias gfetchorigin='git fetch origin'
-alias gmergeorigin='git merge origin/main'
-alias gcheckoutmain='git checkout main'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
-alias gpull='git pull'
-alias gadd='git add'
-alias gadda='git add --all'
-alias gcommit='git commit -s'
-alias gcommitm='git commit -sm'
-alias gpush='git push'
-alias gpushf='git push --force'
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-alias gclearcache='git rm -r --cached .'
-########################################  FAST  ########################################
-alias vi='vim'
-alias vi.='vim .'
-# alias c='/usr/bin/clear'
-alias c='clear && __prompt_to_bottom_line'
-alias ee='exit'
-alias code.='code . && exit'
-# alias tree='tree -CAhF --dirsfirst'
-alias cp='cp -r'
-alias rmhistory='rm ~/.bash_history'
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-######################################## OTHERS ########################################
-# Chmod
-alias 000='chmod -R 000'
-alias 644='chmod -R 644'
-alias 666='chmod -R 666'
-alias 755='chmod -R 755'
-alias 777='chmod -R 777'
-# Copy progress bar
-alias cpv='rsync -ah --info=progress2'
-alias mvv='rsync -ah --remove-source-files --info=progress2'
-# Search command line history
-alias h="history | grep --color=always"
-# Search files in the current folder
-# alias f="find . | grep --color=always"
-# Python creation d'envorinement
-alias ve='virtualenv ./.env'
-alias va='source ./.env/bin/activate || source ./env/bin/activate'
-alias vave='virtualenv ./.env && source ./.env/bin/activate'
-alias da='deactivate'
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-###########################################################################################
-######################################## FUNCTIONS ########################################
-###########################################################################################
-#rajoute la fonction extract qui unzip tout
-extract() {
-  if [ -f "$1" ]; then
-    case "$1" in
-    *.tar.bz2) tar xvjf "$1" ;;
-    *.tar.gz) tar xvzf "$1" ;;
-    *.tgz) tar xvzf "$1" ;;
-    *.tar.xz) tar xvJf "$1" ;;
-    *.bz2) bunzip2 "$1" ;;
-    *.rar) unrar x "$1" ;;
-    *.gz) gunzip "$1" ;;
-    *.tar) tar xvf "$1" ;;
-    *.tbz2) tar xvjf "$1" ;;
-    *.tgz) tar xvzf "$1" ;;
-    *.zip) unzip "$1" ;;
-    *.Z) uncompress "$1" ;;
-    *.7z) 7z x "$1" ;;
-    *.xz) unxz "$1" ;;
-    *.exe) cabextract "$1" ;;
-    *) echo "'$1': unrecognized file compression" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
   fi
-}
-
-# convert pdf to png
-pdf2png() {
-  convert -density 300 "$1" -quality 100 -background white -alpha off "$2"/"${1%.*}.png"  
-# -alpha remove  -colorspace RGB
-#convert -density 300 3_treepred.pdf -quality 100 -background white -alpha off ./tmp/test.png
-}
-
-# Searches for text in all files in the current folder
-ftext() {
-  # -i case-insensitive
-  # -I ignore binary files
-  # -H causes filename to be printed
-  # -r recursive search
-  # -n causes line number to be printed
-  # optional: -F treat search term as a literal, not a regular expression
-  # optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
-  grep -iIHrn --color=always "$1" . | less -r
-}
-
-ffile() {
-  find . | grep --color=always "$1"  
-}
-
-
-calc() {
-  printf "%s\n" "$*" | bc
-}
-
-get_max_files() {
-    du -a . | sort -n -r | head -n 20
-}
-
-jupyter_notebook_clear_output() {
-    jupyter nbconvert --clear-output --inplace "$1"
-}
-
-__prompt_to_bottom_line() {
-  tput cup $LINES
-}
+fi
 
 #######################################    My    #######################################  
 # ==================Useless=================
@@ -272,38 +198,3 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
   vim -p "${bibs[@]}"
 }
 alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
-
-# ==================starship===========
-export STARSHIP_CONFIG=~/.config/starship.toml
-HISTSIZE=1000
-PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
-eval "$(starship init bash)"
-
-######################################################################
-
-__prompt_to_bottom_line
-
-# neofetch
-
-ble
-
-
-
-
-
-# ==================notes==================
-#
-# NERD FONT FOLDER
-# /usr/local/share/fonts/
-# fc-cache -fv
-
-# add-apt-repository
-# ppa:cwchien/gradle installed from ppa
-
-# debian.sur5r.net/i3
-# i3
-
-# apt-cache policy
-# sudo add-apt-repository --remove "https://zotero.retorque.re/file/apt-package-archive"
-
-
