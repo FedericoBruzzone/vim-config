@@ -1,0 +1,44 @@
+# https://linux.how2shout.com/how-to-install-alacritty-terminal-on-ubuntu-22-04-lts/
+window:
+  padding:
+    x: 5     
+    y: 5
+  class:
+    instance: Alacritty
+    general: Alacritty
+  opacity: 0.91
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  normal:
+    family: Iosevka Nerd Font 
+    style:  Regular
+  bold:
+    family: Iosevka Nerd Font 
+    style:  Bold
+  italic:
+    family: Iosevka Nerd Font 
+    style:  Italic
+  bold_italic:
+    family: Iosevka Nerd Font 
+    style: Bold Italic
+  size: 20
+draw_bold_text_with_bright_colors: true
+
+cursor:
+  style:
+    shape: Block # Underline Beam Block
+    blinking: Off
+    blink-interval: 750
+
+# import:
+#   - ~/.config/alacritty/catppuccin-mocha.yml
+
+selection:
+  save_to_clipboard: false
+
+key_bindings:
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
