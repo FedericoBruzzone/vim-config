@@ -116,7 +116,116 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#######################################    My    #######################################  
+###################################### MY ########################################
+
+#######################################  LS    ############################################
+alias l='ls --color=always'            
+alias l.='ls -d .* --color=always'     
+alias ll='ls -lhrt --color=always'     
+alias lla='ls -lhrta --color=always'     
+alias lld='ls -lUd */ --color=always'  
+alias la='ls -a --color=always'        
+
+########################################   CD    ########################################
+alias bd='cd "$OLDPWD"' # equivalent to : cd -
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias cdd='cd ~/Documents'
+alias cdmc='cd ~/Documents/master-courses'
+
+######################################## GIT ########################################
+alias gstatus='git status -sb'
+alias glog='git log --oneline'
+alias glast='git log -1 HEAD --stat'
+alias gdiff='git diff'
+
+alias gremote='git remote -v'
+alias gbranch='git branch -va'
+alias gfetchupstream='git fetch upstream'
+alias gmergeupstream='git merge upstream/main'
+alias gfetchorigin='git fetch origin'
+alias gmergeorigin='git merge origin/main'
+alias gcheckoutmain='git checkout main'
+
+alias gpull='git pull'
+alias gadd='git add'
+alias gadda='git add --all'
+alias gcommit='git commit -s'
+alias gcommitm='git commit -sm'
+alias gpush='git push'
+alias gpushf='git push --force'
+
+alias gclearcache='git rm -r --cached .'
+
+########################################  FAST  ########################################
+alias vi='vim'
+alias vi.='vim .'
+alias c='clear'
+alias ee='exit'
+alias code.='code . && exit'
+alias cp='cp -r'
+alias rmhistory='rm ~/.bash_history'
+
+######################################## FUNCTIONS ########################################
+extract() {
+  if [ -f "$1" ]; then
+    case "$1" in
+    *.tar.bz2) tar xvjf "$1" ;;
+    *.tar.gz) tar xvzf "$1" ;;
+    *.tgz) tar xvzf "$1" ;;
+    *.tar.xz) tar xvJf "$1" ;;
+    *.bz2) bunzip2 "$1" ;;
+    *.rar) unrar x "$1" ;;
+    *.gz) gunzip "$1" ;;
+    *.tar) tar xvf "$1" ;;
+    *.tbz2) tar xvjf "$1" ;;
+    *.tgz) tar xvzf "$1" ;;
+    *.zip) unzip "$1" ;;
+    *.Z) uncompress "$1" ;;
+    *.7z) 7z x "$1" ;;
+    *.xz) unxz "$1" ;;
+    *.exe) cabextract "$1" ;;
+    *) echo "'$1': unrecognized file compression" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+pdf2png() {
+  convert -density 300 "$1" -quality 100 -background white -alpha off "$2"/"${1%.*}.png"  
+}
+
+ftext() {
+  # -i case-insensitive
+  # -I ignore binary files
+  # -H causes filename to be printed
+  # -r recursive search
+  # -n causes line number to be printed
+  # optional: -F treat search term as a literal, not a regular expression
+  # optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
+  grep -iIHrn --color=always "$1" . | less -r
+}
+
+ffile() {
+  # find . -name "*word*" 2>/dev/null
+  find . | grep --color=always "$1"  
+}
+
+open_pdf() { 
+    nohup xdg-open "$1".pdf >/dev/null 2>&1 & 
+}
+
+mkdircd() { 
+    [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; 
+}
+
+jupyter_notebook_clear_output() {
+    jupyter nbconvert --clear-output --inplace "$1"
+}
+
 # ==================Useless=================
 alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 alias gcollect="find ~ -xdev \( -type f \( -name .DS_Store -o -name .directory -o -name ._.DS_Store -o -name logfile.wget -o -name core -o -name Thumbs.db -o -name \*.bck -o -name .\*.bck -o -iname .\*.bak -o -name .\*~ -o -name \*.o -o -name \*.ilg -o -name \*.nav -o -name \*.snm -o -name \*.vrb -o -name \*.log -o -name \*.blg -o -name \*.bcf -o -name \*-blx.bib -o -name \*.run.xml -o -name \*.synctex.gz -o -name \*.aux -o -name a.out -o -name DEADJOE -o -name \*~ -o -iname \*.bak -o -name \*.crashdump -o -name erl_crash.dump -o -name \*.fls -o -name \*.fdb_latexmk -o -name %tmp%\* \) \) -exec rm -fv {} \;"
@@ -153,7 +262,6 @@ STM32_Programmer_CLI() {
 alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
 export PATH="$PATH:/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.linux64_1.0.100.202210260954/tools/bin" # /arm-none-eabi-gcc"
 
-
 # ==================xrandr===========
 alias start_second_monitor_right='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
 alias start_second_monitor_left='xrandr --output HDMI-1-0 --auto --left-of eDP-1'
@@ -169,20 +277,18 @@ brightness_m1() {
     xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
 }
 
-# ==================xdg===========
-open_pdf() { 
-    nohup xdg-open "$1".pdf >/dev/null 2>&1 & 
-}
-
 # ==================upower===========
 alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
 # ==================latex===========
+alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
 export BIBINPUTS=${HOME}/Documents/adapt-lab/bibs:.
+
 l4p() {  # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
   BIB_DIR=${BIBINPUTS%%:*}
   grep -rin"$2" -ie "$1" "$BIB_DIR"/*.bib
 }
+
 vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
   BIB_DIR=${BIBINPUTS%%:*}
   # local bibs=()
@@ -197,4 +303,9 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 
   vim -p "${bibs[@]}"
 }
-alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
+
+# ==================starship===========
+export STARSHIP_CONFIG=~/.config/starship.toml
+eval "$(starship init bash)"
+
+ble
