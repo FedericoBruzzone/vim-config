@@ -37,7 +37,7 @@ cursor:
     blink-interval: 750
 
 import:
-  - ~/.config/alacritty/jellybeans.yml
+  - ~/.config/alacritty/Gruvbox-Dark.yml
 
 selection:
   save_to_clipboard: false

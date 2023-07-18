@@ -1,5 +1,13 @@
+" Remove background color
+" hi Normal guibg=NONE ctermbg=NONE
+" highlight Normal ctermfg=NONE ctermbg=NONE
+    
 "set background=light
-"colorscheme gruvbox
+set background=dark
+set termguicolors
+colorscheme gruvbox 
+let g:gruvbox_italic=1
+highlight LineNr guibg=black
 
 " :colorscheme 256noir 
 
@@ -14,14 +22,12 @@
 
 " :colorscheme lightning
 
-":colorscheme jellybeans 
+" :colorscheme jellybeans 
 ":colorscheme solarized8
 
 " set background=dark
 " set termguicolors
 " :colorscheme iceberg
-
-" === Best ColorScheme ===
 
 " set termguicolors
 " colorscheme deep-space
@@ -54,34 +60,28 @@
 "   \   }
 "   \ }
 
-" colorscheme gotham256
 
-" Jellybeans config
-" set termguicolors
-:colorscheme jellybeans
-let g:jellybeans_use_term_italics = 1
+" ========== Jellybeans config ==========
+" NO " set termguicolors
+" colorscheme myjellybeans
+" " :colorscheme jellybeans
+" let g:jellybeans_use_term_italics = 1
 
-let g:jellybeans_overrides = {
-\    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
-\              'ctermfg': 'Black', 'ctermbg': 'Yellow',
-\              'attr': 'bold' },
-\    'Comment': { 'guifg': 'cccccc' },
-\}
 " let g:jellybeans_overrides = {
-" \    'background': { 'guibg': '000000' },
+" \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
+" \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+" \              'attr': 'bold' },
+" \    'Comment': { 'guifg': 'cccccc' },
 " \}
-let g:jellybeans_overrides = {
-\    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-\}
-if has('termguicolors') && &termguicolors
-    let g:jellybeans_overrides['background']['guibg'] = 'none'
-endif
-
-
-
-
-
-
+" " let g:jellybeans_overrides = {
+" " \    'background': { 'guibg': '000000' },
+" " \}
+" let g:jellybeans_overrides = {
+" \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+" \}
+" if has('termguicolors') "&& &termguicolors
+"     let g:jellybeans_overrides['background']['guibg'] = 'none'
+" endif
 
 
 " Returns true if the color hex value is light

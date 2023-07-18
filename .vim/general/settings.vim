@@ -13,7 +13,7 @@ set clipboard^=unnamed
 
 
 " nnoremap <Leader>ncc :highlight MyColorColumn ctermbg=red guibg=red<CR>:highlight link ColorColumn MyColorColumn<CR>:set colorcolumn-=80<CR>
-highlight ColorColumn ctermbg=red guibg=red
+" highlight ColorColumn ctermbg=red guibg=red
 nnoremap <Leader>cc :highlight ColorColumn ctermbg=red guibg=red<cr>:set colorcolumn=80 <cr> 
 nnoremap <Leader>ncc :set colorcolumn-=80<cr> 
 
@@ -56,11 +56,11 @@ endif
 :set splitbelow
 :set splitright
 
-"split navigations
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 
 " Enable folding
@@ -132,8 +132,6 @@ set ttimeoutlen=0
 " Open terminal in a new windows
 map t :tabnew<esc>:terminal ++curwin<cr>
 
-
-
 " inoremap jj <esc>
 " nnoremap <space> :
 
@@ -200,4 +198,9 @@ command Q :call QuitOrDeleteBuffer()
 " nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
 
 set! conceallevel=0
-set wrap
+
+map <leader>n :bnext<cr>
+map <leader>p :bprevious<cr>
+map <leader>d :bdelete<cr>
+inoremap <Tab> >
+inoremap <S-Tab> <

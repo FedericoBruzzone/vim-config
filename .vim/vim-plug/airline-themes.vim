@@ -18,4 +18,7 @@
 " let g:airline_theme='sierra'
 
 " let g:airline_theme='jellybeans'
-let g:airline_theme='jellybeans'
+let g:airline_theme='base16_gruvbox_dark_hard'
+" let g:airline_theme='base16_gruvbox_dark_medium'
+" let g:airline_theme='base16_gruvbox_dark_soft'
+" let g:airline_theme='base16_gruvbox_dark_pale'

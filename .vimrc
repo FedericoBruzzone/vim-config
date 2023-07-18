@@ -7,9 +7,11 @@
 
 " Change ~ with $VIM_HOME 
 
+" General settings
+source ~/.vim/general/settings.vim
+source ~/.vim/vim-plug/plugin.vim
 
 " Plugin configuration
-source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
 source ~/.vim/vim-plug/tagbar.vim
 source ~/.vim/vim-plug/coc.vim
 source ~/.vim/vim-plug/nerdtree.vim
@@ -28,13 +30,13 @@ source ~/.vim/vim-plug/indentline.vim
 source ~/.vim/vim-plug/vim-devicons.vim
 source ~/.vim/vim-plug/vim-visual-multi.vim
 source ~/.vim/vim-plug/jupyter-ascending.vim
+source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
+
+
 
 " source ~/.vim/vim-plug/vim-which-key.vim
 " source ~/.vim/vim-plug/vim-grammarous.vim
 " source $VIM_HOME/.vim/vim-plug/ale.vim
 " source $VIM_HOME/.vim/vim-plug/deoplete.vim
 
-" General settings
-source ~/.vim/general/settings.vim
-source ~/.vim/vim-plug/plugin.vim
 

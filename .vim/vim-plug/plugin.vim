@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
     Plug 'https://github.com/vim-airline/vim-airline' " Status bar
     Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
-    Plug 'https://github.com/psliwka/vim-smoothie' " Smooth scroll down
+    " Plug 'https://github.com/psliwka/vim-smoothie' " Smooth scroll down
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
     Plug 'https://github.com/chrisbra/csv.vim' " csv files 
     Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
@@ -43,7 +43,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
     Plug 'https://github.com/instant-markdown/vim-instant-markdown' " markdown Preview
     Plug 'https://github.com/untitled-ai/jupyter_ascending.vim' " jupyter preview
-    Plug 'https://github.com/makerj/vim-pdf' " view pdf 
+    " Plug 'https://github.com/makerj/vim-pdf' " view pdf 
     
     Plug 'github/copilot.vim'
     " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
