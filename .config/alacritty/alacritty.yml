@@ -6,7 +6,9 @@ window:
   class:
     instance: Alacritty
     general: Alacritty
-  opacity: 0.91
+  opacity: 1 
+
+# background_opacity: 0.1
 
 scrolling:
   history: 10000
@@ -25,7 +27,7 @@ font:
   bold_italic:
     family: Iosevka Nerd Font 
     style: Bold Italic
-  size: 20
+  size: 10 
 draw_bold_text_with_bright_colors: true
 
 cursor:
@@ -34,8 +36,8 @@ cursor:
     blinking: Off
     blink-interval: 750
 
-# import:
-#   - ~/.config/alacritty/catppuccin-mocha.yml
+import:
+  - ~/.config/alacritty/jellybeans.yml
 
 selection:
   save_to_clipboard: false

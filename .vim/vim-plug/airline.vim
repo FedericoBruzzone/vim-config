@@ -1,6 +1,6 @@
 let g:airline_extensions = ['hunks', 'branch', 'tabline']
 
-"let g:airline_theme='gruvbox'                                                                                                             
+let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts = 1                                                                                                       
 " let g:airline_section_b = '%{getcwd()}' " in section B of the status line display the CWD                                                 
 

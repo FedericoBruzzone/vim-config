@@ -18,4 +18,4 @@
 " let g:airline_theme='sierra'
 
 " let g:airline_theme='jellybeans'
-let g:airline_theme=''
+let g:airline_theme='jellybeans'
