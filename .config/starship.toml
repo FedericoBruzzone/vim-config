@@ -1,119 +1,69 @@
-format = """
-[ ](bold white)$time$hostname$kubernetes$directory$git_branch$git_commit$git_state$git_status$docker_context$package$golang$helm$java$cmake$julia$kotlin$lua$nim$nodejs$python$ruby$rust$swift$terraform$aws$gcloud$azure $battery               
-[ ❯ ](bold green)"""
+# ~/.config/starship.toml
 
-[aws]
-symbol = "  "
+# Inserts a blank line between shell prompts
+add_newline = true
 
-[buf]
-symbol = " "
+# Change command timeout from 500 to 1000 ms
+command_timeout = 1000
 
-[c]
-symbol = " "
+# Change the default prompt format
+format = """\
+[╭╴](238)$username$hostname$directory$git_branch$git_status$battery\
+$all[╰─](238)$character"""
+# 
+# Change the default prompt characters
+[character]
+success_symbol = "[](238)"
+error_symbol = "[](238)"
 
-[conda]
-symbol = " "
+# Shows an icon that should be included by zshrc script based on the distribution or os
+# [env_var.STARSHIP_DISTRO]
+# format = '[$env_value](bold yellow)'
+# variable = "STARSHIP_DISTRO"
+# disabled = false
 
-[dart]
-symbol = " "
-
-[directory]
-read_only = " "
-truncation_length = 7
-# truncation_symbol = "…/"
-truncation_symbol = ""
-
-[hostname]
-ssh_only = false
-format = '[$hostname]($style) '
-style = "blue bold"
-trim_at = "."
-disabled = false
-
+# Shows the username
 [username]
-style_user = "blue bold"
-style_root = "red bold"
+style_user = "white"
+style_root = "white"
 format = "[$user]($style) "
 disabled = false
 show_always = true
 
-[docker_context]
-symbol = " "
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold yellow) "
+disabled = false
 
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "at [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
-symbol = " "
+symbol = " "
+format = "[$symbol$branch]($style) "
+truncation_length = 12
+truncation_symbol = "…/"
+style = "purple"
 
 [git_status]
-ahead = "⇡🏎💨${count}"
-diverged = "⇕⇡😵${ahead_count}⇣${behind_count}"
-behind = "⇣😰${count}"
-conflicted = "🏳 "
-untracked = "🤷"
-stashed = "📦"
-modified = "📝"
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "purple"
+conflicted = "🏳"
+up_to_date = " "
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = " "
+modified = " "
 staged = '[++\($count\)](green)'
-renamed = "👅"
-deleted ="🗑 "
-
-[golang]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[lua]
-symbol = " "
-
-[memory_usage]
-symbol = " "
-
-[meson]
-symbol = "喝 "
-
-[nim]
-symbol = " "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[package]
-symbol = " "
-
-[python]
-symbol = " "
-
-[rlang]
-symbol = "ﳒ "
-
-[ruby]
-symbol = " "
-
-[rust]
-symbol = " "
-
-[scala]
-symbol = " "
-
-[spack]
-symbol = "🅢 "
+renamed = "襁 "
+deleted = " "
 
 [battery]
 full_symbol = "🔋"
@@ -132,8 +82,66 @@ style = "bold yellow"
 threshold = 100
 style = "bold green"
 
-[time]
-disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "" #"bg:#abf8e4"
-format = '[  $time ]($style)'
+
+[package]
+disabled = true
+
+[c]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[golang]
+disabled = true
+
+[gradle]
+disabled = true
+
+[haskell]
+disabled = true
+
+[java]
+disabled = true
+
+[lua]
+disabled = true
+
+[julia]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[nim]
+disabled = true
+
+[rust]
+disabled = true
+
+[scala]
+disabled = true
+
+[meson]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[python]
+disabled = true
+
+[rlang]
+disabled = true
+
+[ruby]
+disabled = true
+
+[spack]
+disabled = true
