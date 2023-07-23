@@ -1,5 +1,9 @@
 # Vim Config
 
+# TODO
+
+.profile -> rust and jetbrains
+
 ## How to start
 
 1. **Clone the repo to any folder**
