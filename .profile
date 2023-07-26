@@ -28,5 +28,5 @@ fi
 . "$HOME/.cargo/env"
 
 # Added by Toolbox App
-export PATH="$PATH:/home/fcb/.local/share/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/home/fcb/.local/share/JetBrains/Toolbox/scripts
 
