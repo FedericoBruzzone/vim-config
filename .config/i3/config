@@ -189,7 +189,8 @@ bar {
     # position top
     strip_workspace_numbers yes
     # font pango:Economica, FontAwesome 15
-    font pango:Iosevka Nerd Font, FontAwesome 15 
+    # font pango:Iosevka Nerd Font, FontAwesome 15 
+    font pango:PragmataProMonoLiga Nerd Font, FontAwesome 15
     separator_symbol "⋆"
     status_command i3status 
 }
