@@ -236,7 +236,7 @@ alias to_py='jupytext --set-formats ipynb,py:percent'
 alias ble='source ~/ble.sh/out/ble.sh'
 
 # ==================rust==================
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 
 # ==================dart/flutter==================
 export PATH="$PATH:/home/fcb/flutterdev/flutter/bin"
@@ -252,6 +252,11 @@ alias javaformatall="java -jar /home/fcb/Documents/master-courses/advanced-progr
 
 # ==================python==================
 export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
+
+# ==================jetbrains==================
+alias jetbrainstoolbox='nohup ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox >/dev/null 2>&1 &'
+alias intellij='nohup .local/share/JetBrains/Toolbox/apps/IDEA-C/ch-0/223.8617.56/bin/idea.sh >/dev/null 2>&1 &'
+
 
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.11.2/stm32cubeide &'
@@ -305,7 +310,7 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
 }
 
 # ==================starship===========
-export STARSHIP_CONFIG=~/.config/starship.toml
+# export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init bash)"
 
 ble
