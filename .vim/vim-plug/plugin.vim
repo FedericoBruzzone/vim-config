@@ -14,13 +14,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/chrisbra/csv.vim' " csv files 
     Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
     Plug 'https://github.com/Yggdroot/indentLine' " show indentation
-
-    " Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
-    " Plug 'https://github.com/Shougo/deoplete.nvim' " Auto completition 
-    " Plug 'https://github.com/roxma/nvim-yarp' " Used by deoplete
-    " Plug 'https://github.com/roxma/vim-hug-neovim-rpc' " Used by deoplete
-    " Plug 'https://github.com/deoplete-plugins/deoplete-jedi' " deoplete for python
-    " Plug 'https://github.com/tweekmonster/deoplete-clang2' " deoplete for clang 
+    Plug 'https://github.com/907th/vim-auto-save' " auto save
 
     Plug 'https://github.com/neoclide/coc.nvim' " Auto Completion for java and scala
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
@@ -30,7 +24,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/voldikss/vim-floaterm' "terminal 
     Plug 'https://github.com/airblade/vim-gitgutter' " git integration 
     Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
-    Plug 'https://github.com/sillybun/vim-repl' " vim repl
+    " Plug 'https://github.com/sillybun/vim-repl' " vim repl
 
     " Plug 'https://github.com/sk1418/HowMuch' " Turns vim into a calculator
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
@@ -52,6 +46,13 @@ call plug#begin('~/.vim/plugged')
     " Plug 'https://github.com/sheerun/vim-polyglot'
     " Plug 'https://github.com/SirVer/ultisnips' " It needs vim with python3 installed 
     " Plug 'https://github.com/liuchengxu/vim-which-key' "  show which key, only for binding
+    
+    " Plug 'https://github.com/dense-analysis/ale' " Error handler and linting
+    " Plug 'https://github.com/Shougo/deoplete.nvim' " Auto completition 
+    " Plug 'https://github.com/roxma/nvim-yarp' " Used by deoplete
+    " Plug 'https://github.com/roxma/vim-hug-neovim-rpc' " Used by deoplete
+    " Plug 'https://github.com/deoplete-plugins/deoplete-jedi' " deoplete for python
+    " Plug 'https://github.com/tweekmonster/deoplete-clang2' " deoplete for clang 
 call plug#end()
 
 " --- Just Some Notes ---

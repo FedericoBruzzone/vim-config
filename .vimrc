@@ -22,7 +22,6 @@ source ~/.vim/vim-plug/floaterm.vim
 source ~/.vim/vim-plug/airline.vim
 source ~/.vim/vim-plug/airline-themes.vim
 source ~/.vim/vim-plug/vimtex.vim
-source ~/.vim/vim-plug/vim-repl.vim
 source ~/.vim/vim-plug/csv-vim.vim
 source ~/.vim/vim-plug/vim-notes.vim
 source ~/.vim/vim-plug/vim-rainbow.vim
@@ -31,9 +30,10 @@ source ~/.vim/vim-plug/vim-devicons.vim
 source ~/.vim/vim-plug/vim-visual-multi.vim
 source ~/.vim/vim-plug/jupyter-ascending.vim
 source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
+source ~/.vim/vim-plug/vim-auto-save.vim
 
 
-
+" source ~/.vim/vim-plug/vim-repl.vim
 " source ~/.vim/vim-plug/vim-which-key.vim
 " source ~/.vim/vim-plug/vim-grammarous.vim
 " source $VIM_HOME/.vim/vim-plug/ale.vim
