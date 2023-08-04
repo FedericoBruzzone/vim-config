@@ -197,10 +197,13 @@ command Q :call QuitOrDeleteBuffer()
 " " nnoremap <leader>w :w<CR>
 " nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
 
+" set nohlsearch
 set! conceallevel=0
-
-map <leader>n :bnext<cr>
-map <leader>p :bprevious<cr>
-map <leader>d :bdelete<cr>
+nnoremap <ESC>u :nohlsearch<CR>
 inoremap <Tab> >
 inoremap <S-Tab> <
+
+" map <leader>n :bnext<cr>
+" map <leader>p :bprevious<cr>
+" map <leader>d :bdelete<cr>
+
