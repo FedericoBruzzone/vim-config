@@ -19,5 +19,14 @@
   },
   "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
   "pyright.inlayHints.functionReturnTypes": false,
-  "pyright.inlayHints.variableTypes": false
+  "pyright.inlayHints.variableTypes": false,
+  "floatFactory.floatConfig": {
+      "border": true,
+      "rounded": true,
+      "highlight": "FloatBorder",
+      "title": "",
+      "borderhighlight": "FloatBorder",
+      "close": true
+  }
 }
+
