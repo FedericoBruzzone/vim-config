@@ -37,9 +37,10 @@ let g:coc_global_extensions = [
   \ 'coc-metals', 
   \ 'coc-vimtex',
   \ 'coc-protobuf',
-  \ 'coc-python',
   \ 'coc-clangd',
+  \ 'coc-pyright',
   \ ]
+  " \ 'coc-python',
   " \ 'coc-explorer',
 
 " utf-8 byte sequence
