@@ -208,3 +208,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " My
 autocmd FileType c setl omnifunc=coc#on_coc_completion
 autocmd FileType h setl omnifunc=coc#on_coc_completion
+
+" let coc_user_config = {}
+" let g:coc_user_config['coc.preferences.jumpCommand'] = 'split' | 'vsplit' | 'tabe' | 'tab drop'
