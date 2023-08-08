@@ -8,16 +8,23 @@
 $ git clone https://github.com/FedericoBruzzone/vim-config.git
 ```
 
+<!--
 2. **Add in your .bashrc**
 
 ```bash
 export VIM_HOME=<The path where you cloned the repo>/vim-config
 ```
+-->
 
-3. **Replace your .vimrc**    
+2. **Replace your .vimrc**    
 
 ```bash
 $ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
+```
+
+3. **Replace your .vim folder**
+```bash
+$ cp -r <The path where you cloned the repo>/.config/.vim ~/home/<username>/.config/.vim
 ```
 
 4. **Open vim**
@@ -50,7 +57,8 @@ $ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
 |`i`               |_NERDTree_                   |open file in orizontal mode             |
 |`s`               |_NERDTree_                   |open file in vertical mode              |
 |`t`               |_NERDTree_                   |open file in a new tab                  |
-|:T                |_Normal_                     |open NERDTree in a current directory    |
+|`<CTRL>` + `t`    |_Visual_                     |open `:NERDTreeToggle`                  |
+|`<CTRL>` + `a`    |_Visual_                     |open `:NERDTreeFiles`                   |
 
 ### Tag bar
 
@@ -76,7 +84,10 @@ $ cp <The path where you cloned the repo>/.vimrc ~/home/<username>
 |`<CTRL>` + `t`    |_File mode_                  |open file in new tab                    |
 |`<CTRL>` + `v`    |_File mode_                  |open file in vertical split             |
 |`<CTRL>` + `x`    |_File mode_                  |open file in horizontal split           |
-|:F                |_Normal_                     |open fzf in the current directory       |
+|`<CTRL>` + `f`    |_Visual_                     |open `:Files`                           |
+|`<CTRL>` + `g`    |_Visual_                     |open `:GFiles`                          |
+|`<CTRL>` + `b`    |_Visual_                     |open `:Buffers`                         |
+|`<CTRL>` + `w`    |_Visual_                     |open `:Windows`                         |
 
 ### Vim-Repl 
 
