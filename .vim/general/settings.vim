@@ -87,10 +87,10 @@ filetype indent on
 syntax on
 
 " Highlight cursor line underneath the cursor horizontally.
-set cursorline
+" set cursorline
 
 " Highlight cursor line underneath the cursor vertically.
-set cursorcolumn
+" set cursorcolumn
 
 " Do not save backup files.
 set nobackup
@@ -206,3 +206,5 @@ inoremap <S-Tab> <
 " map <leader>n :bnext<cr>
 " map <leader>p :bprevious<cr>
 " map <leader>d :bdelete<cr>
+
+set noro

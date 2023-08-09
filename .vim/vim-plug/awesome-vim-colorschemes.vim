@@ -1,71 +1,46 @@
 " Remove background color
 " hi Normal guibg=NONE ctermbg=NONE
 " highlight Normal ctermfg=NONE ctermbg=NONE
-    
-"set background=light
+
+" ===== deep-space =====
 set background=dark
 set termguicolors
-colorscheme gruvbox 
-let g:gruvbox_italic=1
-highlight LineNr guibg=black
+colorscheme deep-space
+let g:deepspace_italics=1
+let g:airline_theme='deep_space'
 
-" :colorscheme 256noir 
+" ===== Nord =====
+" set termguicolors
+" colorscheme nord
+" let g:nord_cursor_line_number_background = 1
+" let g:nord_uniform_status_lines = 1
+" let g:nord_bold_vertical_split_line = 1
+" let g:nord_uniform_diff_background = 1
+" let g:nord_bold = 1 
+" let g:nord_italic = 1
+" let g:nord_italic_comments = 1
+" let g:nord_underline = 1
+" let g:airline_theme='nord'
 
-"set background=dark "light
-":colorscheme PaperColor
-
-" :colorscheme abstract
-
-" set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
-" :colorscheme ayu
-
-" :colorscheme lightning
-
-" :colorscheme jellybeans 
-":colorscheme solarized8
-
+" ===== gruvbox =====
+" set background=light
 " set background=dark
 " set termguicolors
-" :colorscheme iceberg
+" colorscheme gruvbox 
+" let g:gruvbox_italic=1
+" highlight LineNr guibg=black
 
-" set termguicolors
-" colorscheme deep-space
-
-" set termguicolors
-" colorscheme jellybeans
-
-" set termguicolors
-" set background=dark
-" colorscheme gruvbox
-"let g:gruvbox_italic=1
-
-" set termguicolors
-" colorscheme challenger_deep
-
-" let g:sierra_Pitch = 1
-" colorscheme sierra
-
-" set t_Co=256   " This is may or may not needed.
-" set background=dark
-" colorscheme PaperColor
-" let g:PaperColor_Theme_Options = {
-"   \   'theme': {
-"   \     'default.dark': {
-"   \       'override' : {
-"   \         'color00' : ['#080808', '232'],
-"   \         'linenumber_bg' : ['#080808', '232']
-"   \       }
-"   \     }
-"   \   }
-"   \ }
-
+" let g:airline_theme='base16_gruvbox_dark_hard'
+" let g:airline_theme='base16_gruvbox_dark_medium'
+" let g:airline_theme='base16_gruvbox_dark_soft'
+" let g:airline_theme='base16_gruvbox_dark_pale'
 
 " ========== Jellybeans config ==========
 " NO " set termguicolors
-" colorscheme myjellybeans
-" " :colorscheme jellybeans
+" NO " colorscheme myjellybeans
+" colorscheme jellybeans
 " let g:jellybeans_use_term_italics = 1
+" let g:airline_theme='jellybeans'
 
 " let g:jellybeans_overrides = {
 " \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
@@ -73,26 +48,21 @@ highlight LineNr guibg=black
 " \              'attr': 'bold' },
 " \    'Comment': { 'guifg': 'cccccc' },
 " \}
-" " let g:jellybeans_overrides = {
-" " \    'background': { 'guibg': '000000' },
-" " \}
+
+" let g:jellybeans_overrides = {
+" \    'background': { 'guibg': '000000' },
+" \}
 " let g:jellybeans_overrides = {
 " \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
 " \}
-" if has('termguicolors') "&& &termguicolors
+" if has('termguicolors') && &termguicolors
 "     let g:jellybeans_overrides['background']['guibg'] = 'none'
 " endif
+" let g:jellybeans_overrides = {
+" \    'MatchParen': { 'guifg': 'ffffff', 'guibg': '556779' },
+" \}
+" let g:jellybeans_overrides = {
+" \    'MatchParen': { 'guifg': 'dd0093', 'guibg': '000000',
+" \                    'ctermfg': 'Magenta', 'ctermbg': '' },
+" \}
 
-
-" Returns true if the color hex value is light
-" function! IsHexColorLight(color) abort
-"   let l:raw_color = trim(a:color, '#')
-
-"   let l:red = str2nr(substitute(l:raw_color, '(.{2}).{4}', '1', 'g'), 16)
-"   let l:green = str2nr(substitute(l:raw_color, '.{2}(.{2}).{2}', '1', 'g'), 16)
-"   let l:blue = str2nr(substitute(l:raw_color, '.{4}(.{2})', '1', 'g'), 16)
-
-"   let l:brightness = ((l:red * 299) + (l:green * 587) + (l:blue * 114)) / 1000
-
-"   return l:brightness > 155
-" endfunction

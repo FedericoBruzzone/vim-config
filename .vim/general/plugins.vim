@@ -55,5 +55,3 @@ call plug#begin('~/.vim/plugged')
     " Plug 'https://github.com/tweekmonster/deoplete-clang2' " deoplete for clang 
 call plug#end()
 
-" --- Just Some Notes ---
-" :PlugClean :PlugInstall :UpdateRemotePlugins

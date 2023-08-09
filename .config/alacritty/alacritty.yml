@@ -1,18 +1,21 @@
 # https://linux.how2shout.com/how-to-install-alacritty-terminal-on-ubuntu-22-04-lts/
 window:
   padding:
-    x: 5     
-    y: 5
+    # x: 5     
+    # y: 5 
+    x: 0     
+    y: 0 
   class:
     instance: Alacritty
     general: Alacritty
   opacity: 1 
+  dynamic_title: true
 
 # background_opacity: 0.1
 
 scrolling:
   history: 10000
-  multiplier: 3
+  multiplier: 3 
 
 font:
   normal:
@@ -40,11 +43,14 @@ cursor:
     blinking: Off
     blink-interval: 750
 
-import:
-  - ~/.config/alacritty/Gruvbox-Dark.yml
-
 selection:
-  save_to_clipboard: false
+  save_to_clipboard: true 
 
 key_bindings:
   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+
+# import:
+#   - ~/.config/alacritty/Gruvbox-Dark.yml
+import:
+  - ~/.config/alacritty/deep-space.yaml
+

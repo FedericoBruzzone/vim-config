@@ -2,7 +2,11 @@
 	email = federico.bruzzone.i@gmail.com
 	name = FedericoBruzzone
 [alias]
-	clone-branches = "! git branch -a | sed -n \"/\\/HEAD /d; /\\/master$/d; /remotes/p;\" | xargs -L1 git checkout -t"
+	clone-branches = "! git branch -a | sed -n \"/\\/HEAD /d; /\\/main$/d; /remotes/p;\" | xargs -L1 git checkout -t"
 	graph = "! git log --all --decorate --oneline --graph"
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
 [init]
 	defaultBranch = main
