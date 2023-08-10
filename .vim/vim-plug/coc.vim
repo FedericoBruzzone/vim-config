@@ -23,6 +23,7 @@
 " sudo apt-get install bear
 " bear -- make
 
+
 autocmd BufNew,BufEnter *.java,*.aj,*.scala execute "silent! CocEnable"
 autocmd BufLeave *.java,*.aj,*.scala execute "silent! CocDisable"
 
@@ -208,6 +209,10 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " My
 autocmd FileType c setl omnifunc=coc#on_coc_completion
 autocmd FileType h setl omnifunc=coc#on_coc_completion
+
+" let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+set rtp^="/home/fcb/.opam/4.14.0/share/ocp-indent/vim
 
 " let coc_user_config = {}
 " let g:coc_user_config['coc.preferences.jumpCommand'] = 'split' | 'vsplit' | 'tabe' | 'tab drop'
