@@ -28,5 +28,7 @@ fi
 . "$HOME/.cargo/env"
 
 # Added by Toolbox App
-export PATH="$PATH:/home/fcb/.local/share/JetBrains/Toolbox/scripts
+export PATH="$PATH:/home/fcb/.local/share/JetBrains/Toolbox/scripts"
 
+# opam configuration
+test -r /home/fcb/.opam/opam-init/init.sh && . /home/fcb/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
