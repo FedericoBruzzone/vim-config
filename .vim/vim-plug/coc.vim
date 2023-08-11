@@ -212,7 +212,7 @@ autocmd FileType h setl omnifunc=coc#on_coc_completion
 
 " let g:opamshare = substitute(system('opam var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
-set rtp^="/home/fcb/.opam/4.14.0/share/ocp-indent/vim
+" set rtp^="/home/fcb/.opam/4.14.0/share/ocp-indent/vim
 
 " let coc_user_config = {}
 " let g:coc_user_config['coc.preferences.jumpCommand'] = 'split' | 'vsplit' | 'tabe' | 'tab drop'
