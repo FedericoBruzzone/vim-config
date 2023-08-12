@@ -2,6 +2,7 @@
 " hi Normal guibg=NONE ctermbg=NONE
 " highlight Normal ctermfg=NONE ctermbg=NONE
 
+
 " ===== deep-space =====
 set background=dark
 set termguicolors

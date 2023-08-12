@@ -12,9 +12,9 @@ source ~/.vim/general/settings.vim
 source ~/.vim/general/plugins.vim
 
 " " Plugin configuration
-source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
 source ~/.vim/vim-plug/vim-devicons.vim
-source ~/.vim/vim-plug/airline.vim
+source ~/.vim/vim-plug/rose-pine.vim
+source ~/.vim/vim-plug/lightline.vim
 
 source ~/.vim/vim-plug/commentary.vim
 source ~/.vim/vim-plug/vim-visual-multi.vim
@@ -32,6 +32,9 @@ source ~/.vim/vim-plug/vimtex.vim
 
 source ~/.vim/vim-plug/vim-notes.vim
 
+
+" source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
+" source ~/.vim/vim-plug/airline.vim
 " source ~/.vim/vim-plug/vim-rainbow.vim
 " source ~/.vim/vim-plug/indentline.vim
 " source ~/.vim/vim-plug/csv-vim.vim

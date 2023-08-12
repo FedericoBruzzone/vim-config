@@ -2,12 +2,12 @@
 
 call plug#begin('~/.vim/plugged')
     " Aspects of the editor
-    Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Color font Retro Scheme
+    Plug 'https://github.com/rose-pine/vim'
+    Plug 'https://github.com/itchyny/lightline.vim' " Status bar
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
-    Plug 'https://github.com/vim-airline/vim-airline' " Status bar
-    Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
 
+    
     " Shortcuts  
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
     Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
@@ -37,6 +37,10 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " Aspects of the editor
+" Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Color font Retro Scheme
+" Plug 'https://github.com/vim-airline/vim-airline' " Status bar
+" Plug 'https://github.com/vim-airline/vim-airline-themes' " Status bar themes
+"
 " Plug 'https://github.com/Yggdroot/indentLine' " show indentation
 " Plug 'https://github.com/frazrepo/vim-rainbow' " color brackets
 " Plug 'https://github.com/psliwka/vim-smoothie' " Smooth scroll down
