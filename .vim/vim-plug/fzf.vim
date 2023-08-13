@@ -21,4 +21,12 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
+" Define a function to find the project root
+function! FindProjectRoot()
+    let current_dir = expand('%:p:h')
+    let root_dir = finddir('.git', current_dir.';')
+    return root_dir != '' ? root_dir : current_dir
+endfunction
 
+" Set the initial directory for fzf.vim to the project root
+let g:fzf_initial_directory = FindProjectRoot()

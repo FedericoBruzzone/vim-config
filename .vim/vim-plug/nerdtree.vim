@@ -6,7 +6,7 @@ nnoremap <F3> :NERDTreeToggle<cr> "%<cr>
 
 nnoremap <C-t> :NERDTreeToggle<cr> "%<cr>
 nnoremap <C-a> :NERDTreeFind<cr> "%<cr>
-
+let g:NERDTreeHijackNetrw=0
 
 
 

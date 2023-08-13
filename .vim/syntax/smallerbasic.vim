@@ -16,8 +16,8 @@ syn keyword smallerbasicOperator = < > >= <= <> + - * /
 syn keyword smallerbasicConstant true false 
 
 " Comments
-syn region smallerbasicComment start="/\*" end="\*/" contains=smallerbasicTodo,@Spell
-syn match smallerbasicComment "//.*$" contains=smallerbasicTodo,@Spell
+syn match smallerbasicComment "'.*$" contains=smallerbasicTodo,@Spell
+syn region smallerbasicComment start="'\*" end="\*'" contains=smallerbasicTodo,@Spell
 
 " Labels
 syn match smallerbasicLabel /^\s*\w\+\s*:/ contains=smallerbasicTodo,@Spell
