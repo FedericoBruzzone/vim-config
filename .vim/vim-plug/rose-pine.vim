@@ -1,4 +1,5 @@
 " ===== rose-pine =====
+set termguicolors
 set background=dark
 colorscheme rosepine
 
