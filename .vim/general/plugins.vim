@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/907th/vim-auto-save' " auto save
 
     " Plug
+    Plug 'https://github.com/sheerun/vim-polyglot' " Syntax Highlighting
     Plug 'https://github.com/neoclide/coc.nvim' " Auto Completion 
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
     Plug 'https://github.com/preservim/nerdtree' " Nerd Tree  
