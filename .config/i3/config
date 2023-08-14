@@ -215,21 +215,21 @@ bindsym $mod+n exec nautilus
 bindsym $mod+z exec discord
 
 ## Screenshots
-bindsym Print exec --no-startup-id maim "/home/fcb/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/fcb/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/fcb/Pictures/$(date)"
+bindsym Print exec --no-startup-id maim "/home/fcb/Pictures/$(date).png"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/fcb/Pictures/$(date).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/fcb/Pictures/$(date).png"
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 
 # Border
 default_border pixel 2 
 default_floating_border pixel 2
 # default_border none 
 # default_floating_border none 
-gaps inner 10
+gaps inner 0
 
 client.focused          #00FF00 #00FF00 #ffffff #00FF00 #00FF00
 client.unfocused        #FF8800 #FF8800 #ffffff #FF8800 #FF8800 
