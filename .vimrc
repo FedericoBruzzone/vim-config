@@ -24,15 +24,15 @@ source ~/.vim/vim-plug/coc.vim
 source ~/.vim/vim-plug/tagbar.vim
 source ~/.vim/vim-plug/nerdtree.vim
 source ~/.vim/vim-plug/fzf.vim
-source ~/.vim/vim-plug/floaterm.vim
 
 source ~/.vim/vim-plug/vim-instant-markdown.vim
-source ~/.vim/vim-plug/jupyter-ascending.vim
 source ~/.vim/vim-plug/vimtex.vim
 
 source ~/.vim/vim-plug/vim-notes.vim
 
 
+" source ~/.vim/vim-plug/floaterm.vim
+" source ~/.vim/vim-plug/jupyter-ascending.vim
 " source ~/.vim/vim-plug/awesome-vim-colorschemes.vim
 " source ~/.vim/vim-plug/airline.vim
 " source ~/.vim/vim-plug/vim-rainbow.vim

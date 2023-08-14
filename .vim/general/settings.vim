@@ -4,19 +4,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set guifont=Iosevka\ Nerd\ Font\ Mono
-
-set clipboard^=unnamedplus
-set clipboard^=unnamed
-" set guicursor=
-" :set paste
-
-
-" nnoremap <Leader>ncc :highlight MyColorColumn ctermbg=red guibg=red<CR>:highlight link ColorColumn MyColorColumn<CR>:set colorcolumn-=80<CR>
-" highlight ColorColumn ctermbg=red guibg=red
-nnoremap <Leader>cc :highlight ColorColumn ctermbg=red guibg=red<cr>:set colorcolumn=80 <cr> 
-nnoremap <Leader>ncc :set colorcolumn-=80<cr> 
-
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
   au InsertEnter,InsertChange *
@@ -28,48 +15,47 @@ if has("autocmd")
 au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
-"set statusline=%t 
-" set statusline=0 
-" set guitablabel=0
+" set number
+set number
 
-:set number
-:set relativenumber
-:set autoindent
-:set tabstop=4
-:set shiftwidth=4
-:set expandtab
-:set smarttab
-:set softtabstop=4
+" set relativenumber
+set relativenumber
 
-:set mouse=a
-:set go+=a
+" set autoindent
+set autoindent
 
-:set encoding=utf-8
+" Tab settings
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+set softtabstop=4
 
-:set showtabline=2
-:set laststatus=2
+" Mouse settings
+set mouse=a
+set go+=a
 
-""""""""""""""""""""
+" Encoding settings
+set encoding=utf-8
 
-:set backspace=indent,eol,start
+" Show tabline
+set showtabline=2
 
-:set splitbelow
-:set splitright
+" Show statusline
+set laststatus=2
 
-" split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
+" Backspace
+set backspace=indent,eol,start
 
 " Enable folding
-:set foldmethod=indent
-:set foldlevel=99
+set foldmethod=indent
+set foldlevel=99
 " Enable folding with the spacebar
 " nnoremap <space> za
 
-""""""""""""""""""""
+" Split window below and to the right.
+set splitbelow
+set splitright
 
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
@@ -129,82 +115,125 @@ set timeoutlen=500
 
 set ttimeoutlen=0
 
-" Open terminal in a new windows
-map t :tabnew<esc>:terminal ++curwin<cr>
+" Set not read only 
+set noro
 
-" inoremap jj <esc>
-" nnoremap <space> :
+" Some servers coc have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
+
+" Set guifont
+set guifont=PragmataProMonoLiga\ Nerd\ Font
+
+" ================================ Additional Settings ================================
+" set clipboard^=unnamedplus
+" set clipboard^=unnamed
+
+" ===== REMAP =====
+" Remap <leader> to space
+let g:mapleader = "\<Space>"
+
+" Set C-c to exit insert mode
+inoremap <C-c> <Esc>
+
+" Set <leader>pv to Ex
+nnoremap <leader>pv :Ex<CR>
+
+" It will delete the selected text and paste the deleted text above the current line.
+xnoremap <leader>p "_dP
+
+" Copy to clipboard
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+vnoremap <leader>y "+y
+vnoremap <leader>Y "+Y
 
 " Move line/lines
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+" vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" nmap <S-j> mz:m+<cr>`z
+" nmap <S-k> mz:m-2<cr>`z
+nnoremap <S-j> :m .+1<CR>==
+nnoremap <S-k> :m .-2<CR>==
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
+" inoremap <S-j> <Esc>:m .+1<CR>==gi
+" inoremap <S-k> <Esc>:m .-2<CR>==gi
+
+" Search pattern and replace
+nnoremap <leader>s :%s/\<<C-r>=expand('<cword>')<CR>\>//gI<Left><Left><Left>
 
 " Map Ctrl-Backspace to delete the previous word in insert mode.
-noremap! <C-BS> <C-w>
-noremap! <C-h> <C-w>
+inoremap <C-BS> <C-u>
+inoremap <C-h> <C-w>
 
+" C-j and C-k skips a paragraph and word
+nnoremap <C-j> }
+nnoremap <C-k> {
+vnoremap <C-j> }
+vnoremap <C-k> {
+inoremap <C-j> <C-\><C-n>}a
+inoremap <C-k> <C-\><C-n>{a
+
+"let C-l and C-h skips a word
+nnoremap <C-l> e
+nnoremap <C-h> b
+vnoremap <C-l> e 
+vnoremap <C-h> b
+
+" CTRL-left/right skips a word
+nnoremap <C-Right> e
+nnoremap <C-Left> b
+vnoremap <C-Right> e
+vnoremap <C-Left> b
+
+" CTRL-down/oup skips a paragraph and word
+nnoremap <C-UP> {
+nnoremap <C-DOWN> }
+vnoremap <C-UP> {
+vnoremap <C-DOWN> }
+inoremap <C-DOWN> <C-\><C-n>}a
+inoremap <C-UP> <C-\><C-n>{a
+
+" Set color column
+" nnoremap <Leader>sc :highlight ColorColumn ctermbg=red guibg=red<cr>:set colorcolumn=80 <cr> 
+nnoremap <leader>sc :set colorcolumn+=80<cr>
+nnoremap <leader>nsc :set colorcolumn-=80<cr>
+
+" Make this file exetuable
+nnoremap <leader>xx :!chmod +x %<CR>
+
+nnoremap <ESC>u :nohlsearch<CR>
+
+set! conceallevel=0
+
+" Open terminal in a new windows
+" map t :tabnew<esc>:terminal ++curwin<cr>
 " Resize split windows using arrow keys by pressing:
 " CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
-"nnoremap <C-UP> <c-w>+
-"nnoremap <C-DOWN> <c-w>-
-nnoremap <S-LEFT> <c-w><
-nnoremap <S-RIGHT> <c-w>>
-
-" CTRL-down/up skips a paragraph and word
-:nmap <C-UP> {
-:nmap <C-DOWN> }
-":nmap <C-RIGHT> :normal! w<CR>
-":nmap <C-LEFT> :normal! b<CR>
-
-" :imap <C-DOWN> <Esc>}
-" :imap <C-UP> <Esc>{
-:imap <C-DOWN> <C-\><C-n>}a
-:imap <C-UP> <C-\><C-n>{a
-
-:vmap <C-UP> {
-:vmap <C-DOWN> }
-
-" nnoremap <silent> p :set paste<CR>"0p:set nopaste<CR>
-
-
-" from insert to normal mode cursor in the same position
-" :set virtualedit=onemore
-" :inoremap <Esc> <Esc>`^
-
-noremap <C-Right> e
-" inoremap <C-Right> <Esc>e
-" inoremap <C-Right> <Esc>ea
-" inoremap <C-Right> <C-\><C-n>ea
-vnoremap <C-Right> e
-
-" autocmd TextChanged,TextChangedI * silent write
-
-function! QuitOrDeleteBuffer()
-  if !(bufnr('$') == bufnr(''))
-    quit
-  else
-    bd
-  endif
-endfunction
-
-command Q :call QuitOrDeleteBuffer()
-
-" inoremap <leader>w <esc>:w<CR>
-" inoremap <leader>q <esc>:call QuitOrDeleteBuffer()<CR>
-" map <leader>w :w<CR>
-" " nnoremap <leader>w :w<CR>
-" nnoremap <leader>q :call QuitOrDeleteBuffer()<CR>
-
-" set nohlsearch
-set! conceallevel=0
-nnoremap <ESC>u :nohlsearch<CR>
-inoremap <Tab> >
-inoremap <S-Tab> <
+" nnoremap <C-UP> <c-w>+
+" nnoremap <C-DOWN> <c-w>-
+" nnoremap <S-LEFT> <c-w><
+" nnoremap <S-RIGHT> <c-w>>
 
 " map <leader>n :bnext<cr>
 " map <leader>p :bprevious<cr>
 " map <leader>d :bdelete<cr>
 
-set noro
+" function! QuitOrDeleteBuffer()
+"   if !(bufnr('$') == bufnr(''))
+"     quit
+"   else
+"     bd
+"   endif
+" endfunction
+
+" command Q :call QuitOrDeleteBuffer()

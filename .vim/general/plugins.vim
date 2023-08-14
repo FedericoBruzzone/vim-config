@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/itchyny/lightline.vim' " Status bar
     Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
     Plug 'https://github.com/junegunn/goyo.vim' " Goyo for distraction free writing
-
     
     " Shortcuts  
     Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw) or yss)
@@ -16,22 +15,20 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/907th/vim-auto-save' " auto save
 
     " Plug
-    Plug 'https://github.com/neoclide/coc.nvim' " Auto Completion for java and scala
+    Plug 'https://github.com/neoclide/coc.nvim' " Auto Completion 
     Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
     Plug 'https://github.com/preservim/nerdtree' " Nerd Tree  
     Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'https://github.com/junegunn/fzf.vim' " File manager
-    Plug 'https://github.com/voldikss/vim-floaterm' "terminal 
     Plug 'https://github.com/airblade/vim-gitgutter' " git integration 
 
     " Preview
     Plug 'https://github.com/lervag/vimtex' " latex plug in => update to latex-suite
     Plug 'https://github.com/instant-markdown/vim-instant-markdown' " markdown Preview
-    Plug 'https://github.com/untitled-ai/jupyter_ascending.vim' " jupyter preview
 
     " Used with vim-notes
-    Plug 'https://github.com/xolox/vim-misc'
     Plug 'https://github.com/xolox/vim-notes'
+    Plug 'https://github.com/xolox/vim-misc'
     
     Plug 'github/copilot.vim'
 call plug#end()
@@ -52,8 +49,13 @@ call plug#end()
 " Plug 'https://github.com/rhysd/vim-grammarous' " grammar checker
     
 " Plug
+" Plug 'https://github.com/voldikss/vim-floaterm' "terminal 
 " Plug 'https://github.com/tpope/vim-fugitive' " git integration 2
 " Plug 'https://github.com/sillybun/vim-repl' " vim repl
+
+" Preview
+" Plug 'https://github.com/untitled-ai/jupyter_ascending.vim' " jupyter preview
+
 
 " ===== NEVER USED =====
 " Plug 'https://github.com/KabbAmine/zeavim.vim' " Open zeal
