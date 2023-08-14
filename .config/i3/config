@@ -231,10 +231,11 @@ default_floating_border pixel 2
 # default_floating_border none 
 gaps inner 0
 
-client.focused          #00FF00 #00FF00 #ffffff #00FF00 #00FF00
-client.unfocused        #FF8800 #FF8800 #ffffff #FF8800 #FF8800 
-client.focused_inactive #FFFF00 #FFFF00 #ffffff #FFFF00 #FFFF00
-client.urgent           #FF0000 #FF0000 #ffffff #FF0000 #FF0000
+client.focused          #00FF00 #00FF00 #000000 #00FF00 #00FF00
+client.unfocused        #FF8800 #FF8800 #000000 #FF8800 #FF8800 
+client.focused_inactive #FFFF00 #FFFF00 #000000 #FFFF00 #FFFF00
+client.urgent           #FF0000 #FF0000 #000000 #FF0000 #FF0000
+
 
 # Compton
 # exec --no-startup-id compton 
