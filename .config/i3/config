@@ -193,6 +193,7 @@ bar {
     font pango:PragmataProMonoLiga Nerd Font, FontAwesome 15
     separator_symbol "⋆"
     status_command i3status 
+    i3bar_command i3bar -t
 }
 
 # Polybar
@@ -229,13 +230,15 @@ default_border pixel 2
 default_floating_border pixel 2
 # default_border none 
 # default_floating_border none 
-gaps inner 0
+gaps inner 7 
 
 client.focused          #00FF00 #00FF00 #000000 #00FF00 #00FF00
 client.unfocused        #FF8800 #FF8800 #000000 #FF8800 #FF8800 
 client.focused_inactive #FFFF00 #FFFF00 #000000 #FFFF00 #FFFF00
 client.urgent           #FF0000 #FF0000 #000000 #FF0000 #FF0000
 
-
 # Compton
 # exec --no-startup-id compton 
+
+# Picom
+exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf &
