@@ -19,11 +19,11 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
 " command! -bang -nargs=? -complete=dir F call fzf#vim#files(<q-args>, fzf#vim#with_preview({'dir': expand('%:p:h')}))
 
-nnoremap <leader>pf :Files<Cr>
-nnoremap <leader>pg :GFiles<Cr>
-nnoremap <leader>pb :Buffers<Cr>
-nnoremap <leader>pw :Windows<Cr>
-nnoremap <leader>ps :Lines<Cr>
+nnoremap <leader>f :Files<Cr>
+nnoremap <leader>g :GFiles<Cr>
+nnoremap <leader>b :Buffers<Cr>
+nnoremap <leader>w :Windows<Cr>
+nnoremap <leader>s :Lines<Cr>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)

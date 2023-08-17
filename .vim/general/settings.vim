@@ -157,16 +157,25 @@ vnoremap <leader>y "+y
 vnoremap <leader>Y "+Y
 
 " Move line/lines
+" ===== old =====
 " vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 " vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " nmap <S-j> mz:m+<cr>`z
 " nmap <S-k> mz:m-2<cr>`z
-nnoremap <S-j> :m .+1<CR>==
-nnoremap <S-k> :m .-2<CR>==
+" ===============
 vnoremap <S-j> :m '>+1<CR>gv=gv
 vnoremap <S-k> :m '<-2<CR>gv=gv
+" nnoremap <S-j> :m .+1<CR>==
+" nnoremap <S-k> :m .-2<CR>==
 " inoremap <S-j> <Esc>:m .+1<CR>==gi
 " inoremap <S-k> <Esc>:m .-2<CR>==gi
+
+" Line join
+nnoremap <S-j> mzJ`z 
+
+" C-d and C-u central cursor
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 " Search pattern and replace
 nnoremap <leader>s :%s/\<<C-r>=expand('<cword>')<CR>\>//gI<Left><Left><Left>
