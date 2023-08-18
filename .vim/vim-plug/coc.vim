@@ -156,6 +156,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 autocmd FileType c setl omnifunc=coc#on_coc_completion
 autocmd FileType h setl omnifunc=coc#on_coc_completion
 
+" autocmd FileType ocaml setl omnifunc=coc#on_coc_completion
+" set omnifunc=syntaxcomplete#Complete
+" let g:syntastic_ocaml_checkers = ['merlin']
+
 " let g:opamshare = substitute(system('opam var share'),'\n$','','''')
 " execute "set rtp+=" . g:opamshare . "/merlin/vim"
 " set rtp^="/home/fcb/.opam/4.14.0/share/ocp-indent/vim
