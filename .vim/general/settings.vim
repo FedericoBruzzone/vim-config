@@ -178,7 +178,7 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
 " Search pattern and replace
-nnoremap <leader>s :%s/\<<C-r>=expand('<cword>')<CR>\>//gI<Left><Left><Left>
+nnoremap <leader>ss :%s/\<<C-r>=expand('<cword>')<CR>\>//gI<Left><Left><Left>
 
 " Map Ctrl-Backspace to delete the previous word in insert mode.
 inoremap <C-BS> <C-u>
