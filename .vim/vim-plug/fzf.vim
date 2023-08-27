@@ -19,16 +19,16 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
 " command! -bang -nargs=? -complete=dir F call fzf#vim#files(<q-args>, fzf#vim#with_preview({'dir': expand('%:p:h')}))
 
-nnoremap <leader>f :Files<Cr>
-nnoremap <leader>g :GFiles<Cr>
-nnoremap <leader>b :Buffers<Cr>
-nnoremap <leader>w :Windows<Cr>
-nnoremap <leader>s :Lines<Cr>
+nnoremap <leader>ff :Files<Cr>
+nnoremap <leader>fg :GFiles<Cr>
+nnoremap <leader>fb :Buffers<Cr>
+nnoremap <leader>lg :Lines<Cr>
+" nnoremap <leader>w :Windows<Cr>
 
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+nmap <leader>fh <plug>(fzf-maps-n)
+xmap <leader>fh <plug>(fzf-maps-x)
+omap <leader>fh <plug>(fzf-maps-o)
 
 " Define a function to find the project root
 function! FindProjectRoot()
