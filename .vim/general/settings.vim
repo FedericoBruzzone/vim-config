@@ -185,18 +185,18 @@ inoremap <C-BS> <C-u>
 inoremap <C-h> <C-w>
 
 " C-j and C-k skips a paragraph and word
-nnoremap <C-j> }
-nnoremap <C-k> {
-vnoremap <C-j> }
-vnoremap <C-k> {
-inoremap <C-j> <C-\><C-n>}a
-inoremap <C-k> <C-\><C-n>{a
+" nnoremap <C-j> }
+" nnoremap <C-k> {
+" vnoremap <C-j> }
+" vnoremap <C-k> {
+" inoremap <C-j> <C-\><C-n>}a
+" inoremap <C-k> <C-\><C-n>{a
 
 "let C-l and C-h skips a word
-nnoremap <C-l> e
-nnoremap <C-h> b
-vnoremap <C-l> e 
-vnoremap <C-h> b
+" nnoremap <C-l> e
+" nnoremap <C-h> b
+" vnoremap <C-l> e 
+" vnoremap <C-h> b
 
 " CTRL-left/right skips a word
 nnoremap <C-Right> e
