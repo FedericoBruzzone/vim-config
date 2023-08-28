@@ -119,12 +119,12 @@ fi
 ###################################### MY ########################################
 
 #######################################  LS    ############################################
-alias l='ls --color=always'            
-alias l.='ls -d .* --color=always'     
-alias ll='ls -lhrt --color=always'     
-alias lla='ls -lhrta --color=always'     
-alias lld='ls -lUd */ --color=always'  
-alias la='ls -a --color=always'        
+alias l='ls --color=always'
+alias l.='ls -d .* --color=always'
+alias ll='ls -lhrt --color=always'
+alias lla='ls -lhrta --color=always'
+alias lld='ls -lUd */ --color=always'
+alias la='ls -a --color=always'
 
 ########################################   CD    ########################################
 alias bd='cd "$OLDPWD"' # equivalent to : cd -
@@ -195,7 +195,7 @@ extract() {
 }
 
 pdf2png() {
-  convert -density 300 "$1" -quality 100 -background white -alpha off "$2"/"${1%.*}.png"  
+  convert -density 300 "$1" -quality 100 -background white -alpha off "$2"/"${1%.*}.png"
 }
 
 ftext() {
@@ -211,15 +211,15 @@ ftext() {
 
 ffile() {
   # find . -name "*word*" 2>/dev/null
-  find . | grep --color=always "$1"  
+  find . | grep --color=always "$1"
 }
 
-open_pdf() { 
-    nohup xdg-open "$1".pdf >/dev/null 2>&1 & 
+open_pdf() {
+    nohup xdg-open "$1".pdf >/dev/null 2>&1 &
 }
 
-mkdircd() { 
-    [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!"; 
+mkdircd() {
+    [ $# = 1 ] && mkdir -p "$@" && cd "$@" || echo "Error - no directory passed!";
 }
 
 jupyter_notebook_clear_output() {
@@ -281,6 +281,10 @@ brightness_p1() {
 brightness_m1() {
     xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
 }
+
+# ================== X =================
+# defulat auto repeat delay:  660    repeat rate:  25
+alias increase_r_rate='xset r rate 660 100'
 
 # ==================upower===========
 alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
