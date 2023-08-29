@@ -201,7 +201,7 @@ bar {
 
 # Background
 # exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/System76-Fractal_Mountains-by_Kate_Hazen_of_System76.png 
-exec_always --no-startup-id feh --bg-scale ~/.config/i3/background.jpg
+exec_always --no-startup-id feh --bg-scale -g 1920x1080 ~/.config/i3/rose_pine_shape.png
 
 # Touchpad
 exec_always xinput set-prop "CUST0001:00 06CB:7E7E Touchpad" "libinput Natural Scrolling Enabled" 1 
