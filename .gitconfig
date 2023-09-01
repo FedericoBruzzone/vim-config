@@ -4,9 +4,18 @@
 [alias]
 	clone-branches = "! git branch -a | sed -n \"/\\/HEAD /d; /\\/main$/d; /remotes/p;\" | xargs -L1 git checkout -t"
 	graph = "! git log --all --decorate --oneline --graph"
+[core]
+    editor = nvim
+[difftool]
+    prompt = true
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [diff]
-    tool = vimdiff
+    ; tool = vimdiff
+    tool = nvimdiff
 [merge]
-    tool = vimdiff
+    ; tool = vimdiff
+    tool = nvimdiff
 [init]
 	defaultBranch = main
+
