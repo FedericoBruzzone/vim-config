@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+ # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -160,8 +160,8 @@ alias gpushf='git push --force'
 alias gclearcache='git rm -r --cached .'
 
 ########################################  FAST  ########################################
-alias vi='vim'
-alias vi.='vim .'
+alias v='nvim'
+alias v.='nvim .'
 alias c='clear'
 alias ee='exit'
 alias code.='code . && exit'
@@ -229,18 +229,17 @@ jupyter_notebook_clear_output() {
 # ==================Useless=================
 alias coc_java_clear='rm -rf ~/.config/coc/extensions/coc-java-data/*'
 alias gcollect="find ~ -xdev \( -type f \( -name .DS_Store -o -name .directory -o -name ._.DS_Store -o -name logfile.wget -o -name core -o -name Thumbs.db -o -name \*.bck -o -name .\*.bck -o -iname .\*.bak -o -name .\*~ -o -name \*.o -o -name \*.ilg -o -name \*.nav -o -name \*.snm -o -name \*.vrb -o -name \*.log -o -name \*.blg -o -name \*.bcf -o -name \*-blx.bib -o -name \*.run.xml -o -name \*.synctex.gz -o -name \*.aux -o -name a.out -o -name DEADJOE -o -name \*~ -o -iname \*.bak -o -name \*.crashdump -o -name erl_crash.dump -o -name \*.fls -o -name \*.fdb_latexmk -o -name %tmp%\* \) \) -exec rm -fv {} \;"
+# ==================jetbrains==================
+alias jetbrainstoolbox='nohup ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox >/dev/null 2>&1 &'
+alias intellij='nohup .local/share/JetBrains/Toolbox/apps/IDEA-C/ch-0/223.8617.56/bin/idea.sh >/dev/null 2>&1 &'
+# ==================upower===========
+alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 # ==================Jupyter=================
 alias to_py='jupytext --set-formats ipynb,py:percent'
 
-# ==================ble==================
-alias ble='source ~/ble.sh/out/ble.sh'
 
 # ==================rust==================
 source "$HOME/.cargo/env"
-
-# ==================dart/flutter==================
-export PATH="$PATH:/home/fcb/flutterdev/flutter/bin"
-export PATH="$PATH:/usr/lib/dart/bin"
 
 # ==================java==================
 export PATH="$PATH:/home/fcb/aspectj1.9/bin"
@@ -253,11 +252,6 @@ alias javaformatall="java -jar /home/fcb/Documents/master-courses/advanced-progr
 # ==================python==================
 export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
-# ==================jetbrains==================
-alias jetbrainstoolbox='nohup ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox >/dev/null 2>&1 &'
-alias intellij='nohup .local/share/JetBrains/Toolbox/apps/IDEA-C/ch-0/223.8617.56/bin/idea.sh >/dev/null 2>&1 &'
-
-
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.11.2/stm32cubeide &'
 STM32_Programmer_CLI() {
@@ -266,28 +260,6 @@ STM32_Programmer_CLI() {
 # alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.0.500.202209151145/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
 alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
 export PATH="$PATH:/opt/st/stm32cubeide_1.11.2/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.linux64_1.0.100.202210260954/tools/bin" # /arm-none-eabi-gcc"
-
-# ==================xrandr===========
-alias start_second_monitor_right='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
-alias start_second_monitor_left='xrandr --output HDMI-1-0 --auto --left-of eDP-1'
-alias start_second_monitor_above='xrandr --output HDMI-1-0 --auto --above eDP-1'
-alias start_second_monitor_below='xrandr --output HDMI-1-0 --auto --below eDP-1'
-
-# function to add 1 the brightness with xrandr
-brightness_p1() {
-    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1" | bc)
-}
-
-brightness_m1() {
-    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
-}
-
-# ================== X =================
-# defulat auto repeat delay:  660    repeat rate:  25
-alias increase_r_rate='xset r rate 660 100'
-
-# ==================upower===========
-alias show_battery='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 
 # ==================latex===========
 alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
@@ -313,8 +285,35 @@ vimbib() { # it assumes to have $BIBINPUTS set and with the dir to look into as 
   vim -p "${bibs[@]}"
 }
 
+# ==================xrandr===========
+alias start_second_monitor_right='xrandr --output HDMI-1-0 --auto --right-of eDP-1'
+alias start_second_monitor_left='xrandr --output HDMI-1-0 --auto --left-of eDP-1'
+alias start_second_monitor_above='xrandr --output HDMI-1-0 --auto --above eDP-1'
+alias start_second_monitor_below='xrandr --output HDMI-1-0 --auto --below eDP-1'
+
+# function to add 1 the brightness with xrandr
+brightness_p1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') + 0.1" | bc)
+}
+
+brightness_m1() {
+    xrandr --output eDP-1 --brightness $(echo "$(xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' ') - 0.1" | bc)
+}
+
+# ================== X =================
+# defulat auto repeat delay:  660    repeat rate:  25
+alias increase_r_rate='xset r rate 660 100'
+
+# ==================  Picom  =================
+alias start_picom='nohup picom --experimental-backends --config ~/.config/picom/picom.conf >/dev/null 2>&1 &'
+alias stop_picom='killall picom'
+
+# ==================ble==================
+alias ble='source ~/ble.sh/out/ble.sh'
+
 # ==================starship===========
 # export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init bash)"
 
 ble
+
