@@ -252,6 +252,9 @@ alias javaformatall="java -jar /home/fcb/Documents/master-courses/advanced-progr
 # ==================python==================
 export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
+# ==================CPP==================
+# export CPLUS_INCLUDE_PATH=/usr/include/c++/11:/usr/include/x86_64-linux-gnu/c++/11 # -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
+
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.13.1/stm32cubeide &'
 # alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.1.0.202305091550/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
@@ -259,7 +262,10 @@ STM32_Compile () {
     make -j8 clean -C ./Debug
     make -j8 all -C ./Debug/
 }
-STM32_Programmer_CLI() {
+STM32_Generate_Make() { # $1 is the project name or all
+    /opt/st/stm32cubeide_1.13.1/stm32cubeide -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -data . -build "$1"
+}
+STM32_Flash() { # $1 is the path to the elf file
     /opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.1.0.202305091550/tools/bin/STM32_Programmer_CLI -c port=swd -w "$1" -rst
 }
 alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
