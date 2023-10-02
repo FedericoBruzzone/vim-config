@@ -258,9 +258,12 @@ export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lec
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.13.1/stm32cubeide &'
 # alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.1.0.202305091550/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
-STM32_Compile () {
+STM32_Clean () {
     make -j8 clean -C ./Debug
-    make -j8 all -C ./Debug/
+}
+
+STM32_Compile () {
+    make -j8 all -C ./Debug
 }
 STM32_Generate_Make() { # $1 is the project name or all
     /opt/st/stm32cubeide_1.13.1/stm32cubeide -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -data . -build "$1"
