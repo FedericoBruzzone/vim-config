@@ -252,6 +252,9 @@ alias javaformatall="java -jar /home/fcb/Documents/master-courses/advanced-progr
 # ==================python==================
 export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lecture/jars/antlr-4.12.0-complete.jar"
 
+# ==================C==================
+# export C_INCLUDE_PATH=/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.linux64_1.1.0.202305231506/tools/arm-none-eabi/include
+
 # ==================CPP==================
 # export CPLUS_INCLUDE_PATH=/usr/include/c++/11:/usr/include/x86_64-linux-gnu/c++/11 # -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 
@@ -329,5 +332,6 @@ alias ble='source ~/ble.sh/out/ble.sh'
 # export STARSHIP_CONFIG=~/.config/starship.toml
 eval "$(starship init bash)"
 
+increase_r_rate
 ble
 
