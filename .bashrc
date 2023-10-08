@@ -279,7 +279,7 @@ alias STM32_Generate_Compile_Commands='bear -- make -j8 all -C ./Debug/'
 export PATH="$PATH:/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.linux64_1.1.0.202305231506/tools/bin" # /arm-none-eabi-gcc"
 
 # ==================latex===========
-alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz'
+alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz *.idx *.ilg *.ind'
 export BIBINPUTS=${HOME}/Documents/adapt-lab/bibs:.
 
 l4p() {  # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
