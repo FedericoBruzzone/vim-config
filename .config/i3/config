@@ -186,7 +186,7 @@ bindsym $mod+r mode "resize"
 # }
 
 bar {
-    # position top
+    position top
     strip_workspace_numbers yes
     # font pango:Economica, FontAwesome 15
     # font pango:Iosevka Nerd Font, FontAwesome 15
@@ -201,7 +201,8 @@ bar {
 
 # Background
 # exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/System76-Fractal_Mountains-by_Kate_Hazen_of_System76.png
-exec_always --no-startup-id feh --bg-scale -g 1920x1080 ~/.config/i3/rose_pine_shape.png
+# exec_always --no-startup-id feh --bg-scale -g 1920x1080 ~/.config/i3/leafy.jpg
+exec_always --no-startup-id feh --bg-scale -g 1920x1080 ~/.config/i3/liquid-texture.jpg
 
 # Touchpad
 exec_always xinput set-prop "CUST0001:00 06CB:7E7E Touchpad" "libinput Natural Scrolling Enabled" 1
@@ -230,19 +231,21 @@ default_border pixel 2
 default_floating_border pixel 2
 # default_border none
 # default_floating_border none
-gaps inner 7
+# gaps inner 7
 
-client.focused          #00FF00 #00FF00 #000000 #00FF00 #00FF00
-client.unfocused        #FF8800 #FF8800 #000000 #FF8800 #FF8800
-client.focused_inactive #FFFF00 #FFFF00 #000000 #FFFF00 #FFFF00
-client.urgent           #FF0000 #FF0000 #000000 #FF0000 #FF0000
+# Colors                border  backgr. text    indicator child_border
+# client.focused          #00FF00 #00FF00 #000000 #00FF00 #00FF00
+# client.unfocused        #FF8800 #FF8800 #000000 #FF8800 #FF8800
+# client.focused_inactive #FFFF00 #FFFF00 #000000 #FFFF00 #FFFF00
+# client.urgent           #FF0000 #FF0000 #000000 #FF0000 #FF0000
 
 # Rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
-# Compton
-# exec --no-startup-id compton
 
 # Picom
 # exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf &
+
+# Compton NOT USED
+# exec --no-startup-id compton
