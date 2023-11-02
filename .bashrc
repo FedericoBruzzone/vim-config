@@ -258,6 +258,9 @@ export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lec
 # ==================CPP==================
 # export CPLUS_INCLUDE_PATH=/usr/include/c++/11:/usr/include/x86_64-linux-gnu/c++/11 # -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 
+# ==================Erlang===========
+export PATH=/home/fcb/.cache/rebar3/bin:$PATH
+
 # ==================STM32===========
 alias stm32cubeide='/opt/st/stm32cubeide_1.13.1/stm32cubeide &'
 # alias STM32_Programmer_CLI="/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.externaltools.cubeprogrammer.linux64_2.1.0.202305091550/tools/bin/STM32_Programmer_CLI -c port=swd -w " # -rst
