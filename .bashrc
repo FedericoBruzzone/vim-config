@@ -258,7 +258,6 @@ export ANTLR4_JAR="/home/fcb/Documents/master-courses/linguaggi-e-traduttori/lec
 # ==================CPP==================
 # export CPLUS_INCLUDE_PATH=/usr/include/c++/11:/usr/include/x86_64-linux-gnu/c++/11 # -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 
-# ==================Erlang===========
 export PATH=/home/fcb/.cache/rebar3/bin:$PATH
 
 # ==================STM32===========
@@ -292,7 +291,8 @@ export PATH="$PATH:/opt/st/stm32cubeide_1.13.1/plugins/com.st.stm32cube.ide.mcu.
 
 # ==================latex===========
 alias clearlatex='rm -rf *.aux *.log *.out *.toc *.bbl *.blg *.synctex.gz *.fdb_latexmk *.fls *.lot *.lof *.gz *.idx *.ilg *.ind'
-export BIBINPUTS=${HOME}/Documents/adapt-lab/bibs:.
+# export BIBINPUTS=${HOME}/Documents/adapt-lab/bibs:.
+export BIBINPUTS=~/texmf/tex/latex/adapt-lab/bibs/:.
 
 l4p() {  # it assumes to have $BIBINPUTS set and with the dir to look into as the first one
   BIB_DIR=${BIBINPUTS%%:*}
